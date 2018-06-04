@@ -17,22 +17,20 @@ public class BayDao {
 	private final String GET_ALL_Bays = "Insert INTO bay (id, dep)\r\n" + 
 			"VALUES (3,\"D03\");";
 	
-	private final String getAllBays = "select * from bay";
+	private final String getAllBays = "SELECT * FROM baymanagement.bay;";
 	
 	@Autowired
 	JdbcTemplate jdbctemplate;
 	
-//	@Autowired
-//	DataSource dataSource; 
 	
 	public void getBays() {
 		
-//		System.out.println(jdbctemplate);
-//		System.out.println(dataSource);
+
 		List<Bay> bayList = jdbctemplate.query(getAllBays, new BeanPropertyRowMapper<>(Bay.class));
 		System.out.println(bayList);
-//		System.out.println(jdbctemplate.query(getAllBays, new BeanPropertyRowMapper<>(Bay.class)));
-//		return jdbctemplate.query(getAllBays, new BeanPropertyRowMapper<>(Bay.class));
+		for(Bay b: bayList) {
+			System.out.println(b.getId() + b.getDep());
+		}
 	}
 	
 }
