@@ -16,6 +16,6 @@ public class BayController {
     
     @RequestMapping("/getBay")
     public void insertBay() {
-    	bayDao.getBays();
+    	bayDao.getMasterBays();
     }
 }

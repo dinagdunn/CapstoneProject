@@ -3,6 +3,15 @@ package bootcamp.model;
 public class Bay {
 	int id;
 	String dep;
+	String masterbay;
+	
+	public String getMasterbay() {
+		return masterbay;
+	}
+
+	public void setMasterbay(String masterbay) {
+		this.masterbay = masterbay;
+	}
 	
 	public Bay() {
 	}

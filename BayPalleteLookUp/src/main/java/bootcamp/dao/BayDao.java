@@ -1,5 +1,6 @@
 package bootcamp.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -18,6 +19,8 @@ public class BayDao {
 			"VALUES (3,\"D03\");";
 	
 	private final String getAllBays = "SELECT * FROM baymanagement.bay;";
+	private final String getAllMasterBays = "select distinct masterbay from baymanagement.bay";
+	private final String getBayList = "";
 	
 	@Autowired
 	JdbcTemplate jdbctemplate;
@@ -29,8 +32,16 @@ public class BayDao {
 		List<Bay> bayList = jdbctemplate.query(getAllBays, new BeanPropertyRowMapper<>(Bay.class));
 		System.out.println(bayList);
 		for(Bay b: bayList) {
-			System.out.println(b.getId() + b.getDep());
+			System.out.println(b.getId() + b.getDep() + b.getMasterbay());
 		}
 	}
 	
+	public void getMasterBays() {
+		List<Bay> masterBays = jdbctemplate.query(getAllMasterBays, new BeanPropertyRowMapper<>(Bay.class));
+		for(Bay b: masterBays) {
+			List<String> masterBaysz = new ArrayList<String>();
+			masterBaysz.add(b.getMasterbay());
+			System.out.println(b.getMasterbay());
+		}
+	}
 }
