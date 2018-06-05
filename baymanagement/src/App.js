@@ -26,8 +26,11 @@ class App extends Component {
     <div className="row">
 
     <switch>
-    <div className="col-lrg-6 col-md-4 col-sm-3 col-xs-2"><Link to="/search">Search</Link></div>
-    <div className="col-lrg-6 col-md-4 col-sm-3 col-xs-2"><Link to="/add">Add</Link></div>
+    <div className="col-sm-6 col-sm-offset-3">
+      <div className="col-xs-4 headerButton"><Link to="/search">Search</Link></div>
+      <div className="col-xs-4 headerButton">Image</div>
+      <div className="col-xs-4 headerButton"><Link to="/add">Add</Link></div>
+    </div>
     </switch>
 
     </div>
