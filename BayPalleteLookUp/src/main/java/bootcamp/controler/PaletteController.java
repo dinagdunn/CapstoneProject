@@ -21,7 +21,7 @@ public class PaletteController {
     }
     
     @RequestMapping(value ="/getPaletteById", method = RequestMethod.GET)
-    public Palette getPaletteById(@RequestParam("id") int id) {
+    public Palette getPaletteById(@RequestParam("id") String id) {
     	return paletteDao.getPaletteById(id);
     }
     
@@ -31,8 +31,11 @@ public class PaletteController {
     }
     
     @RequestMapping(value ="/deletePalette", method = RequestMethod.DELETE) 
-    public void deletePalette(@RequestParam("id") int id) {
+    public void deletePalette(@RequestParam("id") String id) {
     	paletteDao.deletePalette(id);
     }
 
+    //sample palette object json:
+    // {"id": "P1", "width": 34, "height": 34, "length": 34, "dep": "D1", "paletteClass": "C1", "category": "CAT1", "bay": "B1"}
+    
 }

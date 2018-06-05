@@ -23,7 +23,7 @@ public class BayController {
     }
     
     @RequestMapping(value ="/getBayById", method = RequestMethod.GET)
-    public Bay getBayById(@RequestParam("id") int id) {
+    public Bay getBayById(@RequestParam("id") String id) {
     	return bayDao.getBayById(id);
     }
     
@@ -33,8 +33,11 @@ public class BayController {
     }
     
     @RequestMapping(value ="/deleteBay", method = RequestMethod.DELETE) 
-    public void deleteBay(@RequestParam("id") int id) {
+    public void deleteBay(@RequestParam("id") String id) {
     	bayDao.deleteBay(id);
     }
-//    {"id":5,"width":0,"height":0,"length":0,"dep":"D05","category":null,"subCategory":null,"masterbay":null}
+    
+// A sample bay object in json:    
+// {"id": "B1", "width": 34, "height": 34, "length": 34, "dep": "D1", "bayClass": "C1", "category": "CAT1", "masterbay": "MB1", "palette": "P1"}
+    
 }

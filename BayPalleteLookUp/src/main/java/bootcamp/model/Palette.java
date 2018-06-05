@@ -2,80 +2,96 @@ package bootcamp.model;
 
 public class Palette {
 
-	int id;
+	String id;
 	int width;
 	int height;
 	int length;
-	int bayId;
 	String dep;
+	String paletteClass;
 	String category;
-	String subCategory;
+	String bay;	
 	
 	public Palette() {
 		
 	}
-	
-	public Palette(int id, int width, int height, int length, int bayId, String dep, String category,
-			String subCategory) {
+
+	public Palette(String id, int width, int height, int length, String dep, String paletteClass, String category,
+			String bay) {
 		super();
 		this.id = id;
 		this.width = width;
 		this.height = height;
 		this.length = length;
-		this.bayId = bayId;
 		this.dep = dep;
+		this.paletteClass = paletteClass;
 		this.category = category;
-		this.subCategory = subCategory;
+		this.bay = bay;
 	}
-	
-	public int getId() {
+
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+
+	public void setId(String id) {
 		this.id = id;
 	}
+
 	public int getWidth() {
 		return width;
 	}
+
 	public void setWidth(int width) {
 		this.width = width;
 	}
+
 	public int getHeight() {
 		return height;
 	}
+
 	public void setHeight(int height) {
 		this.height = height;
 	}
+
 	public int getLength() {
 		return length;
 	}
+
 	public void setLength(int length) {
 		this.length = length;
 	}
-	public int getBayId() {
-		return bayId;
-	}
-	public void setBayId(int bayId) {
-		this.bayId = bayId;
-	}
+
 	public String getDep() {
 		return dep;
 	}
+
 	public void setDep(String dep) {
 		this.dep = dep;
 	}
+
+	public String getPaletteClass() {
+		return paletteClass;
+	}
+
+	public void setPaletteClass(String paletteClass) {
+		this.paletteClass = paletteClass;
+	}
+
 	public String getCategory() {
 		return category;
 	}
+
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public String getSubCategory() {
-		return subCategory;
+
+	public String getBay() {
+		return bay;
 	}
-	public void setSubCategory(String subCategory) {
-		this.subCategory = subCategory;
-	}
+
+	public void setBay(String bay) {
+		this.bay = bay;
+	}	
+	
 	
 	
 }
