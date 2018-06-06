@@ -5,7 +5,6 @@ import Search from './Search.js'
 import Add from './Add.js'
 import LoadBay from './LoadBay.js'
 import LoadPallet from './LoadPallet.js'
-import SearchFail from './SearchFail.js'
 import EditPallet from './EditPallet.js'
 import EditBay from './EditBay.js'
 import PBLink from './PBLink.js'
@@ -49,7 +48,6 @@ class App extends Component {
     <Route exact path="/search" component={ Search } />
     <Route path="/search/P*" component={ LoadPallet } />
     <Route path="/search/B*" component={ LoadBay } />
-    <Route path="/search/[^PB]|^" component={ SearchFail} />
     <Route path="/edit/P*" component={ EditPallet } />
     <Route path="/edit/B*" component={ EditBay } />
     <Route path="/pblink/*" component={ PBLink } />   
