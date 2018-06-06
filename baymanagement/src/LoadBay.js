@@ -12,7 +12,7 @@ class LoadBay extends Component {
 	clickHandler(event) {
 		event.preventDefault();
 			// const query = event.target[0].value
-			const query = ' b100'
+			const query = 'b100'
 			this.props.history.push(`/edit/${query}`)
 }
 

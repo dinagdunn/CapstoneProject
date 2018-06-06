@@ -12,8 +12,9 @@ class EditBay extends Component {
 	clickHandler(event) {
 		//push new data to db !!!
 		event.preventDefault();
-		const pId = event.target[0].value
-		this.props.push.history('/search/`${pId}')
+		// const pId = event.target[0].value
+		const bId = 'b123'
+		this.props.push.history('/search/`${bId}')
 	}
 	
 	render() {

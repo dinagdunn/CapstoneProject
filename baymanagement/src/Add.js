@@ -23,30 +23,30 @@ class Add extends Component {
 					<div className="float-center">
 						<div className="col-sm-6 col-sm-offset-3">
 							<div className="col-xs-4">
-								<div class="form-check">
-									<label class="form-check-label">
+								<div className="form-check">
+									<label className="form-check-label">
 										<input type="radio" class="form-check-input"
-											name="Pallet" checked={this.state.selectedOption === 'Pallet'}
-											onChange={this.edit('selectedOption')} />Pallet
+											name="Pallet" checked={this.state.selectedOption === ' Pallet'}
+											onChange={this.edit()} />Pallet
 									</label>
 								</div>
 							</div>
 
 							<div className="col-xs-4 ">
-								<div class="form-check">
-									<label class="form-check-label">
+								<div className="form-check">
+									<label className="form-check-label">
 										<input type="radio" class="form-check-input"
-											name="Master Bay" checked={this.state.selectedOption === 'Master Bay'}
+											name="Master Bay" checked={this.state.selectedOption === ' Master Bay'}
 											onChange={this.edit('selectedOption')} />Master Bay
 						</label>
 								</div>
 							</div>
 
 							<div className="col-xs-4">
-								<div class="form-check">
-									<label class="form-check-label">
+								<div className="form-check">
+									<label className="form-check-label">
 										<input type="radio" class="form-check-input"
-											name="Sub Bay" checked={this.state.selectedOption === 'Sub Bay'}
+											name="Sub Bay" checked={this.state.selectedOption === ' Sub Bay'}
 											onChange={this.edit('selectedOption')} />Sub Bay
 						</label>
 								</div>

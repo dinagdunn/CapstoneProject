@@ -26,15 +26,15 @@ class App extends Component {
 
     {/* <img src={logo} className="App-logo" alt="logo" /> */}
     
-    <Link to="/"><h1 className="App-title">Home Depot Overhead Bay Manager</h1></Link>
+    <Link to="/"><h1 className="App-title">Overhead Bay Manager</h1></Link>
     <div className="container">
     <div className="row">
 
     <switch>
     <div className="col-sm-6 col-sm-offset-3">
-      <div className="col-xs-4 headerButton"><Link to="/search">Search</Link></div>
-      <div className="col-xs-4 logo"><img src={require('./images/logo.jpg')} /></div>
-      <div className="col-xs-4 headerButton"><Link to="/add">Add</Link></div>
+      <div className="col-xs-6 headerButton"><Link to="/search">Search</Link></div>
+      {/* <div className="col-xs-4 logo"><img src={require('./images/logo.jpg')} /></div> */}
+      <div className="col-xs-6 headerButton"><Link to="/add">Add</Link></div>
     </div>
     </switch>
 
@@ -48,12 +48,14 @@ class App extends Component {
     <Route exact path="/search" component={ Search } />
     <Route path="/search/P*" component={ LoadPallet } />
     <Route path="/search/B*" component={ LoadBay } />
+    <Route path="/search/[^PB]|^" component={ SearchFail} />
     <Route path="/edit/P*" component={ EditPallet } />
     <Route path="/edit/B*" component={ EditBay } />    
+  
 
     <Route exact path ="/" render={() =>
       <p className="App-intro">
-      This is going to tell you all about the master bay.
+      This is going to tell you all about the bays.
       </p>
     } />
 

@@ -9,19 +9,20 @@
 .headerButton a {
   border: solid 2px white;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
   text-decoration: none;
 }
 
 .headerButton a:hover {
-  border: solid 2px #f56409;
+  border: solid 2px green;
   background: white;
-  color: #f56409;
+  color:green;
 }
 
 img {
   max-width:45%;
   max-height:45%;
+  padding-bottom: 10px;
 }
 
 a:link {
@@ -49,7 +50,7 @@ a:active {
 }
 
 .App-header {
-  background-color: #f56409;
+  background-color:green;
   height: 150px;
   padding: 20px;
 }

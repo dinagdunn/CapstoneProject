@@ -68,7 +68,7 @@ class EditPallet extends Component {
 			<br />
 
 			<form onSubmit={this.clickHandler} className="bar">
-				<button className="btn btn-primary" type="submit">Search</button>
+				<button className="btn btn-primary" type="submit">Submit</button>
 				<button className="btn btn-primary" type="submit">Delete</button>
 			</form>
 
