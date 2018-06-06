@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 
-class Link extends Component {
+class PBLink extends Component {
 
 	constructor() {
 		super();
@@ -19,10 +19,10 @@ class Link extends Component {
 	render() {
 		return (
 			<div>
-			<h1>This is where you link a bay and a pallet. It's like a marriage.</h1>
+				<h1>This is where you link a bay and a pallet. It's like a marriage.</h1>
 			</div>
 			)
 	}
 }
 
-export default Link
+export default PBLink

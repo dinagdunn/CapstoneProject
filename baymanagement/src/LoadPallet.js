@@ -16,6 +16,13 @@ class LoadPallet extends Component {
 			this.props.history.push(`/edit/${query}`)
 }
 
+clickHandler(event) {
+	event.preventDefault();
+		// const query = event.target[0].value
+		const query = 'p100'
+		this.props.history.push(`/pblink/${query}`)
+}
+
 	render() {
 		return (
 			<div>
@@ -31,6 +38,9 @@ class LoadPallet extends Component {
 			<p>Category: </p>
 			<form onSubmit={this.clickHandler} className="bar">
 				<button className="btn btn-primary" type="submit">Edit</button>
+			</form>
+			<form onSubmit={this.linkHandler} className="bar">
+				<button className="btn btn-primary" type="submit">Link</button>
 			</form>
 			</div>
 			)
