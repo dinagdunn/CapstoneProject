@@ -16,9 +16,9 @@ class Search extends Component {
     }
 
     clickHandler(event) {
-        if (event.target[0].value.length === 0) {
-            document.querySelector('[data-error]').style.display = "block";
-        }
+      
+        console.log(event.target)
+
         event.preventDefault();
         const query = event.target[0].value
            

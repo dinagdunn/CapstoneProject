@@ -6,19 +6,27 @@ class EditBay extends Component {
 
 	constructor() {
 		super();
-		this.clickHandler = this.clickHandler.bind(this)
+		this.submitHandler = this.submitHandler.bind(this)
+		this.deleteHandler = this.deleteHandler.bind(this)
  }
 
-	clickHandler(event) {
+	submitHandler(event) {
 		//push new data to db !!!
 		event.preventDefault();
 		// const pId = event.target[0].value
 		const bId = 'b123'
-		this.props.push.history('/load/`${bId}')
+		this.props.history.push(`/load/${bId}`)
+	}
+
+	deleteHandler(event) {
+		//delete from the db
+		event.preventDefault();
+		this.props.history.push('/')
 	}
 	
 	render() {
 		return (
+			<BrowserRouter>
 			<div>
 			<label>
 			Name: 
@@ -68,12 +76,13 @@ class EditBay extends Component {
 			</label>
 			<br />
 
-			<form onSubmit={this.clickHandler} className="bar">
-				<button className="btn btn-primary" type="submit">Submit</button>
-				<button className="btn btn-primary" type="submit">Delete</button>
+			<form className="bar">
+				<button className="btn btn-primary" type="submit" onSubmit={this.submitHandler}>Submit</button>
+				<button className="btn btn-primary" type="submit" onSubmit={this.deleteHandler}>Delete</button>
 			</form>
 
 			</div>
+			</BrowserRouter>
 			)
 	}
 }

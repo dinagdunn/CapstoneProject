@@ -20,10 +20,12 @@ class AddMaster extends Component {
 
 	render() {
 		return (
+            <BrowserRouter>
             <form onSubmit={this.clickHandler}>
             <AddCommon />
 				<button className="btn btn-primary" type="submit">Submit</button>
 			</form>
+            </BrowserRouter>
         )
     }
 }

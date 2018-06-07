@@ -9,15 +9,23 @@ class EditPallet extends Component {
 		this.clickHandler = this.clickHandler.bind(this)
  }
 
-	clickHandler(event) {
+	submitHandler(event) {
 		//push new data to db !!!
 		event.preventDefault();
 		const pId = event.target[0].value
-		this.props.push.history('/load/`${pId}')
+		this.props.history.push('/load/`${pId}')
+	}
+
+	deleteHandler(event) {
+		//push new data to db !!!
+		event.preventDefault();
+		const pId = event.target[0].value
+		this.props.history.push('/load/`${pId}')
 	}
 	
 	render() {
 		return (
+			<BrowserRouter>
 			<div>
 			<label>
 			Name: 
@@ -68,11 +76,12 @@ class EditPallet extends Component {
 			<br />
 
 			<form onSubmit={this.clickHandler} className="bar">
-				<button className="btn btn-primary" type="submit">Submit</button>
-				<button className="btn btn-primary" type="submit">Delete</button>
+				<button className="btn btn-primary" type="submit" onSubmit={this.submitHandler}>Submit</button>
+				<button className="btn btn-primary" type="submit" onSubmit={this.deleteHandler}>Delete</button>
 			</form>
 
 			</div>
+			</BrowserRouter>
 			)
 	}
 }
