@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 import LoadPallet from './LoadPallet.js'
 import LoadBay from './LoadBay.js'
-// import SearchFail from './SearchFail.js'
+
 
 class Search extends Component {
 
@@ -16,14 +16,18 @@ class Search extends Component {
     }
 
     clickHandler(event) {
+
+        console.log(event);
+        
         if (event.target[0].value.length === 0) {
             document.querySelector('[data-error]').style.display = "block";
         }
         event.preventDefault();
         const query = event.target[0].value
-           
+           if (query) {
         if (query[0].toUpperCase() === "P" || query[0].toUpperCase() === "B") {
                 this.props.history.push(`/load/${query}`)
+        }
         } else {
             document.querySelector('[data-error]').style.display = "block";
         }
