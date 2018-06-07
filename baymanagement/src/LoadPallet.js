@@ -8,46 +8,46 @@ class LoadPallet extends Component {
 		super();
 		this.clickHandler = this.clickHandler.bind(this)
 		this.linkHandler = this.linkHandler.bind(this)
- }
+	}
 
 	clickHandler(event) {
 		event.preventDefault();
-			// const query = event.target[0].value
-			const query = 'p100'
-			this.props.history.push(`/edit/${query}`)
-}
+		// const query = event.target[0].value
+		const query = 'p100'
+		this.props.history.push(`/edit/${query}`)
+	}
 
-linkHandler(event) {
-	event.preventDefault();
+	linkHandler(event) {
+		event.preventDefault();
 		// const query = event.target[0].value
 		const query = 'p100'
 		this.props.history.push(`/pblink/${query}`)
-}
+	}
 
 	render() {
 		return (
 			<div>
-			<h1>Pallet goes here</h1>
-			<p>Palette ID: </p>
-			<p>Palette Name: </p>
-			<p>Palette dimensions: </p>
-			<p>Width:  </p>
-			<p>Height: </p>
-			<p>Length:  </p>
-			<p>Department: </p>
-			<p>Class: </p>
-			<p>Category: </p>
-			<p>Placed: </p>
-			<p>Location: </p>
+				<h1>Pallet goes here</h1>
+				<p>Palette ID: </p>
+				<p>Palette Name: </p>
+				<p>Palette dimensions: </p>
+				<p>Width:  </p>
+				<p>Height: </p>
+				<p>Length:  </p>
+				<p>Department: </p>
+				<p>Class: </p>
+				<p>Category: </p>
+				<p>Placed: </p>
+				<p>Location: </p>
 
-			<form onSubmit={this.clickHandler} className="bar">
-				<button className="btn btn-primary" type="submit">Edit</button>
-			</form>
-			<form onSubmit={this.linkHandler} className="bar">
-				<button className="btn btn-primary" type="submit">Link</button>
-			</form>
+				<form onSubmit={this.clickHandler} className="bar">
+					<button className="btn btn-primary" type="submit">Edit</button>
+				</form>
+				<form onSubmit={this.linkHandler} className="bar">
+					<button className="btn btn-primary" type="submit">Link</button>
+				</form>
 			</div>
-			)
+		)
 	}
 }
 

@@ -8,82 +8,83 @@ class EditPallet extends Component {
 		super();
 		this.submitHandler = this.submitHandler.bind(this)
 		this.deleteHandler = this.deleteHandler.bind(this)
- }
+	}
 
 	submitHandler(event) {
 		//push new data to db !!!
+		console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ")
 		event.preventDefault();
-		const pId = event.target[0].value
-		this.props.history.push('/load/`${pId}')
+		// const pId = event.target[0].value
+		const pId = 'p66'
+		this.props.history.push(`/load/${pId}`)
 	}
 
 	deleteHandler(event) {
 		//push new data to db !!!
 		event.preventDefault();
-		const pId = event.target[0].value
-		this.props.history.push('/')
+		const pId = this.props.match.params[0];
+		console.log(pId)
+		this.props.history.push('/?msg=deleted')
 	}
-	
+
 	render() {
 		return (
 			<BrowserRouter>
-			<div>
-			<label>
-			Name: 
+				<div>
+					<label>
+						Name:
 			<input type="text" name="name" value="" />
-			</label>
-			<br />
-			
-			<label>
-			Height: 
+					</label>
+					<br />
+
+					<label>
+						Height:
 			<input type="text" name="height" value="" />
-			</label>
-			<br />
+					</label>
+					<br />
 
-			<label>
-			Width: 
+					<label>
+						Width:
 			<input type="text" name="width" value="" />
-			</label>
-			<br />
+					</label>
+					<br />
 
-			<label>
-			Depth: 
+					<label>
+						Depth:
 			<input type="text" name="depth" value="" />
-			</label>
-			<br />
+					</label>
+					<br />
 
-			<label>
-			Department: 
+					<label>
+						Department:
 			<select name="department" value="" >
-			<option value="D1">D1</option>
-			</select>
-			</label>
-			<br />
+							<option value="D1">D1</option>
+						</select>
+					</label>
+					<br />
 
-			<label>
-			Class: 
+					<label>
+						Class:
 			<select name="class" value="" >
-			<option value="Cl1">Cl1</option>
-			</select>
-			</label>
-			<br />
+							<option value="Cl1">Cl1</option>
+						</select>
+					</label>
+					<br />
 
-			<label>
-			Category: 
+					<label>
+						Category:
 			<select name="category" value="" >
-			<option value="Ca1">Ca1</option>
-			</select>
-			</label>
-			<br />
+							<option value="Ca1">Ca1</option>
+						</select>
+					</label>
+					<br />
 
-			<form onSubmit={this.clickHandler} className="bar">
-				<button className="btn btn-primary" type="submit" onSubmit={this.submitHandler}>Submit</button>
-				<button className="btn btn-primary" type="submit" onSubmit={this.deleteHandler}>Delete</button>
-			</form>
+					<button className="btn btn-primary"  onClick={this.submitHandler}>Submit</button>
+					<button className="btn btn-primary"  onClick={this.deleteHandler}>Delete</button>
 
-			</div>
+				</div>
 			</BrowserRouter>
-			)
+		)
 	}
 }
 

@@ -8,7 +8,7 @@ class EditBay extends Component {
 		super();
 		this.submitHandler = this.submitHandler.bind(this)
 		this.deleteHandler = this.deleteHandler.bind(this)
- }
+	}
 
 	submitHandler(event) {
 		//push new data to db !!!
@@ -23,67 +23,78 @@ class EditBay extends Component {
 		event.preventDefault();
 		this.props.history.push('/')
 	}
-	
+
+	addSubHandler(event) {
+		// add to db
+		event.preventDefault();
+		this.props.history.push('/managesubs')
+	}
+
 	render() {
 		return (
 			<BrowserRouter>
-			<div>
-			<label>
-			Name: 
+				<div>
+					<label>
+						Name:
 			<input type="text" name="name" value="" />
-			</label>
-			<br />
-			
-			<label>
-			Height: 
+					</label>
+					<br />
+
+					<label>
+						Height:
 			<input type="text" name="height" value="" />
-			</label>
-			<br />
+					</label>
+					<br />
 
-			<label>
-			Width: 
+					<label>
+						Width:
 			<input type="text" name="width" value="" />
-			</label>
-			<br />
+					</label>
+					<br />
 
-			<label>
-			Depth: 
+					<label>
+						Depth:
 			<input type="text" name="depth" value="" />
-			</label>
-			<br />
+					</label>
+					<br />
 
-			<label>
-			Department: 
+					<label>
+						Department:
 			<select name="department" value="" >
-			<option value="D1">D1</option>
-			</select>
-			</label>
-			<br />
+							<option value="D1">D1</option>
+						</select>
+					</label>
+					<br />
 
-			<label>
-			Class: 
+					<label>
+						Class:
 			<select name="class" value="" >
-			<option value="Cl1">Cl1</option>
-			</select>
-			</label>
-			<br />
+							<option value="Cl1">Cl1</option>
+						</select>
+					</label>
+					<br />
 
-			<label>
-			Category: 
+					<label>
+						Category:
 			<select name="category" value="" >
-			<option value="Ca1">Ca1</option>
-			</select>
-			</label>
-			<br />
+							<option value="Ca1">Ca1</option>
+						</select>
+					</label>
+					<br />
 
-			<form className="bar">
-				<button className="btn btn-primary" type="submit" onSubmit={this.submitHandler}>Submit</button>
-				<button className="btn btn-primary" type="submit" onSubmit={this.deleteHandler}>Delete</button>
-			</form>
+					<form className="bar">
+						<div className="row">
+							<button className="btn btn-primary" type="submit" onSubmit={this.submitHandler}>Submit</button>
+							<button className="btn btn-primary" type="submit" onSubmit={this.deleteHandler}>Delete</button>
+						</div>
+						<div className="row">
+							<button className="btn btn-primary" type="submit" onSubmit={this.ManageSubs}>Manage Sub Bays</button>
+						</div>
+					</form>
 
-			</div>
+				</div>
 			</BrowserRouter>
-			)
+		)
 	}
 }
 

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
-import AddCommon from './AddCommon.js'
+
 import AddPallet from './AddPallet.js'
 import AddMaster from './AddMaster.js'
-import AddSub from './AddSub.js'
 
 
 class Add extends Component {
@@ -27,7 +26,6 @@ class Add extends Component {
 
 	render() {
 		return (
-			<BrowserRouter>
 				<div className="float-center">
 					<div className="container">
 						<div className="row">
@@ -41,7 +39,7 @@ class Add extends Component {
 												checked={this.state.selectedOption === 'Pallet'}
 												onChange={this.handleOptionChange}
 											/>Pallet
-										</label>
+		 								</label>
 									</div>
 								</div>
 
@@ -59,23 +57,21 @@ class Add extends Component {
 
 							</div>
 						</div>
-					{/* </div> */}
+
+						<div>
 							<form>
 								<br />
 								<br />
-
-								{this.state.selectedOption === 'Pallet' &&
-									<AddPallet />}
-								{this.state.selectedOption === 'Master Bay' &&
-									<AddMaster />}
+								{ this.state.selectedOption === 'Pallet' &&
+									<AddPallet /> }
+								{ this.state.selectedOption === 'Master Bay' &&
+									<AddMaster /> }
 							</form>
-
 						</div>
-					{/* </div> */}
+					</div>
 				</div>
-		</BrowserRouter>
-				) 
-		}
+		)
 	}
-	
+}
+
 export default Add

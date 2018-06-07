@@ -8,10 +8,10 @@ import LoadPallet from './LoadPallet.js'
 import EditPallet from './EditPallet.js'
 import EditBay from './EditBay.js'
 import PBLink from './PBLink.js'
+import ManageSubs from './ManageSubs.js';
 
 class App extends Component {
 
-  /* var imageName = require('./images/image1.jpg') */
   constructor(props) {
     super()
   }
@@ -20,11 +20,8 @@ class App extends Component {
     return (
 
       <div className="App">
-      <BrowserRouter>
       <div className="routed">
       <header className="App-header">
-
-    {/* <img src={logo} className="App-logo" alt="logo" /> */}
     
     <Link to="/"><h1 className="App-title">Overhead Bay Manager</h1></Link>
     <div className="container">
@@ -50,7 +47,8 @@ class App extends Component {
     <Route path="/load/B*" component={ LoadBay } />
     <Route path="/edit/P*" component={ EditPallet } />
     <Route path="/edit/B*" component={ EditBay } />
-    <Route path="/pblink/*" component={ PBLink } />   
+    <Route path="/pblink/*" component={ PBLink } />
+    <Route path="/managesubs" component={ ManageSubs } />   
   
 
     <Route exact path ="/" render={() =>
@@ -60,7 +58,6 @@ class App extends Component {
     } />
 
     </div>
-    </BrowserRouter> 
     </div>
     );
   }

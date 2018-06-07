@@ -3,7 +3,6 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 import LoadPallet from './LoadPallet.js'
 import LoadBay from './LoadBay.js'
-// import SearchFail from './SearchFail.js'
 
 class Search extends Component {
 
@@ -16,18 +15,14 @@ class Search extends Component {
     }
 
     clickHandler(event) {
-      
-        // console.log(event.target)
-
-        if (event.target)
-
         event.preventDefault();
         const query = event.target[0].value
-           
-        if (query[0].toUpperCase() === "P" || query[0].toUpperCase() === "B") {
+        if (query) {
+            if (query[0].toUpperCase() === "P" || query[0].toUpperCase() === "B") {
                 this.props.history.push(`/load/${query}`)
-        } else {
-            document.querySelector('[data-error]').style.display = "block";
+            } else {
+                document.querySelector('[data-error]').style.display = "block";
+            }
         }
     }
 
@@ -35,20 +30,20 @@ class Search extends Component {
 
         return (
             <React.Fragment>
-            <form onSubmit={this.clickHandler} className="bar">
-                <input type="text"/>
-                
+                <form onSubmit={this.clickHandler} className="bar">
+                    <input type="text" />
 
-                <button className="btn btn-primary" type="submit">Search</button>
-               
-            </form>
-            <div style={{display: "none"}} data-error>
-                <h3>Incorrect value. Please try again.</h3>
+
+                    <button className="btn btn-primary" type="submit">Search</button>
+
+                </form>
+                <div style={{ display: "none" }} data-error>
+                    <h3>Incorrect value. Please try again.</h3>
                 </div>
-                </React.Fragment>
+            </React.Fragment>
 
 
-        )
+            )
     }
 }
 

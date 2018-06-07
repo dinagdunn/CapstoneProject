@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 import AddCommon from './AddCommon.js'
 
-class AddSub extends Component {
+class ManageSubs extends Component {
     
     constructor() {
 		super();
@@ -15,7 +15,7 @@ class AddSub extends Component {
         //push to spring
         // const query = event.target[0].value
         const query = 'b101'
-		this.props.history.push(`/search/${query}`)
+		this.props.history.push(`/load/${query}`)
 }
 
 	render() {
@@ -28,4 +28,4 @@ class AddSub extends Component {
     }
 }
 
-export default AddSub
+export default ManageSubs
