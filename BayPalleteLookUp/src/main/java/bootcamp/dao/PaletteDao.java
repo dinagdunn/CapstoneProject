@@ -12,7 +12,7 @@ import bootcamp.model.Palette;
 @Component
 public class PaletteDao {
 
-	private final String ADD_PALETTE= "INSERT INTO palette (id, width, length, height, dep, paletteClass, category, bay) VALUES (?, ?, ?, ?, ?, ? ,?, ?);";
+	private final String ADD_PALETTE= "INSERT INTO palette (id, width, length, height, dep, paletteClass, category) VALUES (?, ?, ?, ?, ?, ? ,?);";
 	private final String GET_PALETTE_BY_ID = "SELECT * FROM palette WHERE id = ?;";
 	private final String EDIT_PALETTE = "UPDATE palette SET width=?, length=?, height=?, dep=?, paletteClass=?, category=?, bay=? WHERE id = ?;";
 	private final String DELETE_PALETTE = "DELETE FROM palette where id=?;";
@@ -21,7 +21,7 @@ public class PaletteDao {
 	JdbcTemplate jdbctemplate;
 	
 	public void addPalette(Palette palette) {
-		Object[] args = {palette.getId(), palette.getWidth(), palette.getLength(), palette.getHeight(), palette.getDep(), palette.getPaletteClass(), palette.getCategory(), palette.getBay()};
+		Object[] args = {palette.getId(), palette.getWidth(), palette.getLength(), palette.getHeight(), palette.getDep(), palette.getPaletteClass(), palette.getCategory()};
 		jdbctemplate.update(ADD_PALETTE, args);
 	}
 	

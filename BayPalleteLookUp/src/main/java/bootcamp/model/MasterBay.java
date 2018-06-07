@@ -3,6 +3,7 @@ package bootcamp.model;
 import java.util.List;
 
 public class MasterBay {
+	String id;
 	int width;
 	int height;
 	int length;
@@ -14,13 +15,25 @@ public class MasterBay {
 	}
 	
 	
-	public MasterBay(int width, int height, int length, List<Bay> bayList) {
+	public MasterBay(String id, int width, int height, int length, List<Bay> bayList) {
 		super();
+		this.id = id;
 		this.width = width;
 		this.height = height;
 		this.length = length;
 		this.bayList = bayList;
 	}
+	
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
 	public int getWidth() {
 		return width;
 	}
