@@ -17,7 +17,9 @@ class Search extends Component {
 
     clickHandler(event) {
       
-        console.log(event.target)
+        // console.log(event.target)
+
+        if (event.target)
 
         event.preventDefault();
         const query = event.target[0].value

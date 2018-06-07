@@ -6,35 +6,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import bootcamp.dao.BayDao;
 import bootcamp.model.Bay;
+import bootcamp.service.BayService;
 
 
 @RestController
 public class BayController {
 	
 	@Autowired
-	BayDao bayDao;
+	BayService bayService;
 
     
     @RequestMapping(value = "/addBay", method = RequestMethod.POST)
     public void addBay(@RequestBody Bay bay) {
-    	bayDao.addBay(bay);
+    	bayService.addBay(bay);
     }
     
     @RequestMapping(value ="/getBayById", method = RequestMethod.GET)
     public Bay getBayById(@RequestParam("id") String id) {
-    	return bayDao.getBayById(id);
+    	return bayService.getBayById(id);
     }
     
     @RequestMapping(value ="/editBay", method = RequestMethod.POST)
     public void editBay(@RequestBody Bay bay) {
-    	bayDao.editBay(bay);
+    	bayService.editBay(bay);
     }
     
     @RequestMapping(value ="/deleteBay", method = RequestMethod.DELETE) 
     public void deleteBay(@RequestParam("id") String id) {
-    	bayDao.deleteBay(id);
+    	bayService.deleteBay(id);
     }
     
 // A sample bay object in json:    

@@ -6,7 +6,8 @@ class EditPallet extends Component {
 
 	constructor() {
 		super();
-		this.clickHandler = this.clickHandler.bind(this)
+		this.submitHandler = this.submitHandler.bind(this)
+		this.deleteHandler = this.deleteHandler.bind(this)
  }
 
 	submitHandler(event) {
@@ -20,7 +21,7 @@ class EditPallet extends Component {
 		//push new data to db !!!
 		event.preventDefault();
 		const pId = event.target[0].value
-		this.props.history.push('/load/`${pId}')
+		this.props.history.push('/')
 	}
 	
 	render() {
