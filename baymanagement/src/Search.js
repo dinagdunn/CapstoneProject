@@ -16,22 +16,16 @@ class Search extends Component {
     }
 
     clickHandler(event) {
+        if (event.target[0].value.length === 0) {
+            document.querySelector('[data-error]').style.display = "block";
+        }
         event.preventDefault();
-      
-        
         const query = event.target[0].value
            
         if (query[0].toUpperCase() === "P" || query[0].toUpperCase() === "B") {
-            
-  
-                this.props.history.push(`/search/${query}`)
-        
-
-        }
-        else {
+                this.props.history.push(`/load/${query}`)
+        } else {
             document.querySelector('[data-error]').style.display = "block";
-            
-
         }
     }
 

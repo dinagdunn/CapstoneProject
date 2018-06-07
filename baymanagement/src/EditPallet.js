@@ -13,7 +13,7 @@ class EditPallet extends Component {
 		//push new data to db !!!
 		event.preventDefault();
 		const pId = event.target[0].value
-		this.props.push.history('/search/`${pId}')
+		this.props.push.history('/load/`${pId}')
 	}
 	
 	render() {

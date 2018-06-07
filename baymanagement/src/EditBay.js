@@ -14,7 +14,7 @@ class EditBay extends Component {
 		event.preventDefault();
 		// const pId = event.target[0].value
 		const bId = 'b123'
-		this.props.push.history('/search/`${bId}')
+		this.props.push.history('/load/`${bId}')
 	}
 	
 	render() {

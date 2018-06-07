@@ -20,71 +20,62 @@ class Add extends Component {
 
 	handleOptionChange(event) {
 		this.setState({
-		  selectedOption: event.target.name
+			selectedOption: event.target.name
 		})
-	  }
+	}
 
 
 	render() {
 		return (
-				<BrowserRouter>
-					<div className="float-center">
-						<div className="col-sm-6 col-sm-offset-3">
-							<div className="col-xs-4">
-								<div className="form-check">
-									<label className="form-check-label">
-										<input type="radio" class="form-check-input"
-											name="Pallet" 
-											checked={this.state.selectedOption === 'Pallet'} 
-											onChange={this.handleOptionChange} 
+			<BrowserRouter>
+				<div className="float-center">
+					<div className="container">
+						<div className="row">
+							<div className="col-sm-6 col-sm-offset-3">
+
+								<div className="col-sm-3">
+									<div className="form-check">
+										<label className="form-check-label">
+											<input type="radio" class="form-check-input"
+												name="Pallet"
+												checked={this.state.selectedOption === 'Pallet'}
+												onChange={this.handleOptionChange}
 											/>Pallet
-									</label>
+										</label>
+									</div>
 								</div>
-							</div>
 
-							<div className="col-xs-4 ">
-								<div className="form-check">
-									<label className="form-check-label">
-										<input type="radio" class="form-check-input"
-											name="Master Bay" 
-											checked={this.state.selectedOption === 'Master Bay'} 
-											onChange={this.handleOptionChange}
+								<div className="col-sm-3">
+									<div className="form-check">
+										<label className="form-check-label">
+											<input type="radio" class="form-check-input"
+												name="Master Bay"
+												checked={this.state.selectedOption === 'Master Bay'}
+												onChange={this.handleOptionChange}
 											/>Master Bay
-						</label>
+										</label>
+									</div>
 								</div>
-							</div>
 
-							<div className="col-xs-4">
-								<div className="form-check">
-									<label className="form-check-label">
-										<input type="radio" 
-										className = "form-check-input"
-											name="Sub Bay" 
-											checked={this.state.selectedOption === 'Sub Bay'} 
-											onChange={this.handleOptionChange}
-											/>Sub Bay
-						</label>
-								</div>
 							</div>
 						</div>
+					{/* </div> */}
+							<form>
+								<br />
+								<br />
 
-						<form>
-							<br />
-							<br />
-							{/* <AddCommon /> */}
+								{this.state.selectedOption === 'Pallet' &&
+									<AddPallet />}
+								{this.state.selectedOption === 'Master Bay' &&
+									<AddMaster />}
+							</form>
 
-							{this.state.selectedOption === 'Pallet' && 
-							<AddPallet /> }
-							{ this.state.selectedOption === 'Master Bay' && 
-							<AddMaster /> }
-							{ this.state.selectedOption === 'Sub Bay' &&
-							<AddSub /> }
-						</form>
-
-					</div>
-				</BrowserRouter>
-			) 
+						</div>
+					{/* </div> */}
+				</div>
+		</BrowserRouter>
+				) 
+		}
 	}
-}
-
+	
 export default Add

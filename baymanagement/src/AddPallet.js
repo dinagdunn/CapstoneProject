@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
-import AddCommon from './AddCommon'
+import AddCommon from './AddCommon.js'
 
 class AddPallet extends Component {
     
@@ -15,7 +15,7 @@ class AddPallet extends Component {
         //push to spring
         // const query = event.target[0].value
         const query = 'p101'
-		this.props.history.push(`/search/${query}`)
+		this.props.history.push(`/load/${query}`)
 }
 
 	render() {

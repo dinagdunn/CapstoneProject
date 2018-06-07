@@ -7,6 +7,7 @@ class LoadPallet extends Component {
 	constructor() {
 		super();
 		this.clickHandler = this.clickHandler.bind(this)
+		this.linkHandler = this.linkHandler.bind(this)
  }
 
 	clickHandler(event) {
@@ -16,7 +17,7 @@ class LoadPallet extends Component {
 			this.props.history.push(`/edit/${query}`)
 }
 
-clickHandler(event) {
+linkHandler(event) {
 	event.preventDefault();
 		// const query = event.target[0].value
 		const query = 'p100'
@@ -36,6 +37,9 @@ clickHandler(event) {
 			<p>Department: </p>
 			<p>Class: </p>
 			<p>Category: </p>
+			<p>Placed: </p>
+			<p>Location: </p>
+
 			<form onSubmit={this.clickHandler} className="bar">
 				<button className="btn btn-primary" type="submit">Edit</button>
 			</form>

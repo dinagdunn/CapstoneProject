@@ -46,8 +46,8 @@ class App extends Component {
 
     <Route exact path="/add" component={ Add } />
     <Route exact path="/search" component={ Search } />
-    <Route path="/search/P*" component={ LoadPallet } />
-    <Route path="/search/B*" component={ LoadBay } />
+    <Route path="/load/P*" component={ LoadPallet } />
+    <Route path="/load/B*" component={ LoadBay } />
     <Route path="/edit/P*" component={ EditPallet } />
     <Route path="/edit/B*" component={ EditBay } />
     <Route path="/pblink/*" component={ PBLink } />   
