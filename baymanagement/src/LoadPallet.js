@@ -1,13 +1,47 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
+import axios from 'axios'
+
 
 class LoadPallet extends Component {
-
-	constructor() {
-		super();
+	//this "link" will be calling Spring to get us a list of Bay list recommendations 
+	constructor(props) {
+		super(props);
 		this.clickHandler = this.clickHandler.bind(this)
 		this.linkHandler = this.linkHandler.bind(this)
+
+		this.state = {
+			palletInfo: {
+				// id: 0,
+				// width: 0,
+				// height: 0,
+				// length: 0,
+				// dep: "",
+				// paletteClass: "",
+				// category: "",
+				// bay: 0
+			}
+		}
+	}
+
+
+	componentDidMount() {
+		let pId = this.props.match.params.id;
+		pId = parseInt(pId)
+
+
+		axios.get(`http://localhost:8080/getPaletteById?id=${pId}`)
+			.then(res => {
+				console.log(res.data);
+				this.setState({
+					palletInfo: res.data
+				});
+				
+			})
+
+
+
 	}
 
 	clickHandler(event) {
@@ -24,20 +58,23 @@ class LoadPallet extends Component {
 		this.props.history.push(`/pblink/${query}`)
 	}
 
+
+
 	render() {
 		return (
 			<div>
-				<h1>Pallet goes here</h1>
-				<p>Palette ID: </p>
-				<p>Palette Name: </p>
-				<p>Palette dimensions: </p>
-				<p>Width:  </p>
-				<p>Height: </p>
-				<p>Length:  </p>
-				<p>Department: </p>
-				<p>Class: </p>
-				<p>Category: </p>
-				<p>Placed: </p>
+
+
+				<p>Palette ID: {this.state.palletInfo.id} </p>
+				{/* <p>Palette Name: </p> */}
+				<p>Palette dimensions:</p>
+				<p>Width:  {this.state.palletInfo.width}</p>
+				<p>Height: {this.state.palletInfo.height}</p>
+				<p>Length:  {this.state.palletInfo.length}</p>
+				<p>Department: {this.state.palletInfo.dep}</p>
+				<p>Class: {this.state.palletInfo.paletteClass}</p>
+				<p>Category: {this.state.palletInfo.category}</p>
+				<p>Placed: SB{this.state.palletInfo.bay}</p>
 				<p>Location: </p>
 
 				<form onSubmit={this.clickHandler} className="bar">
@@ -50,5 +87,6 @@ class LoadPallet extends Component {
 		)
 	}
 }
+
 
 export default LoadPallet

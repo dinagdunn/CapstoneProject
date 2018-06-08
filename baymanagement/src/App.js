@@ -43,17 +43,19 @@ class App extends Component {
 
     <Route exact path="/add" component={ Add } />
     <Route exact path="/search" component={ Search } />
-    <Route path="/load/P*" component={ LoadPallet } />
-    <Route path="/load/B*" component={ LoadBay } />
-    <Route path="/edit/P*" component={ EditPallet } />
-    <Route path="/edit/B*" component={ EditBay } />
+    <Route path="/load/P:id" component={ LoadPallet } />
+    <Route path="/load/MB:id" component={ LoadBay } />
+    <Route path="/edit/P:id" component={ EditPallet } />
+    <Route path="/edit/B:id" component={ EditBay } />
     <Route path="/pblink/*" component={ PBLink } />
-    <Route path="/managesubs" component={ ManageSubs } />   
+    <Route path="/managesubs/" component={ ManageSubs } />   
   
 
     <Route exact path ="/" render={() =>
       <p className="App-intro">
-      This is going to tell you all about the bays.
+      Input P#### to search for a PalletID
+      <br/><br/>
+      Input MB#### for a MasterBayID
       </p>
     } />
 

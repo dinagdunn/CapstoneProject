@@ -71,3 +71,7 @@ a:active {
 .LinkText {
   color: white;
 }
+
+p{
+  font-weight: bold;
+}
