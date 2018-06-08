@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import bootcamp.model.Bay;
+import bootcamp.model.Message;
 import bootcamp.service.BayService;
 
 
@@ -18,12 +19,12 @@ public class BayController {
 
     
     @RequestMapping(value = "/addBay", method = RequestMethod.POST)
-    public void addBay(@RequestBody Bay bay) {
-    	bayService.addBay(bay);
+    public Message addBay(@RequestBody Bay bay) {
+    	return bayService.addBay(bay);
     }
     
     @RequestMapping(value ="/getBayById", method = RequestMethod.GET)
-    public Bay getBayById(@RequestParam("id") String id) {
+    public Bay getBayById(@RequestParam("id") int id) {
     	return bayService.getBayById(id);
     }
     

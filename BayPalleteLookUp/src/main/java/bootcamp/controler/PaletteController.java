@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import bootcamp.model.DimensionMatch;
 import bootcamp.model.Palette;
 import bootcamp.service.PaletteService;
 
@@ -21,17 +23,17 @@ public class PaletteController {
     }
     
     @RequestMapping(value ="/getPaletteById", method = RequestMethod.GET)
-    public Palette getPaletteById(@RequestParam("id") String id) {
+    public Palette getPaletteById(@RequestParam("id") int id) {
     	return paletteService.getPaletteById(id);
     }
     
     @RequestMapping(value ="/editPalette", method = RequestMethod.POST)
-    public void editPalette(@RequestBody Palette palette) {
-    	paletteService.editPalette(palette);
+    public DimensionMatch editPalette(@RequestBody Palette palette) {
+    	return paletteService.editPalette(palette);
     }
     
     @RequestMapping(value ="/deletePalette", method = RequestMethod.DELETE) 
-    public void deletePalette(@RequestParam("id") String id) {
+    public void deletePalette(@RequestParam("id") int id) {
     	paletteService.deletePalette(id);
     }
 

@@ -24,7 +24,7 @@ public class MasterBayController {
   
   //given masterbay ID return a masterbay object with it's dimentions and all the subbays listed.
   @RequestMapping(value = "/getMasterbayById", method = RequestMethod.GET   )
-  public MasterBay getMasterbayById(@RequestParam("id") String id) {
+  public MasterBay getMasterbayById(@RequestParam("id") int id) {
 	  return masterBayService.getMasterbayById(id);
   }
   

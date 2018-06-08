@@ -2,21 +2,23 @@ package bootcamp.model;
 
 public class Palette {
 
-	String id;
+	int id;
 	int width;
 	int height;
 	int length;
 	String dep;
 	String paletteClass;
 	String category;
-	String bay;	
+	int bay;	
 	
 	public Palette() {
 		
 	}
+	
 
-	public Palette(String id, int width, int height, int length, String dep, String paletteClass, String category,
-			String bay) {
+
+	public Palette(int id, int width, int height, int length, String dep, String paletteClass, String category,
+			int bay) {
 		super();
 		this.id = id;
 		this.width = width;
@@ -28,11 +30,11 @@ public class Palette {
 		this.bay = bay;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -84,13 +86,14 @@ public class Palette {
 		this.category = category;
 	}
 
-	public String getBay() {
+	public int getBay() {
 		return bay;
 	}
 
-	public void setBay(String bay) {
+	public void setBay(int bay) {
 		this.bay = bay;
-	}	
+	}
+
 	
 	
 	

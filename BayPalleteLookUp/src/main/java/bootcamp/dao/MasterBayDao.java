@@ -27,7 +27,7 @@ public class MasterBayDao {
 		return jdbctemplate.query(GET_MASTERBAY_LIST, new BeanPropertyRowMapper<>(MasterBay.class));
 	}
 	
-	public MasterBay getMasterbayById(String masterbay) {
+	public MasterBay getMasterbayById(int masterbay) {
 		Object[] args = {masterbay};
 		List<Bay> bayList = jdbctemplate.query(GET_BAY_LIST, args, new BeanPropertyRowMapper<>(Bay.class));
 		MasterBay masterBay = jdbctemplate.query(GET_MASTERBAY, args, new BeanPropertyRowMapper<>(MasterBay.class)).get(0);
