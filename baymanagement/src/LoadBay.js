@@ -1,12 +1,75 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
+import axios from 'axios'
 
 class LoadBay extends Component {
 
 	constructor() {
 		super();
 		this.clickHandler = this.clickHandler.bind(this)
+		// this.subBayList = this.subBayList.bind(this)
+
+		this.state = {
+			masterBayInfo: {
+				// id: 0,
+				// width: 0,
+				// height: 0,
+				// length: 0,
+				// dep: "",
+				// paletteClass: "",
+				// category: "",
+				// bay: 0
+
+			// bayList = [{
+
+			// }]
+		}
+		}
+	}
+
+
+	componentDidMount() {
+		let bId = this.props.match.params.id;
+		bId = parseInt(bId)
+	
+
+
+		axios.get(`http://localhost:8080/getMasterbayById?id=${bId}`)
+			.then(res => {
+				console.log(res.data);
+				this.setState({
+					masterBayInfo: res.data
+				});
+				console.log("called MB");
+				console.log(this.state.masterBayInfo.bayList);
+				
+			})
+
+			
+
+		//@CrossOrigin needs to be added above @RequestMapping for these requests to Work!!!
+
+		// @CrossOrigin
+		// @RequestMapping(value ="/getPaletteById", method = RequestMethod.GET)
+		// public Palette getPaletteById(@RequestParam("id") int id) {
+		// 	System.out.println(id);
+		// 	return paletteService.getPaletteById(id);
+		// }
+
+	}
+
+	subBayList = () => {
+		let x;
+		console.log("call method")
+		let list = this.state.masterBayInfo.bayList
+		for (let i = 0; i < list.length; i++) {
+console.log(list[i], "hit function");
+
+			return `${list[i]}`
+			
+
+		}
 	}
 
 	clickHandler(event) {
@@ -16,20 +79,39 @@ class LoadBay extends Component {
 		this.props.history.push(`/edit/${query}`)
 	}
 
-
+	
 	render() {
+		// let html_bayList = [];
+		console.log("============")
+		 console.log(this.state.masterBayInfo.bayList);
+
+		//  for(let i=0; i<this.state.masterBayInfo.bayList.length; i++){
+		// 	 console.log(this.state.masterBayInfo.bayList[i]);
+		//  }
+		//this.state.masterBayInfo.bayList.forEach((elem) => {
+			//console.log(elem);
+		// 	html_bayList.push(<h1>bay_obj.id</h1>);
+			
+			// <h1> bay_oby </h1
+			// <h1> bay_oby </h1
+			// <h1> bay_oby </h1
+			// ...
+		 //});
+
 		return (
 			<div>
-				<h1>Bay goes here</h1>
-				<p>Bay ID: </p>
-				<p>Bay Name: </p>
-				<p>Bay dimensions: </p>
-				<p>Width:  </p>
-				<p>Height: </p>
-				<p>Length:  </p>
-				<p>Department: </p>
+
+				<p>MasterBay ID: {this.state.masterBayInfo.id}</p>
+				{/* <p>Bay Name: </p> */}
+				<p>Master Bay dimensions: </p>
+				<p>Width: {this.state.masterBayInfo.width}</p>
+				<p>Height: {this.state.masterBayInfo.height}</p>
+				<p>Length:  {this.state.masterBayInfo.length}</p>
+				{/* <p>Sub Bay List: {this.subBayList()}</p> */}
+				{/* <p>Sub Bay List: {html_bayList}</p> */}
+				{/* <p>Department: </p>
 				<p>Class: </p>
-				<p>Category: </p>
+				<p>Category: </p> */}
 				<form onSubmit={this.clickHandler} className="bar">
 					<button className="btn btn-primary" type="submit">Edit</button>
 				</form>
@@ -37,5 +119,6 @@ class LoadBay extends Component {
 		)
 	}
 }
+
 
 export default LoadBay
