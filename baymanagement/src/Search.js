@@ -17,10 +17,7 @@ class Search extends Component {
         const query = event.target[0].value
 
         if (query) {
-
             if (query[0].toUpperCase() === "P") {
-
-
                 this.props.history.push(`/load/${query}`)
             }
 
@@ -30,20 +27,13 @@ class Search extends Component {
                 this.props.history.push(`/load/${query}`)
             }
 
-
         } else {
             document.querySelector('[data-error]').style.display = "block";
         }
-
     }
 
 
-
-
-
-
     render() {
-
         return (
             <React.Fragment>
                 <form onSubmit={this.clickHandler} className="bar">

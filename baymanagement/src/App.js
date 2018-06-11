@@ -41,7 +41,7 @@ class App extends Component {
     </header>
 
 
-    <Route exact path="/add" component={ Add } />
+    <Route path="/add" component={ Add } />
     <Route exact path="/search" component={ Search } />
     <Route path="/load/P:id" component={ LoadPallet } />
     <Route path="/load/MB:id" component={ LoadBay } />
