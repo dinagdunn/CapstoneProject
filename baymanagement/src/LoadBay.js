@@ -8,7 +8,7 @@ class LoadBay extends Component {
 	constructor() {
 		super();
 		this.clickHandler = this.clickHandler.bind(this)
-		// this.subBayList = this.subBayList.bind(this)
+		this.subBayList = this.subBayList.bind(this)
 
 		this.state = {
 			masterBayInfo: {
@@ -21,18 +21,18 @@ class LoadBay extends Component {
 				// category: "",
 				// bay: 0
 
-			// bayList = [{
-
-			// }]
-		}
+				bayList: [{}]
+			}
 		}
 	}
 
 
 	componentDidMount() {
 		let bId = this.props.match.params.id;
+		console.log(bId);
+
 		bId = parseInt(bId)
-	
+
 
 
 		axios.get(`http://localhost:8080/getMasterbayById?id=${bId}`)
@@ -42,11 +42,11 @@ class LoadBay extends Component {
 					masterBayInfo: res.data
 				});
 				console.log("called MB");
-				console.log(this.state.masterBayInfo.bayList);
-				
+				// console.log(this.state.masterBayInfo.bayList);
+
 			})
 
-			
+
 
 		//@CrossOrigin needs to be added above @RequestMapping for these requests to Work!!!
 
@@ -60,17 +60,25 @@ class LoadBay extends Component {
 	}
 
 	subBayList = () => {
-		let x;
-		console.log("call method")
-		let list = this.state.masterBayInfo.bayList
-		for (let i = 0; i < list.length; i++) {
-console.log(list[i], "hit function");
-
-			return `${list[i]}`
-			
-
+		if (this.state.masterBayInfo.bayList) {
+			let bayList = this.state.masterBayInfo.bayList			
+			bayList.forEach((elem) => {
+					return (<div className="subBay">
+						<p>Sub Bay List:</p>
+							elem.id
+							elem.width
+							elem.height
+							elem.length
+							elem.dep
+							elem.paletteClass
+							elem.category
+							elem.bay
+					</div>)
+				
+			})
 		}
 	}
+
 
 	clickHandler(event) {
 		event.preventDefault();
@@ -79,24 +87,20 @@ console.log(list[i], "hit function");
 		this.props.history.push(`/edit/${query}`)
 	}
 
-	
+
 	render() {
 		// let html_bayList = [];
-		console.log("============")
-		 console.log(this.state.masterBayInfo.bayList);
+
 
 		//  for(let i=0; i<this.state.masterBayInfo.bayList.length; i++){
 		// 	 console.log(this.state.masterBayInfo.bayList[i]);
 		//  }
-		//this.state.masterBayInfo.bayList.forEach((elem) => {
-			//console.log(elem);
+
+		//console.log(elem);
 		// 	html_bayList.push(<h1>bay_obj.id</h1>);
-			
-			// <h1> bay_oby </h1
-			// <h1> bay_oby </h1
-			// <h1> bay_oby </h1
-			// ...
-		 //});
+
+
+
 
 		return (
 			<div>
@@ -107,11 +111,9 @@ console.log(list[i], "hit function");
 				<p>Width: {this.state.masterBayInfo.width}</p>
 				<p>Height: {this.state.masterBayInfo.height}</p>
 				<p>Length:  {this.state.masterBayInfo.length}</p>
-				{/* <p>Sub Bay List: {this.subBayList()}</p> */}
-				{/* <p>Sub Bay List: {html_bayList}</p> */}
-				{/* <p>Department: </p>
-				<p>Class: </p>
-				<p>Category: </p> */}
+				<p>Sub Bay List: {this.subBayList()}
+				</p>
+
 				<form onSubmit={this.clickHandler} className="bar">
 					<button className="btn btn-primary" type="submit">Edit</button>
 				</form>
@@ -119,6 +121,7 @@ console.log(list[i], "hit function");
 		)
 	}
 }
+
 
 
 export default LoadBay
