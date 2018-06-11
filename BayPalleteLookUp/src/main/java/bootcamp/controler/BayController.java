@@ -29,13 +29,13 @@ public class BayController {
     }
     
     @RequestMapping(value ="/editBay", method = RequestMethod.POST)
-    public void editBay(@RequestBody Bay bay) {
-    	bayService.editBay(bay);
+    public Message editBay(@RequestBody Bay bay) {
+    	return bayService.editBay(bay);
     }
     
     @RequestMapping(value ="/deleteBay", method = RequestMethod.DELETE) 
-    public void deleteBay(@RequestParam("id") String id) {
-    	bayService.deleteBay(id);
+    public Message deleteBay(@RequestParam("id") int id) {
+    	return bayService.deleteBay(id);
     }
     
 // A sample bay object in json:    

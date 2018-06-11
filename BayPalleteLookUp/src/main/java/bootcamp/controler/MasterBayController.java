@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import bootcamp.model.MasterBay;
+import bootcamp.model.Message;
 import bootcamp.service.MasterBayService;
 
 @RestController
@@ -33,14 +34,16 @@ public class MasterBayController {
 	  masterBayService.addMasterBay(masterBay);
   }
   
-  @RequestMapping(value = "/deleteMasterBay", method=RequestMethod.POST)
-  public void deleteMasterBay(@RequestParam("id") String id) {
-	  masterBayService.deleteMasterBay(id);
+  @RequestMapping(value = "/deleteMasterBay", method=RequestMethod.DELETE)
+  public Message deleteMasterBay(@RequestParam("id") int id) {
+	  return masterBayService.deleteMasterBay(id);
   }
   
   @RequestMapping(value = "/editMasterBay",method= RequestMethod.POST)
-  public void editMasterBay(@RequestBody MasterBay masterBay) {
-	  masterBayService.editMasterBay(masterBay);
+  public Message editMasterBay(@RequestBody MasterBay masterBay) {
+	  return masterBayService.editMasterBay(masterBay);
   }
-
+  
 }
+  
+//  { "id": 1, "width": 12, "height": 12, "length": 34, "bayList":null}
