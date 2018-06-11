@@ -8,6 +8,21 @@ class EditBay extends Component {
 		super();
 		this.submitHandler = this.submitHandler.bind(this)
 		this.deleteHandler = this.deleteHandler.bind(this)
+
+		this.state = {
+			masterBayInfo: {
+				// id: 0,
+				// width: 0,
+				// height: 0,
+				// length: 0,
+				// dep: "",
+				// paletteClass: "",
+				// category: "",
+				// bay: 0
+
+				bayList: [{}]
+			}
+		}
 	}
 
 	submitHandler(event) {

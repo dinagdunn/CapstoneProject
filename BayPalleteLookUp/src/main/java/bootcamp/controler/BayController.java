@@ -1,6 +1,7 @@
 package bootcamp.controler;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,22 +18,25 @@ public class BayController {
 	@Autowired
 	BayService bayService;
 
-    
+	 @CrossOrigin
     @RequestMapping(value = "/addBay", method = RequestMethod.POST)
     public Message addBay(@RequestBody Bay bay) {
     	return bayService.addBay(bay);
     }
     
+	 @CrossOrigin
     @RequestMapping(value ="/getBayById", method = RequestMethod.GET)
     public Bay getBayById(@RequestParam("id") int id) {
     	return bayService.getBayById(id);
     }
     
+	 @CrossOrigin
     @RequestMapping(value ="/editBay", method = RequestMethod.POST)
     public Message editBay(@RequestBody Bay bay) {
     	return bayService.editBay(bay);
     }
     
+	 @CrossOrigin
     @RequestMapping(value ="/deleteBay", method = RequestMethod.DELETE) 
     public Message deleteBay(@RequestParam("id") int id) {
     	return bayService.deleteBay(id);

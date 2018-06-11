@@ -8,7 +8,7 @@ class LoadBay extends Component {
 	constructor() {
 		super();
 		this.clickHandler = this.clickHandler.bind(this)
-		this.subBayList = this.subBayList.bind(this)
+		// this.subBayList = this.subBayList.bind(this)
 
 		this.state = {
 			masterBayInfo: {
@@ -59,25 +59,29 @@ class LoadBay extends Component {
 
 	}
 
-	subBayList = () => {
-		if (this.state.masterBayInfo.bayList) {
-			let bayList = this.state.masterBayInfo.bayList			
-			bayList.forEach((elem) => {
-					return (<div className="subBay">
-						<p>Sub Bay List:</p>
-							elem.id
-							elem.width
-							elem.height
-							elem.length
-							elem.dep
-							elem.paletteClass
-							elem.category
-							elem.bay
-					</div>)
+	// subBayList = () => {
+
+	// 		this.state.masterBayInfo.bayList.map((elem) => {
+	// 				return (<div className="subBay">
+	// 					<p>Sub Bay List:</p>
+	// 						ID: {elem.id}
+	// 						{elem.width}
+	// 						{elem.height}
+	// 						{elem.length}
+	// 						{elem.dep}
+	// 						{elem.paletteClass}
+	// 						{elem.category}
+	// 						{elem.bay}
+	// 				</div>)
 				
-			})
-		}
-	}
+	// 		})
+	// 	}
+
+		// return (
+		// 	this.state.masterBayInfo.bayList[0].height
+		// )
+	
+
 
 
 	clickHandler(event) {
@@ -111,8 +115,20 @@ class LoadBay extends Component {
 				<p>Width: {this.state.masterBayInfo.width}</p>
 				<p>Height: {this.state.masterBayInfo.height}</p>
 				<p>Length:  {this.state.masterBayInfo.length}</p>
-				<p>Sub Bay List: {this.subBayList()}
-				</p>
+				
+				{this.state.masterBayInfo.bayList.map((sB=> 
+					<div className="subBayDisplay">
+					<p>SubBay ID: {sB.id}</p>
+					<p>SubBay Width: {sB.width}</p>
+					<p>SubBay Height: {sB.height}</p>
+					<p>SubBay Length: {sB.length}</p>
+					<p>SubBay Dept: {sB.dep}</p>
+					<p>SubBay BayClass: {sB.bayClass}</p>
+					<p>SubBay Category: {sB.category}</p>
+					<p>Palettes associated with subBay:{sB.palette}</p> 
+					</div>
+				))}
+			
 
 				<form onSubmit={this.clickHandler} className="bar">
 					<button className="btn btn-primary" type="submit">Edit</button>
