@@ -1,6 +1,7 @@
 package bootcamp.controler;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,21 +17,25 @@ public class PaletteController {
 	@Autowired
 	PaletteService paletteService;
 	
+	@CrossOrigin
     @RequestMapping(value = "/addPalette", method = RequestMethod.POST)
     public void addPalette(@RequestBody Palette palette) {
     	paletteService.addPalette(palette);
     }
-    
+	
+	@CrossOrigin
     @RequestMapping(value ="/getPaletteById", method = RequestMethod.GET)
     public Palette getPaletteById(@RequestParam("id") int id) {
     	return paletteService.getPaletteById(id);
     }
     
+	@CrossOrigin
     @RequestMapping(value ="/editPalette", method = RequestMethod.POST)
     public DimensionMatch editPalette(@RequestBody Palette palette) {
     	return paletteService.editPalette(palette);
     }
     
+	@CrossOrigin
     @RequestMapping(value ="/deletePalette", method = RequestMethod.DELETE) 
     public void deletePalette(@RequestParam("id") int id) {
     	paletteService.deletePalette(id);
