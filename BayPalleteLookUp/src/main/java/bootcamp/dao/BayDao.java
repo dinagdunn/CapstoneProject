@@ -42,7 +42,7 @@ public class BayDao {
 		jdbctemplate.update(EDIT_BAY, args);		
 	}
 	
-	public void deleteBay(String id) {
+	public void deleteBay(int id) {
 		Object[] args = {id};
 		jdbctemplate.update(DELETE_BAY,args);
 	}
