@@ -46,9 +46,11 @@ class LoadPallet extends Component {
 
 	clickHandler(event) {
 		event.preventDefault();
+		let pId = this.props.match.params.id;
+		pId = parseInt(pId)
 		// const query = event.target[0].value
-		const query = 'p100'
-		this.props.history.push(`/edit/${query}`)
+
+		this.props.history.push(`/edit/p${pId}`)
 	}
 
 	linkHandler(event) {
