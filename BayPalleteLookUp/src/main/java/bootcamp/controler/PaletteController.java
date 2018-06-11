@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import bootcamp.model.DimensionMatch;
 import bootcamp.model.Palette;
 import bootcamp.service.PaletteService;
@@ -36,7 +35,12 @@ public class PaletteController {
     public void deletePalette(@RequestParam("id") int id) {
     	paletteService.deletePalette(id);
     }
-
+    
+    @RequestMapping(value = "/unlinkPalette", method = RequestMethod.GET)
+    public void unlinkPalette(@RequestParam("id") int id) {
+    	paletteService.unlinkPalette(id);
+    }
+    
     //sample palette object json:
     // {"id": "P1", "width": 34, "height": 34, "length": 34, "dep": "D1", "paletteClass": "C1", "category": "CAT1", "bay": "B1"}
     

@@ -82,6 +82,19 @@ public class BayService {
     	}
     	bayDao.deleteBay(id);
     	return new Message("Delete successful");
-    }	
-	}
+    }
+    
+    public List<Bay> getEmptyBays(int id){
+    	Palette palette = paletteDao.getPaletteById(id);
+    	List<Bay> bayList = bayDao.emptyBays(palette);
+    	for(Bay b: bayList) {
+    		System.out.println("bay id is: " + b.getId());
+    	}
+    	System.out.println(bayList.isEmpty());
+    	if(bayList.isEmpty()) {
+    		return bayDao.emptyBaysOtherDepartments(palette);
+    	}
+    	return bayList;
+    }
+}
 
