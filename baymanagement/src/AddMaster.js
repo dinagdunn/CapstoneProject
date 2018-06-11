@@ -10,11 +10,12 @@ class AddMaster extends Component {
 		this.clickHandler = this.clickHandler.bind(this)
  }
 
-	clickHandler(event) {
+	masterHandler(event) {
         event.preventDefault();
         //push to spring
         // const query = event.target[0].value
-        const query = 'b101'
+        const query = 'mb101'
+        console.log(query)
 		this.props.history.push(`/load/${query}`)
 }
 

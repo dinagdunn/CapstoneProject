@@ -3,59 +3,62 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 
 class AddCommon extends Component {
-	
+
 	render() {
 		return (
 			<div className="float-center">
-			<label>
-			Name: 
+				<label>
+					Name:
 			<input type="text" name="name" />
-			</label>
-			<br />
-			
-			<label>
-			Height: 
+				</label>
+				<br />
+
+				<label>
+					Height:
 			<input type="text" name="height" />
-			</label>
-			<br />
+				</label>
+				<br />
 
-			<label>
-			Width: 
+				<label>
+					Width:
 			<input type="text" name="width" />
-			</label>
-			<br />
+				</label>
+				<br />
 
-			<label>
-			Depth: 
+				<label>
+					Depth:
 			<input type="text" name="depth" />
-			</label>
-			<br />
+				</label>
+				<br />
 
-			<label>
-			Department: 
+				<label>
+					Department:
 			<select name="department">
-			<option value="D1">D1</option>
-			</select>
-			</label>
-			<br />
+						<option value="D1">D1</option>
+					</select>
+				</label>
+				<br />
 
-			<label>
-			Class: 
+				<label>
+					Class:
 			<select name="class">
-			<option value="Cl1">Cl1</option>
-			</select>
-			</label>
-			<br />
+						<option value="Cl1">Cl1</option>
+					</select>
+				</label>
+				<br />
 
-			<label>
-			Category: 
+				<label>
+					Category:
 			<select name="category">
-			<option value="Ca1">Ca1</option>
-			</select>
-			</label>
-			<br />
+						<option value="Ca1">Ca1</option>
+					</select>
+				</label>
+				<br />
+				<button className="btn btn-primary" type="submit">
+					Submit
+                        			</button>
 			</div>
-			)
+		)
 	}
 }
 
