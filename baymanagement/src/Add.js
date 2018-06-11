@@ -26,6 +26,13 @@ class Add extends Component {
 	palletHandler(event) {
 		event.preventDefault();
 		//push to spring
+
+		const formToJSON = elements => [].reduce.call(elements, (data, element) => {
+			data[element.name] = element.value;
+			return data;
+		  }, {});
+		
+		  console.log("form data object take 1: ", formToJSON)
 		// const query = event.target[0].value
 		const query = 'p101'
 		this.props.history.push(`/load/${query}`)
@@ -37,6 +44,14 @@ class Add extends Component {
 		event.preventDefault();
 		//push to spring
 		// const query = event.target[0].value
+
+		const formToJSON = elements => [].reduce.call(elements, (data, element) => {
+			data[element.name] = element.value;
+			return data;
+		  }, {});
+		
+		  console.log("form data object take 1: ", formToJSON)
+
 		const query = 'mb101'
 		console.log(query)
 		this.props.history.push(`/load/${query}`)

@@ -41,9 +41,9 @@ class LoadBay extends Component {
 				this.setState({
 					masterBayInfo: res.data
 				});
+
 				console.log("called MB");
 				// console.log(this.state.masterBayInfo.bayList);
-
 			})
 
 
