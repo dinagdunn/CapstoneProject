@@ -47,6 +47,6 @@ public class PaletteController {
     }
     
     //sample palette object json:
-    // {"id": "P1", "width": 34, "height": 34, "length": 34, "dep": "D1", "paletteClass": "C1", "category": "CAT1", "bay": "B1"}
+    // {"id": "1", "width": 34, "height": 34, "length": 34, "dep": "D1", "paletteClass": "C1", "category": "CAT1", "bay": "1"}
     
 }

@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import bootcamp.model.Bay;
+
 import bootcamp.model.Palette;
 
 @Component
@@ -19,6 +20,7 @@ public class BayDao {
 	private final String UNLINK_PALETTE = "UPDATE Bay SET palette = 0 WHERE ID = ?";
 	private final String EMPTY_BAYS = "SELECT * FROM Bay WHERE palette = 0 AND dep = ? AND width>=? AND length>=? AND height>=? ORDER BY (length*height*width) ASC;";
 	private final String EMPTY_BAYS_OTHER_DEPARTMENTS = "SELECT * FROM Bay WHERE palette = 0 AND width>=? AND length>=? AND height>=? ORDER BY (length*height*width) ASC;";
+
 
 
 	
@@ -64,6 +66,8 @@ public class BayDao {
 		Object[] args = {palette.getWidth(), palette.getLength(), palette.getHeight()};
 			return jdbctemplate.query(EMPTY_BAYS_OTHER_DEPARTMENTS,args, new BeanPropertyRowMapper<>(Bay.class));
 	}
+	
+
 	
 
 }
