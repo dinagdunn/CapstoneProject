@@ -1,71 +1,114 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
+import axios from 'axios';
 
 class EditPallet extends Component {
 
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.submitHandler = this.submitHandler.bind(this)
 		this.deleteHandler = this.deleteHandler.bind(this)
+		this.changeHeight = this.changeHeight.bind(this)
+		this.state={
+			id: this.props.location.state.paletteInfo.id,
+			width: this.props.location.state.paletteInfo.width,
+			length: this.props.location.state.paletteInfo.length,
+			height:this.props.location.state.paletteInfo.height,
+			dep:this.props.location.state.paletteInfo.dep,
+			class:this.props.location.state.paletteInfo.paletteClass,
+			category:this.props.location.state.paletteInfo.category,
+		}
 	}
+
 
 	submitHandler(event) {
 		//push new data to db !!!
 		console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ")
 		event.preventDefault();
-		// const pId = event.target[0].value
-		const pId = 'p66'
-		this.props.history.push(`/load/${pId}`)
+		console.log(this.props.location.state.paletteInfo)
+		let palette = {}
+
+		palette.id= this.state.id;
+		palette.width= this.state.width;
+		palette.length =  this.state.length;
+		palette.height = this.state.height;
+		palette.dep = this.state.dep
+		palette.paletteClass = this.state.class
+		palette.category = this.state.category;
+		axios.post("http://localhost:8080/editPalette",palette).then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+		this.props.history.push(`/load/P${this.state.id}`)
 	}
 
 	deleteHandler(event) {
 		//push new data to db !!!
 		event.preventDefault();
-		const pId = this.props.match.params[0];
+		const pId = this.props.match.params.id;
 		console.log(pId)
 		this.props.history.push('/?msg=deleted')
+		axios.delete(`http://localhost:8080/deletePalette?id=${pId}`)
+	}
+
+	changeHeight(event,box){
+		console.log(event.target)
+		var stateChange = {}
+		console.log(stateChange[box]);
+		stateChange[box] = event.target.value
+		console.log(stateChange[box]);
+		this.setState(stateChange);
+	}
+
+	getDep(dep){
+		if(dep === this.state.dep){
+			return 'SELECTED'
+		}else{
+			return ""
+		}
 	}
 
 	render() {
+
 		return (
 			<BrowserRouter>
 				<div>
-					<label>
-						Name:
-			<input type="text" name="name" value="" />
-					</label>
-					<br />
-
+				<h4>Palette: P{this.props.location.state.paletteInfo.id}</h4>
+				<form id="editPalette" name="editPalette" >
 					<label>
 						Height:
-			<input type="text" name="height" value="" />
+			<input type="text" name="height" value={this.state.height} onChange={(e)=>{this.changeHeight(e,'height')}}/>
 					</label>
 					<br />
 
 					<label>
 						Width:
-			<input type="text" name="width" value="" />
+			<input type="text" name="width" value={this.state.width} onChange={(e)=>{this.changeHeight(e,'width')}}/>
 					</label>
 					<br />
 
 					<label>
 						Depth:
-			<input type="text" name="depth" value="" />
+			<input type="text" name="depth"  value={this.state.length} onChange={(e)=>{this.changeHeight(e,'length')}}/>
 					</label>
 					<br />
-
+			</form>
 					<label>
 						Department:
-			<select name="department" value="" >
+			<select name="department" form="editPalette" >
 							<option value="D1">D1</option>
+							{/*<option value="D1" {()=>{this.getDep('D1')}}>D1</option>
+							<option value="D2" {()=>{this.getDep('D2')}}>D2</option>*/}
 						</select>
 					</label>
 					<br />
 
 					<label>
 						Class:
-			<select name="class" value="" >
+			<select name="class" form="editPalette">
 							<option value="Cl1">Cl1</option>
 						</select>
 					</label>
@@ -73,7 +116,7 @@ class EditPallet extends Component {
 
 					<label>
 						Category:
-			<select name="category" value="" >
+			<select name="category" form="editPalette">
 							<option value="Ca1">Ca1</option>
 						</select>
 					</label>
@@ -81,7 +124,7 @@ class EditPallet extends Component {
 
 					<button className="btn btn-primary"  onClick={this.submitHandler}>Submit</button>
 					<button className="btn btn-primary"  onClick={this.deleteHandler}>Delete</button>
-
+					
 				</div>
 			</BrowserRouter>
 		)
