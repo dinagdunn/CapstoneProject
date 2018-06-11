@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import bootcamp.model.Bay;
+import bootcamp.model.Palette;
 
 @Component
 public class BayDao {
@@ -15,7 +16,9 @@ public class BayDao {
 	private final String ADD_BAY = "INSERT INTO Bay (id, width, length, height, dep, bayClass, category, masterbay, palette) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";	
 	private final String EDIT_BAY =  "UPDATE Bay SET width=?, length=?, height=?, dep=?, bayClass=?, category=?, masterbay=?, palette=? WHERE id = ?;";
 	private final String DELETE_BAY ="DELETE FROM Bay where id=?;";
-	private final String UNLINK_PALETTE = "UPDATE Bay SET palette = null WHERE ID = ?";
+	private final String UNLINK_PALETTE = "UPDATE Bay SET palette = 0 WHERE ID = ?";
+	private final String EMPTY_BAYS = "SELECT * FROM Bay WHERE palette = 0 AND dep = ? AND width>=? AND length>=? AND height>=? ORDER BY (length*height*width) ASC;";
+	private final String EMPTY_BAYS_OTHER_DEPARTMENTS = "SELECT * FROM Bay WHERE palette = 0 AND width>=? AND length>=? AND height>=? ORDER BY (length*height*width) ASC;";
 
 
 	
@@ -50,6 +53,16 @@ public class BayDao {
 	public void unlinkPalette(int id) {
 		Object[] args = {id};
 		jdbctemplate.update(UNLINK_PALETTE,args);
+	}
+	
+	public List<Bay> emptyBays(Palette palette){
+		Object[] args = {palette.getDep(),palette.getWidth(), palette.getLength(), palette.getHeight()};
+		return jdbctemplate.query(EMPTY_BAYS, args, new BeanPropertyRowMapper<>(Bay.class));
+	}
+	
+	public List<Bay> emptyBaysOtherDepartments(Palette palette){
+		Object[] args = {palette.getWidth(), palette.getLength(), palette.getHeight()};
+			return jdbctemplate.query(EMPTY_BAYS_OTHER_DEPARTMENTS,args, new BeanPropertyRowMapper<>(Bay.class));
 	}
 	
 

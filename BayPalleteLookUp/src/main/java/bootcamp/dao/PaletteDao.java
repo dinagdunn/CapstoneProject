@@ -16,7 +16,7 @@ public class PaletteDao {
 	private final String GET_PALETTE_BY_ID = "SELECT * FROM palette WHERE id = ?;";
 	private final String EDIT_PALETTE = "UPDATE palette SET width=?, length=?, height=?, dep=?, paletteClass=?, category=?, bay=? WHERE id = ?;";
 	private final String DELETE_PALETTE = "DELETE FROM palette where id=?;";
-
+	private final String UNLINK_PALETTE = "UPDATE palette SET bay = 0 WHERE ID = ?";
 	
 	@Autowired
 	JdbcTemplate jdbctemplate;
@@ -47,6 +47,12 @@ public class PaletteDao {
 	public void deletePalette(int id) {
 		Object[] args = {id};
 		jdbctemplate.update(DELETE_PALETTE,args);
+	}
+	
+	public void unlinkPlatte(int id) {
+		Object[] args = {id};
+		jdbctemplate.update(UNLINK_PALETTE,args);
+		
 	}
 	
 

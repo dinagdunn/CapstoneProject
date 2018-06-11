@@ -1,5 +1,7 @@
 package bootcamp.controler;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,6 +42,11 @@ public class BayController {
     @RequestMapping(value ="/deleteBay", method = RequestMethod.DELETE) 
     public Message deleteBay(@RequestParam("id") int id) {
     	return bayService.deleteBay(id);
+    }
+    
+    @RequestMapping(value="/getEmptyBays", method=RequestMethod.GET)
+    public List<Bay> getEmptyBays(@RequestParam("id") int paletteId){
+    	return bayService.getEmptyBays(paletteId);
     }
     
 // A sample bay object in json:    

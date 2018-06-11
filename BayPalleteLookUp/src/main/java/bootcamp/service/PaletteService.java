@@ -44,6 +44,12 @@ public class PaletteService {
     	paletteDao.deletePalette(id);
     	
     }
+    
+    public void unlinkPalette(int id) {
+    	int bayId = paletteDao.getPaletteById(id).getBay();
+    	bayDao.unlinkPalette(bayId);
+    	paletteDao.unlinkPlatte(id);
+    }
 
 	
 }
