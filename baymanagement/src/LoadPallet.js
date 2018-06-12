@@ -69,7 +69,6 @@ class LoadPallet extends Component {
 		return (
 			<div>
 				<p>Palette ID: {this.state.palletInfo.id} </p>
-				{/* <p>Palette Name: </p> */}
 				<p>Palette dimensions:</p>
 				<p>Width:  {this.state.palletInfo.width}</p>
 				<p>Height: {this.state.palletInfo.height}</p>
@@ -77,8 +76,7 @@ class LoadPallet extends Component {
 				<p>Department: {this.state.palletInfo.dep}</p>
 				<p>Class: {this.state.palletInfo.paletteClass}</p>
 				<p>Category: {this.state.palletInfo.category}</p>
-				<p>Placed: SB{this.state.palletInfo.bay}</p>
-				<p>Location: </p>
+				<p>Location: SB{this.state.palletInfo.bay}</p>
 
 				<form onSubmit={this.submitHandler} className="bar">
 					<button className="btn btn-primary" type="submit">Edit</button>
