@@ -4,35 +4,18 @@ import './App.css';
 import axios from 'axios'
 
 class PBLink extends Component {
-	//everything in the pallet controller works
+
 
 	constructor() {
 		super()
 		this.clickHandler = this.clickHandler.bind(this)
-		this.state = {
-			persons: [],
-			selectedOption: 'i am a placeholder value'
-		}
-	}
-
-	//  let searchParams = {
-	// 	 str: str, 
 
 
-	//axios.post('', searchParams)
-
-	componentDidMount() {
-		axios.get(`https://jsonplaceholder.typicode.com/users`,
-			{
-				params: {
-					id: 1
-				}
-			})
-			.then(res => {
-				const persons = res.data;
-				this.setState({ persons });
-			})
-	}
+ }
+	
+	  componentWillMount() {
+	  	let bays = axios.get(`http://localhost:8080/getEmptyBays?id=${pId}`)
+	  }
 
 	clickHandler(event) {
 		//push new data to db !!!
