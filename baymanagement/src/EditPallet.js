@@ -11,9 +11,11 @@ class EditPallet extends Component {
 		this.deleteHandler = this.deleteHandler.bind(this)
 		this.changeValue = this.changeValue.bind(this)
 		this.state={
+
 			id: this.props.location.state.paletteInfo.id,
 			width: this.props.location.state.paletteInfo.width,
 			length: this.props.location.state.paletteInfo.length,
+
 			height:this.props.location.state.paletteInfo.height,
 			dep:this.props.location.state.paletteInfo.dep,
 			class:this.props.location.state.paletteInfo.paletteClass,
@@ -27,13 +29,14 @@ class EditPallet extends Component {
 		console.log(this.props.location.state.paletteInfo)
 		let palette = {}
 
-		palette.id= this.state.id;
-		palette.width= this.state.width;
-		palette.length =  this.state.length;
+		palette.id = this.state.id;
+		palette.width = this.state.width;
+		palette.length = this.state.length;
 		palette.height = this.state.height;
 		palette.dep = this.state.dep
 		palette.paletteClass = this.state.class
 		palette.category = this.state.category;
+
 		palette.bay = this.state.bay;
 		axios.post("http://localhost:8080/editPalette",palette).then((response) =>{
 		    console.log(response);
@@ -73,7 +76,9 @@ class EditPallet extends Component {
 		axios.delete(`http://localhost:8080/deletePalette?id=${pId}`)
 	}
 
+
 	changeValue(event,box){
+
 		console.log(event.target)
 		var stateChange = {}
 		console.log(stateChange[box]);
@@ -82,48 +87,49 @@ class EditPallet extends Component {
 		this.setState(stateChange);
 	}
 
-	componentWillMount(){
-		
-		let departments = axios.get("http://localhost:8080/getDepartments").then((response)=>{
-			const dropDowns = response.data.map((department,index)=>{
+
+	componentWillMount() {
+		let departments = axios.get("http://localhost:8080/getDepartments").then((response) => {
+			const dropDowns = response.data.map((department, index) => {
+
 				console.log(department.value)
-				if(department.value === this.state.dep){
+				if (department.value === this.state.dep) {
 					return (<option value={department.value} selected>{department.value}</option>)
 				} else
-				return (<option value={department.value}>{department.value}</option>)
+					return (<option value={department.value}>{department.value}</option>)
 			})
 			this.setState({
 				deps: dropDowns
 			})
-		})	
+		})
 
-		let classes = axios.get("http://localhost:8080/getClasses").then((response)=>{
-			const dropDowns = response.data.map((department,index)=>{
+		let classes = axios.get("http://localhost:8080/getClasses").then((response) => {
+			const dropDowns = response.data.map((department, index) => {
 				console.log(department.value)
-				if(department.value === this.state.class){
+				if (department.value === this.state.class) {
 					return (<option value={department.value} selected>{department.value}</option>)
 				} else
-				return (<option value={department.value}>{department.value}</option>)
+					return (<option value={department.value}>{department.value}</option>)
 			})
 			this.setState({
 				classes: dropDowns
 			})
-		})	
+		})
 
-		let categories = axios.get("http://localhost:8080/getCategories").then((response)=>{
-			const dropDowns = response.data.map((department,index)=>{
+		let categories = axios.get("http://localhost:8080/getCategories").then((response) => {
+			const dropDowns = response.data.map((department, index) => {
 				console.log(department.value)
-				if(department.value === this.state.category){
+				if (department.value === this.state.category) {
 					return (<option value={department.value} selected>{department.value}</option>)
 				} else
-				return (<option value={department.value}>{department.value}</option>)
+					return (<option value={department.value}>{department.value}</option>)
 			})
 			this.setState({
 				categories: dropDowns
 			})
-		})	
+		})
 
-}
+	}
 
 	render() {
 		return (
@@ -150,6 +156,7 @@ class EditPallet extends Component {
 					<br />
 			</form>
 					<label>
+
 						Department:
 			<select name="department" form="editPalette" >
 							{this.state.deps}
@@ -173,9 +180,9 @@ class EditPallet extends Component {
 					</label>
 					<br />
 
-					<button className="btn btn-primary"  onClick={this.submitHandler}>Submit</button>
-					<button className="btn btn-primary"  onClick={this.deleteHandler}>Delete</button>
-					
+					<button className="btn btn-primary" onClick={this.submitHandler}>Submit</button>
+					<button className="btn btn-primary" onClick={this.deleteHandler}>Delete</button>
+
 				</div>
 			</BrowserRouter>
 		)

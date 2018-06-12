@@ -15,6 +15,7 @@ class App extends Component {
 
   constructor(props) {
     super()
+    document.title = "Overhead Bay Manager"
   }
 
   render() {

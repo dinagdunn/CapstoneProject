@@ -78,6 +78,8 @@ p{
 
 .subBayDisplay{
   border: 1px solid black;
+  cursor: pointer;
+  margin: 5px;
 }
 
 li{
@@ -85,6 +87,7 @@ li{
   border: 1px solid black;
 }
 
-.subBayDisplay{
-  cursor: pointer;
+
+.subBayDisplay:hover {
+  background-color: lightgreen;
 }
