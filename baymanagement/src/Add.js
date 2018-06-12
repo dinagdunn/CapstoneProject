@@ -2,59 +2,109 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 import AddCommon from './AddCommon.js'
+import axios from 'axios'
 
 class Add extends Component {
 
 
 	constructor(props) {
-		super(props);
+		super(props)
 		this.state = {
-			selectedOption: 'Pallet'
+			selectedOption: 'Pallet',
+			name: '',
+			height: '',
+			width: '',
+			depth: '',
+			department: '',
+			class: '',
+			category: ''
 		}
-		this.handleOptionChange = this.handleOptionChange.bind(this);
-		this.palletHandler = this.palletHandler.bind(this)
-		this.masterHandler = this.masterHandler.bind(this)
+
+		this.changeName = this.changeName.bind(this)
+		this.changeHeight = this.changeHeight.bind(this)
+		this.changeWidth = this.changeWidth.bind(this)
+		this.changeDepth = this.changeDepth.bind(this)
+		this.changeDepartment = this.changeDepartment.bind(this)
+		this.changeClass = this.changeClass.bind(this)
+		this.changeCategory = this.changeCategory.bind(this)
+
+		this.handleOptionChange = this.handleOptionChange.bind(this)
+		this.submitHandler = this.submitHandler.bind(this)
 	}
 
+	changeName(e) {
+		this.setState({ name: e.target.value })
+	}
+
+	changeHeight(e) {
+		this.setState({ height: e.target.value })
+	}
+
+	changeWidth(e) {
+		this.setState({ width: e.target.value })
+	}
+
+	changeDepth(e) {
+		this.setState({ depth: e.target.value })
+	}
+
+	changeDepartment(e) {
+		this.setState({ department: e.target.value })
+	}
+
+	changeClass(e) {
+		this.setState({ class: e.target.value })
+	}
+
+	changeCategory(e) {
+		this.setState({ category: e.target.value })
+	}
+
+
 	handleOptionChange(event) {
-		console.log(this.props);
 		this.setState({
 			selectedOption: event.target.name
 		})
 	}
 
-	palletHandler(event) {
+	submitHandler(event) {
 		event.preventDefault();
-		//push to spring
+		const queryURL = '\/addPallet'
 
-		const formToJSON = elements => [].reduce.call(elements, (data, element) => {
-			data[element.name] = element.value;
-			return data;
-		  }, {});
+		if (this.state.selectedOption === 'Pallet') {
+		// queryURL = ''
+		}
 		
-		  console.log("form data object take 1: ", formToJSON)
-		// const query = event.target[0].value
-		const query = 'p101'
-		this.props.history.push(`/load/${query}`)
-		console.log(this.props);
-		console.log(event);
-	}
+		if (this.state.selectedOption === 'Master Bay') {
+			// queryURL = ''
+			console.log("MMBMBMBMBMBMBMBMBMBMBMBMBMB")
+		}
 
-	masterHandler(event) {
-		event.preventDefault();
 		//push to spring
+		axios.post(queryURL, {
+			name: this.state.name,
+			height: this.state.height,
+			width: this.state.width,
+			depth: this.state.depth,
+			department: this.state.department,
+			class: this.state.class,
+			category: this.state.category
+		  })
+		  .then(function (response) {
+			  //response needs 
+			  //include the ID number so we can search with it
+			console.log(response);
+		  })
+		  .catch(function (error) {
+			console.log(error);
+		  });
+
+
 		// const query = event.target[0].value
-
-		const formToJSON = elements => [].reduce.call(elements, (data, element) => {
-			data[element.name] = element.value;
-			return data;
-		  }, {});
-		
-		  console.log("form data object take 1: ", formToJSON)
-
-		const query = 'mb101'
-		console.log(query)
-		this.props.history.push(`/load/${query}`)
+		const queryId = 'p101'
+		this.props.history.push(`/load/${queryId}`)
+		// console.log(this.props);
+		// console.log(event);
 	}
 
 
@@ -93,16 +143,17 @@ class Add extends Component {
 					</div>
 
 					<div>
-						{this.state.selectedOption === 'Pallet' &&
-							<form onSubmit={this.palletHandler}>
-								<AddCommon />
+							<form onSubmit={this.submitHandler}>
+								<AddCommon 
+								changeName = {this.changeName}
+								changeHeight = {this.changeHeight}
+								changeWidth = {this.changeWidth}
+								changeDepth = {this.changeDepth}
+								changeDepartment = {this.changeDepartment}
+								changeClass = {this.changeClass}
+								changeCategory = {this.changeCategory}
+								/>
 							</form>
-						}
-						{this.state.selectedOption === 'Master Bay' &&
-							<form onSubmit={this.masterHandler}>
-								<AddCommon />
-							</form>
-						}
 					</div>
 				</div>
 			</div>

@@ -7,34 +7,43 @@ class PBLink extends Component {
 
 
 	constructor() {
-		super();
+		super()
 		this.clickHandler = this.clickHandler.bind(this)
+
 
  }
 	
 	  componentWillMount() {
 	  	let bays = axios.get(`http://localhost:8080/getEmptyBays?id=${pId}`)
 	  }
-	
 
 	clickHandler(event) {
-
 		//push new data to db !!!
 		event.preventDefault();
-		const pId = event.target[0].value
-		this.props.push.history('/search/`${pId}')
+		console.log('we chose this', this.state.selectedOption)
+		// const pId = event.target[0].value
+		const pId = 'p5643245'
+		this.props.history.push(`/load/${pId}`)
 	}
-	
+
 	render() {
 		return (
 			<div>
-			<ul>
-			{ this.state.persons.map(person => <li>{person.name}</li>)}
-		  </ul>
-				<h1>This is where you link a bay and a pallet</h1>
+				<h1>Select a bay location</h1>
+				<ol>
+					{this.state.persons.map(person => 
+					<li 
+					onClick = 
+					{ this.state.selectedOption = person.name,
+					this.clickHandler
+					}>
+					{person.name}
+					</li>)
+				}
+				</ol>
 			</div>
-			
-			)
+
+		)
 	}
 }
 

@@ -20,10 +20,13 @@ class ManageSubs extends Component {
 
 	render() {
 		return (
-            <form onSubmit={this.clickHandler}>
+            <div>
+            <h1>Sub page</h1>
+            <form className="col-6" onSubmit={this.clickHandler}>
             <AddCommon />
 				<button className="btn btn-primary" type="submit">Submit</button>
 			</form>
+            </div>
         )
     }
 }

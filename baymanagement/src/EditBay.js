@@ -1,116 +1,192 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
+import axios from 'axios'
 
 class EditBay extends Component {
 
 	constructor() {
 		super();
+
 		this.submitHandler = this.submitHandler.bind(this)
 		this.deleteHandler = this.deleteHandler.bind(this)
+    this.subHandler = this.subHandler.bind(this)
+
+		this.handleChangeWidth = this.handleChangeWidth.bind(this)
+		this.handleChangeLength = this.handleChangeLength.bind(this)
+		this.handleChangeHeight = this.handleChangeHeight.bind(this)
 
 		this.state = {
 			masterBayInfo: {
-				// id: 0,
-				// width: 0,
-				// height: 0,
-				// length: 0,
-				// dep: "",
-				// paletteClass: "",
-				// category: "",
-				// bay: 0
+				id: 0,
+				width: 0,
+				height: 0,
+				length: 0,
 
-				bayList: [{}]
+
 			}
 		}
 	}
 
+
+	componentDidMount() {
+		let bId = this.props.match.params.id;
+		bId = parseInt(bId)
+
+		axios.get(`http://localhost:8080/getMasterbayById?id=${bId}`)
+			.then(res => {
+				console.log(res.data);
+				this.setState({
+					masterBayInfo: res.data,
+					id: bId
+				});
+			})
+	}
+
+	// handleChange = () => (event) => {
+	// 	this.setState({
+	// 		id: event.target.value,
+	// 		width: event.target.value,
+	// 		height: event.target.value,
+	// 		length: event.target.value
+	// 	});
+	// }
+
+	handleChangeWidth = () => (event) => {
+		this.setState({width: event.target.value})
+	}
+
+	handleChangeHeight = () => (event) => {
+		this.setState({height: event.target.value})
+	}
+
+	handleChangeLength = () => (event) => {
+		this.setState({length: event.target.value})
+	}
+
 	submitHandler(event) {
 		//push new data to db !!!
-		event.preventDefault();
+
 		// const pId = event.target[0].value
-		const bId = 'b123'
-		this.props.history.push(`/load/${bId}`)
+		event.preventDefault();
+		console.log("hellooooo", this.state.id)
+		axios.post(`http://localhost:8080/editMasterBay`, {
+			id: this.state.id,
+			width: this.state.width,
+			height: this.state.height,
+			length: this.state.length,
+
+
+		})
+			.then(res => {
+				console.log(res.data);
+				this.setState({
+					masterBayInfo: res.data
+				});
+				console.log("called post");
+				console.log(this.state.masterBayInfo);
+				
+
+			})
+
+		console.log("finished hitting post");
+
 	}
 
 	deleteHandler(event) {
 		//delete from the db
+		let bId = this.props.match.params.id;
+		bId = parseInt(bId)
+		axios.delete(`http://localhost:8080/deleteMasterBay${bId}`)
 		event.preventDefault();
 		this.props.history.push('/')
 	}
 
-	addSubHandler(event) {
+	subHandler(event) {
 		// add to db
 		event.preventDefault();
-		this.props.history.push('/managesubs')
+		this.props.history.push('/managesubs/')
 	}
 
 	render() {
 		return (
 			<BrowserRouter>
-				<div>
-					<label>
-						Name:
-			<input type="text" name="name" value="" />
-					</label>
-					<br />
 
-					<label>
-						Height:
-			<input type="text" name="height" value="" />
-					</label>
-					<br />
+<h1>{this.state.masterBayInfo.message}</h1>
 
-					<label>
-						Width:
-			<input type="text" name="width" value="" />
-					</label>
-					<br />
+					<form className="bar" onSubmit={this.submitHandler}>
+						<label>
+							ID: MB
+			<input type="text" name="id" value={this.state.masterBayInfo.id} />
+						</label>
+						<br />
 
-					<label>
-						Depth:
-			<input type="text" name="depth" value="" />
-					</label>
-					<br />
+						<label>
+							Height:
+			<input type="text" name="height" value={this.state.masterBayInfo.height} onChange={this.handleChangeHeight()} />
+						</label>
+						<br />
 
-					<label>
-						Department:
+						<label>
+							Width:
+			<input type="text" name="width" value={this.state.masterBayInfo.width} onChange={this.handleChangeWidth()} />
+						</label>
+						<br />
+
+						<label>
+							Depth:
+			<input type="text" name="length" value={this.state.masterBayInfo.length} onChange={this.handleChangeLength()} />
+						</label>
+						<br />
+
+						<label>
+							Department:
 			<select name="department" value="" >
-							<option value="D1">D1</option>
-						</select>
-					</label>
-					<br />
+								<option value="D1">D1</option>
+							</select>
+						</label>
+						<br />
 
-					<label>
-						Class:
+						<label>
+							Class:
 			<select name="class" value="" >
-							<option value="Cl1">Cl1</option>
-						</select>
-					</label>
-					<br />
+								<option value="Cl1">Cl1</option>
+							</select>
+						</label>
+						<br />
 
-					<label>
-						Category:
+						<label>
+							Category:
 			<select name="category" value="" >
-							<option value="Ca1">Ca1</option>
-						</select>
-					</label>
-					<br />
+								<option value="Ca1">Ca1</option>
+							</select>
+						</label>
+						<br />
 
 					<form className="bar">
 						<div className="row">
-							<button className="btn btn-primary" type="submit" onSubmit={this.submitHandler}>Submit</button>
-							<button className="btn btn-primary" type="submit" onSubmit={this.deleteHandler}>Delete</button>
+              
+							<button className="btn btn-primary" 
+							type="submit" onClick={this.submitHandler}>
+							Submit</button>
+
+							<button className="btn btn-primary" 
+							type="submit" onClick={this.deleteHandler}>
+							Delete</button>
 						</div>
+
 						<div className="row">
-							<button className="btn btn-primary" type="submit" onSubmit={this.ManageSubs}>Manage Sub Bays</button>
-						</div>
+							<button className="btn btn-primary" 
+							type="submit" onClick={this.subHandler}>
+							Manage Sub Bays</button>
+
+					
 					</form>
 
-				</div>
 			</BrowserRouter>
 		)
 	}
 }
 
 export default EditBay
+

@@ -48,7 +48,7 @@ class App extends Component {
     <Route path="/edit/P:id" component={ EditPallet } />
     <Route path="/edit/B:id" component={ EditBay } />
     <Route path="/pblink/*" component={ PBLink } />
-    <Route path="/managesubs/" component={ ManageSubs } />   
+    <Route path="/managesubs/*" component={ ManageSubs } />   
   
 
     <Route exact path ="/" render={() =>
