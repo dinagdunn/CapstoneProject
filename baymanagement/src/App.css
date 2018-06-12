@@ -84,3 +84,7 @@ li{
   font-size: 2em;
   border: 1px solid black;
 }
+
+.subBayDisplay{
+  cursor: pointer;;
+}

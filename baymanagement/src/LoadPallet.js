@@ -12,16 +12,7 @@ class LoadPallet extends Component {
 		this.linkHandler = this.linkHandler.bind(this)
 
 		this.state = {
-			palletInfo: {
-				// id: 0,
-				// width: 0,
-				// height: 0,
-				// length: 0,
-				// dep: "",
-				// paletteClass: "",
-				// category: "",
-				// bay: 0
-			}
+			palletInfo: {}
 		}
 	}
 
@@ -48,8 +39,6 @@ class LoadPallet extends Component {
 		event.preventDefault();
 		let pId = this.props.match.params.id;
 		pId = parseInt(pId)
-		// const query = event.target[0].value
-
 		this.props.history.push({
 			pathname: `/edit/p${pId}`,
 			state: {paletteInfo: this.state.palletInfo}
@@ -58,9 +47,11 @@ class LoadPallet extends Component {
 
 	linkHandler(event) {
 		event.preventDefault();
-		// const query = event.target[0].value
 		const query = this.props.match.params.id
-		this.props.history.push(`/pblink/${query}`)
+		this.props.history.push({
+			pathname: `/pblink/P${query}`,
+			state: {paletteInfo: this.state.palletInfo}
+		})
 	}
 
 

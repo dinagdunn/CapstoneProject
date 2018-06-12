@@ -162,7 +162,7 @@ class EditBay extends Component {
 							</select>
 						</label>
 						<br />
-
+						</form>
 					<form className="bar">
 						<div className="row">
               
@@ -179,7 +179,7 @@ class EditBay extends Component {
 							<button className="btn btn-primary" 
 							type="submit" onClick={this.subHandler}>
 							Manage Sub Bays</button>
-
+						</div>
 					
 					</form>
 
