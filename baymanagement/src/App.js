@@ -46,7 +46,7 @@ class App extends Component {
     <Route path="/load/P:id" component={ LoadPallet } />
     <Route path="/load/MB:id" component={ LoadBay } />
     <Route path="/edit/P:id" component={ EditPallet } />
-    <Route path="/edit/B:id" component={ EditBay } />
+    <Route path="/edit/MB:id" component={ EditBay } />
     <Route path="/pblink/P:id" component={ PBLink } />
     <Route path="/managesubs/*" component={ ManageSubs } />   
   

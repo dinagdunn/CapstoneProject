@@ -87,8 +87,9 @@ class LoadBay extends Component {
 	clickHandler(event) {
 		event.preventDefault();
 		// const query = event.target[0].value
-		const query = 'b100'
-		this.props.history.push(`/edit/${query}`)
+		let bId = this.props.match.params.id;
+		bId = parseInt(bId)
+		this.props.history.push(`/edit/mb${bId}`)
 	}
 
 
