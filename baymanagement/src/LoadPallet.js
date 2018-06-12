@@ -24,15 +24,17 @@ class LoadPallet extends Component {
 		axios.get(`http://localhost:8080/getPaletteById?id=${this.state.pId}`)
 			.then(res => {
 				console.log(res.data);
+				let buttonText = "Link"
+				if (!this.state.palletInfo.bay) {
+					console.log("I AM THE DANG BAYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY",this.state.palletInfo.bay)
+					buttonText = `Unlink`
+				}
 				this.setState({
-					palletInfo: res.data
+					palletInfo: res.data,
+					buttonText
 				});	
-			})
-
-			if (this.state.palletInfo.bay !== 0) {
-				this.state.buttonText = `Unlink`
 			}
-			// console.log("this this.state.palletInfo)
+		)
 	}
 
 	submitHandler(event) {
