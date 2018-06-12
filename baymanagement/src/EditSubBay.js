@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 import AddCommon from './AddCommon.js'
 
-class ManageSubs extends Component {
+class EditSubBay extends Component {
 
     constructor() {
         super();
@@ -31,4 +31,4 @@ class ManageSubs extends Component {
     }
 }
 
-export default ManageSubs
+export default EditSubBay

@@ -10,6 +10,7 @@ import EditBay from './EditBay.js'
 import PBLink from './PBLink.js'
 import ManageSubs from './ManageSubs.js';
 import Message from './Message';
+import EditSubBay from './EditSubBay'
 
 class App extends Component {
 
@@ -50,7 +51,8 @@ class App extends Component {
     <Route path="/edit/MB:id" component={ EditBay } />
     <Route path="/pblink/P:id" component={ PBLink } />
     <Route path="/managesubs/*" component={ ManageSubs } />
-    <Route exact path="/load/message" component={Message}/>   
+    <Route exact path="/load/message" component={Message}/>  
+    <Route exact path="/editSubBay/SB:id" component={EditSubBay}/>
   
 
     <Route exact path ="/" render={() =>
