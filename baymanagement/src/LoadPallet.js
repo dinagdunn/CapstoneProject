@@ -28,20 +28,28 @@ class LoadPallet extends Component {
 					palletInfo: res.data
 				});	
 			})
-			if (paletteInfo.bay !== 0) {
-				buttonText = `Unlink`
+			if (this.state.palletInfo.bay !== 0) {
+				this.state.buttonText = `Unlink`
 			}
+			// console.log("this this.state.palletInfo)
 	}
 
 	clickHandler(event) {
 		event.preventDefault();
 		let pId = this.props.match.params.id;
 		pId = parseInt(pId)
+
+
+		if (this.state.buttonText === `Link`) {
 		this.props.history.push({
 			pathname: `/edit/p${pId}`,
 			state: {paletteInfo: this.state.palletInfo}
 		})
+	} else if (this.state.buttonText === `Unlink`) {
+		// axios.post() {}
+		this.props.history.push(`/load/p${pId}`)
 	}
+}
 
 	linkHandler(event) {
 		event.preventDefault();
