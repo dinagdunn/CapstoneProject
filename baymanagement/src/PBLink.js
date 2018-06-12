@@ -7,10 +7,11 @@ class PBLink extends Component {
 	//everything in the pallet controller works
 
 	constructor() {
-		super();
+		super()
 		this.clickHandler = this.clickHandler.bind(this)
 		this.state = {
-			persons: []
+			persons: [],
+			selectedOption: 'i am a placeholder value'
 		}
 	}
 
@@ -36,17 +37,27 @@ class PBLink extends Component {
 	clickHandler(event) {
 		//push new data to db !!!
 		event.preventDefault();
-		const pId = event.target[0].value
-		this.props.push.history('/load/`${pId}')
+		console.log('we chose this', this.state.selectedOption)
+		// const pId = event.target[0].value
+		const pId = 'p5643245'
+		this.props.history.push(`/load/${pId}`)
 	}
 
 	render() {
 		return (
 			<div>
+				<h1>Select a bay location</h1>
 				<ol>
-					{this.state.persons.map(person => <li>{person.name}</li>)}
+					{this.state.persons.map(person => 
+					<li 
+					onClick = 
+					{ this.state.selectedOption = person.name,
+					this.clickHandler
+					}>
+					{person.name}
+					</li>)
+				}
 				</ol>
-				<h1>This is where you link a bay and a pallet</h1>
 			</div>
 
 		)
