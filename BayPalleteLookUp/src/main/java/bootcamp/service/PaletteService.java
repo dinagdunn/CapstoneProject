@@ -27,10 +27,16 @@ public class PaletteService {
     }
     
     public DimensionMatch editPalette(Palette palette) {
-    	boolean dimensionMatch = paletteDao.editPalette(palette);
-    	Bay bay = bayDao.getBayById(palette.getBay());
-    	if(bay.getWidth()<palette.getWidth() || bay.getHeight()<palette.getHeight() || bay.getLength() < palette.getLength()) {
-    		dimensionMatch = false;
+    	boolean dimensionMatch = false;    			
+    	if(palette.getBay()!=0) {
+	    	Bay bay = bayDao.getBayById(palette.getBay());
+	    	if(bay.getWidth()<palette.getWidth() || bay.getHeight()<palette.getHeight() || bay.getLength() < palette.getLength()) {
+	    		dimensionMatch = false;
+	    	}else{
+	    		dimensionMatch = paletteDao.editPalette(palette);
+	    	}
+    	}else {
+    		dimensionMatch = paletteDao.editPalette(palette);
     	}
     	return new DimensionMatch(dimensionMatch);
     }

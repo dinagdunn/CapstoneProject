@@ -18,6 +18,7 @@ class EditPallet extends Component {
 			dep:this.props.location.state.paletteInfo.dep,
 			class:this.props.location.state.paletteInfo.paletteClass,
 			category:this.props.location.state.paletteInfo.category,
+			bay: this.props.location.state.paletteInfo.bay
 		}
 	}
 
@@ -43,13 +44,36 @@ class EditPallet extends Component {
 		palette.dep = this.state.dep
 		palette.paletteClass = this.state.class
 		palette.category = this.state.category;
-		axios.post("http://localhost:8080/editPalette",palette).then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-		this.props.history.push(`/load/P${this.state.id}`)
+		palette.bay = this.state.bay;
+		axios.post("http://localhost:8080/editPalette",palette).then((response) =>{
+		    console.log(response);
+		    console.log(response.data.dimensionMatch)
+		    if(response.data.dimensionMatch === false){
+		    this.props.history.push({
+				pathname: `/load/message`,
+				state: {message: "Edit unsuccessful, the bay that is associated with this palette is smaller!"}
+			})
+			window.setTimeout(()=>
+				this.props.history.push({
+					pathname: `/edit/p${this.state.id}`,
+					state: {paletteInfo: this.props.location.state.paletteInfo}
+				}), 4000);
+		    }else{
+		    	this.props.history.push({
+				pathname: `/load/message`,
+				state: {message: "Edit  was successful!"}
+				})
+				window.setTimeout(()=>
+				this.props.history.push({
+					pathname: `/load/P${this.state.id}`,
+					state: {paletteInfo: this.props.location.state.paletteInfo}
+				}), 4000);
+		    }
+		}).catch(function (error) {
+	    	console.log(error);
+	    });
+
+		
 	}
 
 	deleteHandler(event) {
@@ -70,7 +94,7 @@ class EditPallet extends Component {
 		this.setState(stateChange);
 	}
 
-componentWillMount(){
+	componentWillMount(){
 		
 		let departments = axios.get("http://localhost:8080/getDepartments").then((response)=>{
 			const dropDowns = response.data.map((department,index)=>{
@@ -114,8 +138,6 @@ componentWillMount(){
 }
 
 	render() {
-
-
 		return (
 			<BrowserRouter>
 				<div>
@@ -123,19 +145,19 @@ componentWillMount(){
 				<form id="editPalette" name="editPalette" >
 					<label>
 						Height:
-			<input type="text" name="height" value={this.state.height} onChange={(e)=>{this.changeHeight(e,'height')}}/>
+			<input type="number" name="height" value={this.state.height} onChange={(e)=>{this.changeHeight(e,'height')}}/>
 					</label>
 					<br />
 
 					<label>
 						Width:
-			<input type="text" name="width" value={this.state.width} onChange={(e)=>{this.changeHeight(e,'width')}}/>
+			<input type="number" name="width" value={this.state.width} onChange={(e)=>{this.changeHeight(e,'width')}}/>
 					</label>
 					<br />
 
 					<label>
 						Depth:
-			<input type="text" name="depth"  value={this.state.length} onChange={(e)=>{this.changeHeight(e,'length')}}/>
+			<input type="number" name="depth"  value={this.state.length} onChange={(e)=>{this.changeHeight(e,'length')}}/>
 					</label>
 					<br />
 			</form>
