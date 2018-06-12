@@ -8,6 +8,7 @@ class EditBay extends Component {
 		super();
 		this.submitHandler = this.submitHandler.bind(this)
 		this.deleteHandler = this.deleteHandler.bind(this)
+		this.subHandler = this.subHandler.bind(this)
 
 		this.state = {
 			masterBayInfo: {
@@ -39,10 +40,10 @@ class EditBay extends Component {
 		this.props.history.push('/')
 	}
 
-	addSubHandler(event) {
+	subHandler(event) {
 		// add to db
 		event.preventDefault();
-		this.props.history.push('/managesubs')
+		this.props.history.push('/managesubs/')
 	}
 
 	render() {
@@ -99,11 +100,17 @@ class EditBay extends Component {
 
 					<form className="bar">
 						<div className="row">
-							<button className="btn btn-primary" type="submit" onSubmit={this.submitHandler}>Submit</button>
-							<button className="btn btn-primary" type="submit" onSubmit={this.deleteHandler}>Delete</button>
+							<button className="btn btn-primary" 
+							type="submit" onClick={this.submitHandler}>
+							Submit</button>
+							<button className="btn btn-primary" 
+							type="submit" onClick={this.deleteHandler}>
+							Delete</button>
 						</div>
 						<div className="row">
-							<button className="btn btn-primary" type="submit" onSubmit={this.ManageSubs}>Manage Sub Bays</button>
+							<button className="btn btn-primary" 
+							type="submit" onClick={this.subHandler}>
+							Manage Sub Bays</button>
 						</div>
 					</form>
 
