@@ -1,4 +1,4 @@
-package bootcamp.controler;
+package bootcamp.controller;
 
 import java.util.List;
 
