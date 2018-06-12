@@ -21,6 +21,13 @@ class EditPallet extends Component {
 		}
 	}
 
+	// getDep(dep){
+	// 	if(dep === this.state.dep){
+	// 		return 'SELECTED'
+	// 	}else{
+	// 		return ""
+	// 	}
+	// }
 
 	submitHandler(event) {
 		//push new data to db !!!
@@ -63,15 +70,26 @@ class EditPallet extends Component {
 		this.setState(stateChange);
 	}
 
-	getDep(dep){
-		if(dep === this.state.dep){
-			return 'SELECTED'
-		}else{
-			return ""
-		}
-	}
+componentWillMount(){
+		
+		let categories = axios.get("http://localhost:8080/getCategories").then((response)=>{
+			const dropDowns = response.data.map((department,index)=>{
+				console.log(department.value)
+				if(department.value === this.state.category){
+					return (<option value={department.value} selected>{department.value}</option>)
+				} else
+				return (<option value={department.value}>{department.value}</option>)
+			})
+			this.setState({
+				categories: dropDowns
+			})
+			console.log(this.state.categories)
+		})	
+
+}
 
 	render() {
+
 
 		return (
 			<BrowserRouter>
@@ -117,7 +135,8 @@ class EditPallet extends Component {
 					<label>
 						Category:
 			<select name="category" form="editPalette">
-							<option value="Ca1">Ca1</option>
+							{this.state.categories}
+							{/*<option value="Ca1">Ca1</option>*/}
 						</select>
 					</label>
 					<br />
