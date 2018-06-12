@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import bootcamp.model.Id;
 import bootcamp.model.MasterBay;
 import bootcamp.model.Message;
 import bootcamp.service.MasterBayService;
@@ -34,8 +36,8 @@ public class MasterBayController {
   }
   @CrossOrigin
   @RequestMapping(value = "/addMasterBay", method=RequestMethod.POST)
-  public void addMasterBay(@RequestBody MasterBay masterBay) {
-	  masterBayService.addMasterBay(masterBay);
+  public Id addMasterBay(@RequestBody MasterBay masterBay) {
+	  return masterBayService.addMasterBay(masterBay);
   }
   
   @CrossOrigin
