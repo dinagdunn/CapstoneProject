@@ -47,10 +47,8 @@ class Search extends Component {
                     <h3>Incorrect value. Please try again.</h3>
                 </div>
             </React.Fragment>
-
-
         )
     }
-
 }
+
 export default Search

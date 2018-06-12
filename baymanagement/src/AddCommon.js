@@ -3,16 +3,14 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 
 class AddCommon extends Component {
-
 	render() {
 		return (
 			<div className="float-center">
 				<label>
 					Name:
-			<input type="text" name="name" />
+			<input type="text" name="name" onChange={this.props.changeName} value={this.props.name} />
 				</label>
 				<br />
-
 				<label>
 					Height:
 			<input type="text" name="height" />
@@ -54,9 +52,11 @@ class AddCommon extends Component {
 					</select>
 				</label>
 				<br />
+
 				<button className="btn btn-primary" type="submit">
 					Submit
-                        			</button>
+                </button>
+				
 			</div>
 		)
 	}
