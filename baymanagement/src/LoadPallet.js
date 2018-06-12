@@ -43,20 +43,23 @@ class LoadPallet extends Component {
 			state: { paletteInfo: this.state.palletInfo }
 		})
 }
-
+	//LINK AND UNLINK COMMANDS HERE
 	linkHandler(event) {
 		event.preventDefault();
 
 		if (this.state.buttonText === `Link`) {
 			this.props.history.push({
-				pathname: `/pblink/${this.state.pId}`,
+				pathname: `/pblink/P${this.state.pId}`,
 				state: {paletteInfo: this.state.palletInfo}
 			})
 		} else if (this.state.buttonText === `Unlink`) {
-			axios.post(`/editPalette`,{
-				
+			axios.get(`/unlinkPalette`,{
+				params: {
+					ID: this.state.pId
+				}
 			})
-			this.props.history.push(`/load/${this.state.pId}`)
+
+			this.props.history.push(`/load/P${this.state.pId}`)
 		}
 	}
 
