@@ -7,11 +7,6 @@ class AddCommon extends Component {
 		return (
 			<div className="float-center">
 				<label>
-					Name:
-			<input type="text" name="name" onChange={this.props.changeName} value={this.props.name} />
-				</label>
-				<br />
-				<label>
 					Height:
 			<input type="text" name="height" />
 				</label>

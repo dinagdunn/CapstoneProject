@@ -11,16 +11,15 @@ class Add extends Component {
 		super(props)
 		this.state = {
 			selectedOption: 'Pallet',
-			name: '',
 			height: '',
 			width: '',
 			depth: '',
 			department: '',
 			class: '',
-			category: ''
+			category: '',
+			queryId: 0
 		}
 
-		this.changeName = this.changeName.bind(this)
 		this.changeHeight = this.changeHeight.bind(this)
 		this.changeWidth = this.changeWidth.bind(this)
 		this.changeDepth = this.changeDepth.bind(this)
@@ -30,10 +29,6 @@ class Add extends Component {
 
 		this.handleOptionChange = this.handleOptionChange.bind(this)
 		this.submitHandler = this.submitHandler.bind(this)
-	}
-
-	changeName(e) {
-		this.setState({ name: e.target.value })
 	}
 
 	changeHeight(e) {
@@ -60,7 +55,6 @@ class Add extends Component {
 		this.setState({ category: e.target.value })
 	}
 
-
 	handleOptionChange(event) {
 		this.setState({
 			selectedOption: event.target.name
@@ -69,34 +63,28 @@ class Add extends Component {
 
 	submitHandler(event) {
 		event.preventDefault();
-		let queryURL = `/addPallet/`
-		let queryId = 'bozo'
 
 		if (this.state.selectedOption === 'Pallet') {
-			queryId = 'p1'
-			queryURL = `/addPallet`
+			this.state.queryURL = `http://localhost:8080/addPallet`
 		}
 		
 		if (this.state.selectedOption === 'Master Bay') {
-			queryId = 'mb2'
-			queryURL = `/addMasterBay`
-			// console.log("MMBMBMBMBMBMBMBMBMBMBMBMBMB")
+			this.state.queryURL = `http://localhost:8080/addMasterBay`
 		}
 
 		//push to spring
-		axios.post(queryURL, {
-			name: this.state.name,
+		axios.post(this.state.queryURL, {
 			height: this.state.height,
 			width: this.state.width,
 			depth: this.state.depth,
-			department: this.state.department,
-			class: this.state.class,
-			category: this.state.category
+			// department: this.state.department,
+			// class: this.state.class,
+			// category: this.state.category
 		  })
 		  .then(function (response) {
-			  //response needs 
-			  //include the ID number so we can search with it
-			console.log(response);
+			// console.log("coming back: ",response.data);
+			console.log("queryId: ",response.data)
+			this.setState({queryId: response.data})
 		  })
 		  .catch(function (error) {
 			console.log(error);
@@ -104,7 +92,7 @@ class Add extends Component {
 
 
 		// const queryId = 'p101'
-		this.props.history.push(`/load/${queryId}`)
+		this.props.history.push(`/load/${this.state.queryId}`)
 	}
 
 
