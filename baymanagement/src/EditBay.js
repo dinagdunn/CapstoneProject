@@ -10,7 +10,7 @@ class EditBay extends Component {
 
 		this.submitHandler = this.submitHandler.bind(this)
 		this.deleteHandler = this.deleteHandler.bind(this)
-    this.subHandler = this.subHandler.bind(this)
+		this.subHandler = this.subHandler.bind(this)
 
 		this.handleChangeWidth = this.handleChangeWidth.bind(this)
 		this.handleChangeLength = this.handleChangeLength.bind(this)
@@ -53,15 +53,15 @@ class EditBay extends Component {
 	// }
 
 	handleChangeWidth = () => (event) => {
-		this.setState({width: event.target.value})
+		this.setState({ width: event.target.value })
 	}
 
 	handleChangeHeight = () => (event) => {
-		this.setState({height: event.target.value})
+		this.setState({ height: event.target.value })
 	}
 
 	handleChangeLength = () => (event) => {
-		this.setState({length: event.target.value})
+		this.setState({ length: event.target.value })
 	}
 
 	submitHandler(event) {
@@ -85,11 +85,12 @@ class EditBay extends Component {
 				});
 				console.log("called post");
 				console.log(this.state.masterBayInfo);
-				
+
 
 			})
-
+			let mbId = `mb22`
 		console.log("finished hitting post");
+		this.props.history.push(`/load/${mbId}`)
 
 	}
 
@@ -165,7 +166,6 @@ class EditBay extends Component {
 						</form>
 					<form className="bar">
 						<div className="row">
-              
 							<button className="btn btn-primary" 
 							type="submit" onClick={this.submitHandler}>
 							Submit</button>
@@ -187,6 +187,4 @@ class EditBay extends Component {
 		)
 	}
 }
-
-export default EditBay
-
+		export default EditBay

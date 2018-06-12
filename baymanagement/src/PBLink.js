@@ -62,8 +62,10 @@ class PBLink extends Component {
 		
 	}  
 	clickHandler(event) {
-		//push new data to db !!!
 		event.preventDefault();
+			//push new data to db !!!
+
+			
 		console.log('we chose this', this.state.selectedOption)
 		// const pId = event.target[0].value
 		const pId = 'p5643245'
@@ -76,18 +78,6 @@ class PBLink extends Component {
 			<div>
 				<h1>Select a bay location</h1>
 				{this.state.bayList}
-
-				{/*<ol>
-					{this.state.persons.map(person => 
-					<li 
-					onClick = 
-					{ this.state.selectedOption = person.name,
-					this.clickHandler
-					}>
-					{person.name}
-					</li>)
-				}
-				</ol>*/}
 			</div>
 
 		)

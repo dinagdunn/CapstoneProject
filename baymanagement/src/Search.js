@@ -10,8 +10,8 @@ class Search extends Component {
     constructor() {
         super();
         this.clickHandler = this.clickHandler.bind(this)
-
     }
+
     clickHandler(event) {
         event.preventDefault();
         const query = event.target[0].value
@@ -21,13 +21,13 @@ class Search extends Component {
                 this.props.history.push(`/load/${query}`)
             }
 
-            else if (query[0].toUpperCase() === "M" && query[1].toUpperCase() === "B") {
-//MB ==> query[0] + query[1]..shortcut for this? 
-
+            else if (query.substring(0,2).toUpperCase() === "MB") {
+                //MB ==> query[0] + query[1]..shortcut for this? 
                 this.props.history.push(`/load/${query}`)
             }
 
         } else {
+            // console.log("this is where the bad search goes")
             document.querySelector('[data-error]').style.display = "block";
         }
     }
@@ -40,7 +40,11 @@ class Search extends Component {
                     <input type="text" />
 
                     {/* <LoadPallet palletInfo={this.props.palletInfo}/> */}
-                    <button className="btn btn-primary" type="submit">Search</button>
+                    <button 
+                    className="btn btn-primary" 
+                    type="submit"
+                    onClick = { this.buttonTest }
+                    >Search</button>
 
                 </form>
                 <div style={{ display: "none" }} data-error>
