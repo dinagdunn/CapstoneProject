@@ -72,6 +72,32 @@ class EditPallet extends Component {
 
 componentWillMount(){
 		
+		let departments = axios.get("http://localhost:8080/getDepartments").then((response)=>{
+			const dropDowns = response.data.map((department,index)=>{
+				console.log(department.value)
+				if(department.value === this.state.dep){
+					return (<option value={department.value} selected>{department.value}</option>)
+				} else
+				return (<option value={department.value}>{department.value}</option>)
+			})
+			this.setState({
+				deps: dropDowns
+			})
+		})	
+
+		let classes = axios.get("http://localhost:8080/getClasses").then((response)=>{
+			const dropDowns = response.data.map((department,index)=>{
+				console.log(department.value)
+				if(department.value === this.state.class){
+					return (<option value={department.value} selected>{department.value}</option>)
+				} else
+				return (<option value={department.value}>{department.value}</option>)
+			})
+			this.setState({
+				classes: dropDowns
+			})
+		})	
+
 		let categories = axios.get("http://localhost:8080/getCategories").then((response)=>{
 			const dropDowns = response.data.map((department,index)=>{
 				console.log(department.value)
@@ -83,7 +109,6 @@ componentWillMount(){
 			this.setState({
 				categories: dropDowns
 			})
-			console.log(this.state.categories)
 		})	
 
 }
@@ -117,9 +142,7 @@ componentWillMount(){
 					<label>
 						Department:
 			<select name="department" form="editPalette" >
-							<option value="D1">D1</option>
-							{/*<option value="D1" {()=>{this.getDep('D1')}}>D1</option>
-							<option value="D2" {()=>{this.getDep('D2')}}>D2</option>*/}
+							{this.state.deps}
 						</select>
 					</label>
 					<br />
@@ -127,7 +150,7 @@ componentWillMount(){
 					<label>
 						Class:
 			<select name="class" form="editPalette">
-							<option value="Cl1">Cl1</option>
+							{this.state.classes}
 						</select>
 					</label>
 					<br />
@@ -136,7 +159,6 @@ componentWillMount(){
 						Category:
 			<select name="category" form="editPalette">
 							{this.state.categories}
-							{/*<option value="Ca1">Ca1</option>*/}
 						</select>
 					</label>
 					<br />

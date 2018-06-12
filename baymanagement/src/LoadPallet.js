@@ -59,7 +59,7 @@ class LoadPallet extends Component {
 	linkHandler(event) {
 		event.preventDefault();
 		// const query = event.target[0].value
-		const query = 'p100'
+		const query = this.props.match.params.id
 		this.props.history.push(`/pblink/${query}`)
 	}
 
