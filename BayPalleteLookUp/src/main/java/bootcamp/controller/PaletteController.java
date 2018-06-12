@@ -1,4 +1,4 @@
-package bootcamp.controler;
+package bootcamp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
