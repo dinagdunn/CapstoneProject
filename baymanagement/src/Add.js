@@ -69,15 +69,18 @@ class Add extends Component {
 
 	submitHandler(event) {
 		event.preventDefault();
-		const queryURL = '\/addPallet'
+		let queryURL = `/addPallet/`
+		let queryId = 'bozo'
 
 		if (this.state.selectedOption === 'Pallet') {
-		// queryURL = ''
+			queryId = 'p1'
+			queryURL = `/addPallet`
 		}
 		
 		if (this.state.selectedOption === 'Master Bay') {
-			// queryURL = ''
-			console.log("MMBMBMBMBMBMBMBMBMBMBMBMBMB")
+			queryId = 'mb2'
+			queryURL = `/addMasterBay`
+			// console.log("MMBMBMBMBMBMBMBMBMBMBMBMBMB")
 		}
 
 		//push to spring
@@ -100,11 +103,8 @@ class Add extends Component {
 		  });
 
 
-		// const query = event.target[0].value
-		const queryId = 'p101'
+		// const queryId = 'p101'
 		this.props.history.push(`/load/${queryId}`)
-		// console.log(this.props);
-		// console.log(event);
 	}
 
 

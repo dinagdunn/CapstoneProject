@@ -10,7 +10,7 @@ class EditBay extends Component {
 
 		this.submitHandler = this.submitHandler.bind(this)
 		this.deleteHandler = this.deleteHandler.bind(this)
-    this.subHandler = this.subHandler.bind(this)
+		this.subHandler = this.subHandler.bind(this)
 
 		this.handleChangeWidth = this.handleChangeWidth.bind(this)
 		this.handleChangeLength = this.handleChangeLength.bind(this)
@@ -53,15 +53,15 @@ class EditBay extends Component {
 	// }
 
 	handleChangeWidth = () => (event) => {
-		this.setState({width: event.target.value})
+		this.setState({ width: event.target.value })
 	}
 
 	handleChangeHeight = () => (event) => {
-		this.setState({height: event.target.value})
+		this.setState({ height: event.target.value })
 	}
 
 	handleChangeLength = () => (event) => {
-		this.setState({length: event.target.value})
+		this.setState({ length: event.target.value })
 	}
 
 	submitHandler(event) {
@@ -85,11 +85,12 @@ class EditBay extends Component {
 				});
 				console.log("called post");
 				console.log(this.state.masterBayInfo);
-				
+
 
 			})
-
+			let mbId = `mb22`
 		console.log("finished hitting post");
+		this.props.history.push(`/load/${mbId}`)
 
 	}
 
@@ -110,83 +111,82 @@ class EditBay extends Component {
 
 	render() {
 		return (
-			<BrowserRouter>
+			<div>
+				<h1>{this.state.masterBayInfo.message}</h1>
 
-<h1>{this.state.masterBayInfo.message}</h1>
+				<form className="bar" onSubmit={this.submitHandler}>
+					<label>
+						ID: MB
+						<input type="text" name="id" 
+						value={this.state.masterBayInfo.id} />
+					</label>
+					<br />
 
-					<form className="bar" onSubmit={this.submitHandler}>
-						<label>
-							ID: MB
-			<input type="text" name="id" value={this.state.masterBayInfo.id} />
-						</label>
-						<br />
+					<label>
+						Height:
+						<input type="text" name="height" 
+						value={this.state.masterBayInfo.height} onChange={this.handleChangeHeight()} />
+					</label>
+					<br />
 
-						<label>
-							Height:
-			<input type="text" name="height" value={this.state.masterBayInfo.height} onChange={this.handleChangeHeight()} />
-						</label>
-						<br />
+					<label>
+						Width:
+						<input type="text" name="width"
+						value={this.state.masterBayInfo.width} onChange={this.handleChangeWidth()} />
+					</label>
+					<br />
 
-						<label>
-							Width:
-			<input type="text" name="width" value={this.state.masterBayInfo.width} onChange={this.handleChangeWidth()} />
-						</label>
-						<br />
+					<label>
+						Depth:
+						<input type="text" name="length" 
+						value={this.state.masterBayInfo.length} onChange={this.handleChangeLength()} />
+					</label>
+					<br />
 
-						<label>
-							Depth:
-			<input type="text" name="length" value={this.state.masterBayInfo.length} onChange={this.handleChangeLength()} />
-						</label>
-						<br />
+					<label>
+						Department:
+						<select name="department" value="" >
+							<option value="D1">D1</option>
+						</select>
+					</label>
+					<br />
 
-						<label>
-							Department:
-			<select name="department" value="" >
-								<option value="D1">D1</option>
-							</select>
-						</label>
-						<br />
+					<label>
+						Class:
+						<select name="class" value="" >
+							<option value="Cl1">Cl1</option>
+						</select>
+					</label>
+					<br />
 
-						<label>
-							Class:
-			<select name="class" value="" >
-								<option value="Cl1">Cl1</option>
-							</select>
-						</label>
-						<br />
+					<label>
+						Category:
+						<select name="category" value="" >
+							<option value="Ca1">Ca1</option>
+						</select>
+					</label>
+					<br />
 
-						<label>
-							Category:
-			<select name="category" value="" >
-								<option value="Ca1">Ca1</option>
-							</select>
-						</label>
-						<br />
-
-					<form className="bar">
 						<div className="row">
-              
-							<button className="btn btn-primary" 
-							type="submit" onClick={this.submitHandler}>
-							Submit</button>
 
-							<button className="btn btn-primary" 
-							type="submit" onClick={this.deleteHandler}>
-							Delete</button>
+							<button className="btn btn-primary"
+								type="submit" onClick={this.submitHandler}>
+								Submit</button>
+
+							<button className="btn btn-primary"
+								type="submit" onClick={this.deleteHandler}>
+								Delete</button>
 						</div>
 
 						<div className="row">
-							<button className="btn btn-primary" 
-							type="submit" onClick={this.subHandler}>
-							Manage Sub Bays</button>
-
-					
+							<button className="btn btn-primary"
+								type="submit" onClick={this.subHandler}>
+								Manage Sub Bays</button>
+						</div>
 					</form>
-
-			</BrowserRouter>
-		)
-	}
-}
-
-export default EditBay
-
+			</div>
+				)
+			}
+		}
+		
+		export default EditBay
