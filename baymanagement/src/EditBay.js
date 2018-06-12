@@ -88,8 +88,9 @@ class EditBay extends Component {
 
 
 			})
-
+			let mbId = `mb22`
 		console.log("finished hitting post");
+		this.props.history.push(`/load/${mbId}`)
 
 	}
 
