@@ -8,56 +8,56 @@ class LoadPallet extends Component {
 	//this "link" will be calling Spring to get us a list of Bay list recommendations 
 	constructor(props) {
 		super(props);
-		this.clickHandler = this.clickHandler.bind(this)
+		this.submitHandler = this.submitHandler.bind(this)
 		this.linkHandler = this.linkHandler.bind(this)
 
 		this.state = {
 			palletInfo: {},
-			buttonText: `Link`
+			buttonText: `Link`,
+			pId: 0
 		}
 	}
 
 	componentDidMount() {
-		let pId = this.props.match.params.id;
-		pId = parseInt(pId)
+		this.state.pId = parseInt(this.props.match.params.id);
 
-		axios.get(`http://localhost:8080/getPaletteById?id=${pId}`)
+		axios.get(`http://localhost:8080/getPaletteById?id=${this.state.pId}`)
 			.then(res => {
 				console.log(res.data);
 				this.setState({
 					palletInfo: res.data
 				});	
 			})
+
 			if (this.state.palletInfo.bay !== 0) {
 				this.state.buttonText = `Unlink`
 			}
 			// console.log("this this.state.palletInfo)
 	}
 
-	clickHandler(event) {
+	submitHandler(event) {
 		event.preventDefault();
-		let pId = this.props.match.params.id;
-		pId = parseInt(pId)
 
-
-		if (this.state.buttonText === `Link`) {
 		this.props.history.push({
-			pathname: `/edit/p${pId}`,
-			state: {paletteInfo: this.state.palletInfo}
+			pathname: `/edit/p${this.state.pId}`,
+			state: { paletteInfo: this.state.palletInfo }
 		})
-	} else if (this.state.buttonText === `Unlink`) {
-		// axios.post() {}
-		this.props.history.push(`/load/p${pId}`)
-	}
 }
 
 	linkHandler(event) {
 		event.preventDefault();
-		const query = this.props.match.params.id
-		this.props.history.push({
-			pathname: `/pblink/P${query}`,
-			state: {paletteInfo: this.state.palletInfo}
-		})
+
+		if (this.state.buttonText === `Link`) {
+			this.props.history.push({
+				pathname: `/pblink/${this.state.pId}`,
+				state: {paletteInfo: this.state.palletInfo}
+			})
+		} else if (this.state.buttonText === `Unlink`) {
+			axios.post(`/editPalette`,{
+				
+			})
+			this.props.history.push(`/load/${this.state.pId}`)
+		}
 	}
 
 
@@ -77,7 +77,7 @@ class LoadPallet extends Component {
 				<p>Placed: SB{this.state.palletInfo.bay}</p>
 				<p>Location: </p>
 
-				<form onSubmit={this.clickHandler} className="bar">
+				<form onSubmit={this.submitHandler} className="bar">
 					<button className="btn btn-primary" type="submit">Edit</button>
 				</form>
 				<form onSubmit={this.linkHandler} className="bar">
