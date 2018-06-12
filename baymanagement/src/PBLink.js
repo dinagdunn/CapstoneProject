@@ -58,7 +58,13 @@ class PBLink extends Component {
 		palette.category = this.state.category;
 		palette.bay = bay.id
 
-		axios.post(`http://localhost:8080/editPalette`,palette).then(console.log("mission accomplished"))
+		axios.post(`http://localhost:8080/editPalette`,palette).then((message)=>{
+		this.props.history.push({
+			pathname: `/load/message`,
+			state: {message: "Palette was associated with the bay successfully!"}
+		})
+			window.setTimeout(()=>this.props.history.push(`/load/P${palette.id}`), 4000);
+		})
 		
 	}  
 	clickHandler(event) {
