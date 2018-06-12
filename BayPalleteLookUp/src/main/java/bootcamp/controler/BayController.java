@@ -44,6 +44,7 @@ public class BayController {
     	return bayService.deleteBay(id);
     }
     
+	 @CrossOrigin
     @RequestMapping(value="/getEmptyBays", method=RequestMethod.GET)
     public List<Bay> getEmptyBays(@RequestParam("id") int paletteId){
     	return bayService.getEmptyBays(paletteId);
