@@ -12,27 +12,25 @@ class LoadPallet extends Component {
 		this.linkHandler = this.linkHandler.bind(this)
 
 		this.state = {
-			palletInfo: {}
+			palletInfo: {},
+			buttonText: `Link`
 		}
 	}
-
 
 	componentDidMount() {
 		let pId = this.props.match.params.id;
 		pId = parseInt(pId)
-
 
 		axios.get(`http://localhost:8080/getPaletteById?id=${pId}`)
 			.then(res => {
 				console.log(res.data);
 				this.setState({
 					palletInfo: res.data
-				});
-				
+				});	
 			})
-
-
-
+			if (paletteInfo.bay !== 0) {
+				buttonText = `Unlink`
+			}
 	}
 
 	clickHandler(event) {
@@ -59,8 +57,6 @@ class LoadPallet extends Component {
 	render() {
 		return (
 			<div>
-
-
 				<p>Palette ID: {this.state.palletInfo.id} </p>
 				{/* <p>Palette Name: </p> */}
 				<p>Palette dimensions:</p>
@@ -77,7 +73,9 @@ class LoadPallet extends Component {
 					<button className="btn btn-primary" type="submit">Edit</button>
 				</form>
 				<form onSubmit={this.linkHandler} className="bar">
-					<button className="btn btn-primary" type="submit">Link</button>
+					<button className="btn btn-primary" type="submit">
+						{this.state.buttonText}
+					</button>
 				</form>
 			</div>
 		)
