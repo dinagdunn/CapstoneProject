@@ -10,11 +10,10 @@ class EditBay extends Component {
 
 		this.submitHandler = this.submitHandler.bind(this)
 		this.deleteHandler = this.deleteHandler.bind(this)
-		this.subHandler = this.subHandler.bind(this)
-
 		this.handleChangeWidth = this.handleChangeWidth.bind(this)
 		this.handleChangeLength = this.handleChangeLength.bind(this)
 		this.handleChangeHeight = this.handleChangeHeight.bind(this)
+
 
 		this.state = {
 			masterBayInfo: {
@@ -38,30 +37,47 @@ class EditBay extends Component {
 				console.log(res.data);
 				this.setState({
 					masterBayInfo: res.data,
-					id: bId
+					id: bId,
+
 				});
 			})
 	}
 
-	// handleChange = () => (event) => {
-	// 	this.setState({
-	// 		id: event.target.value,
-	// 		width: event.target.value,
-	// 		height: event.target.value,
-	// 		length: event.target.value
-	// 	});
-	// }
 
 	handleChangeWidth = () => (event) => {
-		this.setState({ width: event.target.value })
+		let newMasterBayInfo = Object.assign({}, this.state.masterBayInfo)
+		newMasterBayInfo.width = Number(event.target.value)
+		this.setState({ masterBayInfo: newMasterBayInfo })
+		console.log(newMasterBayInfo);
+
+
 	}
 
 	handleChangeHeight = () => (event) => {
-		this.setState({ height: event.target.value })
+		let newMasterBayInfo = Object.assign({}, this.state.masterBayInfo)
+		newMasterBayInfo.height = Number(event.target.value)
+		this.setState({ masterBayInfo: newMasterBayInfo })
 	}
 
 	handleChangeLength = () => (event) => {
-		this.setState({ length: event.target.value })
+
+
+		// this.state.masterBayInfo.width = event.target.value
+		// this.setState({
+		// 	masterBayInfo: {
+		// 		lenght: event.target.value
+		// 	}
+		// })
+
+		// let newMasterBayInfo = masterBayInfo;
+		// newMasterBayInfo.length = event.target.value;
+		// this.setState({
+		// 	masterBayInfo: newMasterBayInfo
+		// })
+
+		let newMasterBayInfo = Object.assign({}, this.state.masterBayInfo)
+		newMasterBayInfo.length = Number(event.target.value)
+		this.setState({ masterBayInfo: newMasterBayInfo })
 	}
 
 	submitHandler(event) {
@@ -71,10 +87,10 @@ class EditBay extends Component {
 		event.preventDefault();
 		console.log("hellooooo", this.state.id)
 		axios.post(`http://localhost:8080/editMasterBay`, {
-			id: this.state.id,
-			width: this.state.width,
-			height: this.state.height,
-			length: this.state.length,
+			id: this.state.masterBayInfo.id,
+			width: this.state.masterBayInfo.width,
+			height: this.state.masterBayInfo.height,
+			length: this.state.masterBayInfo.length,
 
 
 		})
@@ -88,103 +104,80 @@ class EditBay extends Component {
 
 
 			})
-			let mbId = `mb22`
+
 		console.log("finished hitting post");
-		this.props.history.push(`/load/${mbId}`)
 
 	}
+
 
 	deleteHandler(event) {
 		//delete from the db
 		let bId = this.props.match.params.id;
 		bId = parseInt(bId)
-		axios.delete(`http://localhost:8080/deleteMasterBay${bId}`)
-		event.preventDefault();
-		this.props.history.push('/')
+		console.log(bId, "delete");
+
+		axios.delete(`http://localhost:8080/deleteMasterBay?id=${bId}`)
+
+		this.props.history.push('/?msg=deleted')
 	}
 
-	subHandler(event) {
+	addSubHandler(event) {
 		// add to db
+		let bId = this.props.match.params.id;
+		bId = parseInt(bId)
 		event.preventDefault();
-		this.props.history.push('/managesubs/')
+		this.props.history.push(`/managesubs/mb${bId}`)
 	}
 
 	render() {
 		return (
 			<BrowserRouter>
+				<div>
 
-<h1>{this.state.masterBayInfo.message}</h1>
+					<h1>{this.state.masterBayInfo.message}</h1>
 
 					<form className="bar" onSubmit={this.submitHandler}>
 						<label>
 							ID: MB
-			<input type="text" name="id" value={this.state.masterBayInfo.id} />
+
+			<input type="number" name="id" value={this.state.masterBayInfo.id} disabled />
 						</label>
 						<br />
 
 						<label>
 							Height:
-			<input type="text" name="height" value={this.state.masterBayInfo.height} onChange={this.handleChangeHeight()} />
+			<input type="number" name="height" value={this.state.masterBayInfo.height} onChange={this.handleChangeHeight()} />
 						</label>
 						<br />
 
 						<label>
 							Width:
-			<input type="text" name="width" value={this.state.masterBayInfo.width} onChange={this.handleChangeWidth()} />
+			<input type="number" name="width" value={this.state.masterBayInfo.width} onChange={this.handleChangeWidth()} />
 						</label>
 						<br />
 
 						<label>
-							Depth:
-			<input type="text" name="length" value={this.state.masterBayInfo.length} onChange={this.handleChangeLength()} />
+							Length:
+			<input type="number" name="length" value={this.state.masterBayInfo.length} onChange={this.handleChangeLength()} />
 						</label>
-						<br />
-
-						<label>
-							Department:
-			<select name="department" value="" >
-								<option value="D1">D1</option>
-							</select>
-						</label>
-						<br />
-
-						<label>
-							Class:
-			<select name="class" value="" >
-								<option value="Cl1">Cl1</option>
-							</select>
-						</label>
-						<br />
-
-						<label>
-							Category:
-			<select name="category" value="" >
-								<option value="Ca1">Ca1</option>
-							</select>
-						</label>
-						<br />
-						</form>
-					<form className="bar">
-						<div className="row">
-							<button className="btn btn-primary" 
-							type="submit" onClick={this.submitHandler}>
-							Submit</button>
-
-							<button className="btn btn-primary" 
-							type="submit" onClick={this.deleteHandler}>
-							Delete</button>
-						</div>
 
 						<div className="row">
-							<button className="btn btn-primary" 
-							type="submit" onClick={this.subHandler}>
-							Manage Sub Bays</button>
+							<button className="btn btn-primary" type="submit">Submit</button>
 						</div>
-					
 					</form>
+					<div>
+						<button className="btn btn-primary" type="submit" onClick={this.deleteHandler}>Delete</button>
+					</div>
 
+					<div className="row">
+						<button className="btn btn-primary" type="submit" onClick={this.ManageSubs}>Manage Sub Bays</button>
+					</div>
+
+
+				</div>
 			</BrowserRouter>
 		)
 	}
 }
-		export default EditBay
+
+export default EditBay
