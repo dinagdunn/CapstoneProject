@@ -9,8 +9,9 @@ class EditPallet extends Component {
 		super(props);
 		this.submitHandler = this.submitHandler.bind(this)
 		this.deleteHandler = this.deleteHandler.bind(this)
-		this.changeHeight = this.changeHeight.bind(this)
-		this.state = {
+		this.changeValue = this.changeValue.bind(this)
+		this.state={
+
 			id: this.props.location.state.paletteInfo.id,
 			width: this.props.location.state.paletteInfo.width,
 			length: this.props.location.state.paletteInfo.length,
@@ -23,17 +24,7 @@ class EditPallet extends Component {
 		}
 	}
 
-	// getDep(dep){
-	// 	if(dep === this.state.dep){
-	// 		return 'SELECTED'
-	// 	}else{
-	// 		return ""
-	// 	}
-	// }
-
 	submitHandler(event) {
-		//push new data to db !!!
-		console.log("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ")
 		event.preventDefault();
 		console.log(this.props.location.state.paletteInfo)
 		let palette = {}
@@ -45,15 +36,14 @@ class EditPallet extends Component {
 		palette.dep = this.state.dep
 		palette.paletteClass = this.state.class
 		palette.category = this.state.category;
-
-		palette.bay = this.state.bay;
+		palette.bay = this.state.bay
 		axios.post("http://localhost:8080/editPalette",palette).then((response) =>{
 		    console.log(response);
 		    console.log(response.data.dimensionMatch)
 		    if(response.data.dimensionMatch === false){
 		    this.props.history.push({
 				pathname: `/load/message`,
-				state: {message: "Edit unsuccessful, the bay that is associated with this palette is smaller!"}
+				state: {message: "Edit unsuccessful, the bay that is associated with this palette is too small!"}
 			})
 			window.setTimeout(()=>
 				this.props.history.push({
@@ -73,9 +63,7 @@ class EditPallet extends Component {
 		    }
 		}).catch(function (error) {
 	    	console.log(error);
-	    });
-
-		
+	    });		
 	}
 
 	deleteHandler(event) {
@@ -87,7 +75,9 @@ class EditPallet extends Component {
 		axios.delete(`http://localhost:8080/deletePalette?id=${pId}`)
 	}
 
-	changeHeight(event, box) {
+
+	changeValue(event,box){
+
 		console.log(event.target)
 		var stateChange = {}
 		console.log(stateChange[box]);
@@ -95,7 +85,6 @@ class EditPallet extends Component {
 		console.log(stateChange[box]);
 		this.setState(stateChange);
 	}
-
 
 	componentWillMount() {
 		let departments = axios.get("http://localhost:8080/getDepartments").then((response) => {
@@ -144,7 +133,6 @@ class EditPallet extends Component {
 		return (
 			<BrowserRouter>
 				<div>
-
 					<h4>Palette: P{this.props.location.state.paletteInfo.id}</h4>
 					<form id="editPalette" name="editPalette" >
 						<label>
@@ -170,6 +158,13 @@ class EditPallet extends Component {
 					</form>
 
 					<label>
+						Depth:
+			<input type="number" name="depth"  value={this.state.length} onChange={(e)=>{this.changeValue(e,'length')}}/>
+					</label>
+					<br />
+			</form>
+					<label>
+
 						Department:
 			<select name="department" form="editPalette" >
 							{this.state.deps}

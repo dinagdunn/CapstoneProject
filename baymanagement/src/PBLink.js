@@ -5,12 +5,12 @@ import axios from 'axios'
 
 class PBLink extends Component {
 
-
 	constructor(props) {
 		super(props)
 		this.clickHandler = this.clickHandler.bind(this)
 		this.componentWillMount = this.componentWillMount.bind(this)
 		this.render = this.render.bind(this)
+		console.log(this.props)
 		this.state={
 			id: this.props.location.state.paletteInfo.id,
 			width: this.props.location.state.paletteInfo.width,
@@ -20,10 +20,8 @@ class PBLink extends Component {
 			class:this.props.location.state.paletteInfo.paletteClass,
 			category:this.props.location.state.paletteInfo.category,
 		}
+    }
 
-
- }
-	
 	  componentWillMount() {
 	  	let pId = this.props.match.params.id;
 	  	let bays = axios.get(`http://localhost:8080/getEmptyBays?id=${pId}`).then((response)=>{
@@ -44,7 +42,6 @@ class PBLink extends Component {
 	  			bayList: bayList
 	  		})
 	  	})
-
 	  }
 
 	bayClick(bay){		
@@ -57,7 +54,6 @@ class PBLink extends Component {
 		palette.paletteClass = this.state.class
 		palette.category = this.state.category;
 		palette.bay = bay.id
-
 		axios.post(`http://localhost:8080/editPalette`,palette).then((message)=>{
 		this.props.history.push({
 			pathname: `/load/message`,
@@ -65,33 +61,23 @@ class PBLink extends Component {
 		})
 			window.setTimeout(()=>this.props.history.push(`/load/P${palette.id}`), 4000);
 		})
-		
 	}  
+
 	clickHandler(event) {
 		event.preventDefault();
-			//push new data to db !!!
-
-			
 		console.log('we chose this', this.state.selectedOption)
-		// const pId = event.target[0].value
 		const pId = 'p5643245'
 		this.props.history.push(`/load/${pId}`)
 	}
 
 	render() {
 		return (
-			
 			<div>
 				<h1>Select a bay location</h1>
 				{this.state.bayList}
 			</div>
-
 		)
 	}
 }
 
-//<PastInfo pastINfo={this.state.pastInfo}> --> call this as props in the next one 
-//in the PastInfo ---> 
-//oconstructor(props) { super (props)}
-// wrap this inside of a function ---> let weeklySales = this.props.pastInfo
 export default PBLink
