@@ -91,6 +91,7 @@ class EditBay extends Component {
 		bId = parseInt(bId)
 		console.log(bId, "delete");
 
+
 		  swal({
 			title: "Are you sure?",
 			text: `MasterBay ${bId} will be deleted!`,
@@ -109,6 +110,7 @@ class EditBay extends Component {
 			  swal("Delete cancelled");
 			}
 		  });
+
 
 
 	}
@@ -186,6 +188,8 @@ class EditBay extends Component {
 							onClick={this.deleteHandler}>
 							Delete
 						</button>
+					</div>
+					<div className="row">
 					</div>
 				</div>
 		)
