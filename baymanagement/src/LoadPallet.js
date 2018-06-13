@@ -10,23 +10,21 @@ class LoadPallet extends Component {
 		super(props);
 		this.submitHandler = this.submitHandler.bind(this)
 		this.linkHandler = this.linkHandler.bind(this)
-
+		console.log(props.match.params.id)
 		this.state = {
 			palletInfo: {},
 			buttonText: `Link`,
-			pId: 0
+			id: props.match.params.id
 		}
 	}
 
 	componentDidMount() {
-		this.state.pId = parseInt(this.props.match.params.id);
+		// this.state.pId = parseInt(this.props.match.params.id);
 
-		axios.get(`http://localhost:8080/getPaletteById?id=${this.state.pId}`)
-			.then(res => {
-				console.log(res.data);
+		axios.get(`http://localhost:8080/getPaletteById?id=${this.state.id}`).then(res => {
 				let buttonText = "Link"
-				if (!this.state.palletInfo.bay) {
-					console.log("I AM THE DANG BAYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY",this.state.palletInfo.bay)
+				if (res.data.bay>0) {
+					console.log("I AM THE DANG BAYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY", res.data.bay)
 					buttonText = `Unlink`
 				}
 				this.setState({
@@ -41,27 +39,33 @@ class LoadPallet extends Component {
 		event.preventDefault();
 
 		this.props.history.push({
-			pathname: `/edit/p${this.state.pId}`,
+			pathname: `/edit/p${this.state.id}`,
 			state: { paletteInfo: this.state.palletInfo }
 		})
 }
 	//LINK AND UNLINK COMMANDS HERE
 	linkHandler(event) {
 		event.preventDefault();
-
+		console.log(this.state.palletInfo)		
 		if (this.state.buttonText === `Link`) {
+			console.log(this.state.palletInfo)
 			this.props.history.push({
-				pathname: `/pblink/P${this.state.pId}`,
+				pathname: `/pblink/P${this.state.id}`,
 				state: {paletteInfo: this.state.palletInfo}
 			})
 		} else if (this.state.buttonText === `Unlink`) {
-			axios.get(`/unlinkPalette`,{
+			axios.get(`http://localhost:8080/unlinkPalette`,{
 				params: {
-					ID: this.state.pId
+					id: this.state.id
 				}
-			})
-
-			this.props.history.push(`/load/P${this.state.pId}`)
+			}).then(()=>{
+		let unlinkPalletInfo = this.state.palletInfo
+		unlinkPalletInfo.bay =0;
+		this.setState({
+		buttonText: `Link`,
+		palletInfo: unlinkPalletInfo
+	})
+})
 		}
 	}
 

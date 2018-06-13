@@ -14,13 +14,16 @@ import bootcamp.model.Palette;
 public class BayDao {
 
 	private final String GET_BAY_BY_ID = "SELECT * FROM baymanagement.Bay WHERE id = ?;";
-	private final String ADD_BAY = "INSERT INTO Bay (id, width, length, height, dep, bayClass, category, masterbay, palette) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";	
-	private final String EDIT_BAY =  "UPDATE Bay SET width=?, length=?, height=?, dep=?, bayClass=?, category=?, masterbay=?, palette=? WHERE id = ?;";
+	private final String ADD_BAY = "INSERT INTO Bay (id, width, length, height, dep, "
+			+ "bayClass, category, masterbay, palette) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) SELECT id from where LAST_INSERT_ID();";	
+	private final String EDIT_BAY =  "UPDATE Bay SET width=?, length=?, height=?, dep=?, "
+			+ "bayClass=?, category=?, masterbay=?, palette=? WHERE id = ?;";
 	private final String DELETE_BAY ="DELETE FROM Bay where id=?;";
 	private final String UNLINK_PALETTE = "UPDATE Bay SET palette = 0 WHERE ID = ?";
-	private final String EMPTY_BAYS = "SELECT * FROM Bay WHERE palette = 0 AND dep = ? AND width>=? AND length>=? AND height>=? ORDER BY (length*height*width) ASC;";
-	private final String EMPTY_BAYS_OTHER_DEPARTMENTS = "SELECT * FROM Bay WHERE palette = 0 AND width>=? AND length>=? AND height>=? ORDER BY (length*height*width) ASC;";
-
+	private final String EMPTY_BAYS = "SELECT * FROM Bay WHERE palette = 0 "
+			+ "AND dep = ? AND width>=? AND length>=? AND height>=? ORDER BY (length*height*width) ASC;";
+	private final String EMPTY_BAYS_OTHER_DEPARTMENTS = "SELECT * FROM Bay WHERE palette = 0 "
+			+ "AND width>=? AND length>=? AND height>=? ORDER BY (length*height*width) ASC;";
 
 
 	
@@ -66,8 +69,6 @@ public class BayDao {
 		Object[] args = {palette.getWidth(), palette.getLength(), palette.getHeight()};
 			return jdbctemplate.query(EMPTY_BAYS_OTHER_DEPARTMENTS,args, new BeanPropertyRowMapper<>(Bay.class));
 	}
-	
-
 	
 
 }

@@ -21,8 +21,6 @@ class EditBay extends Component {
 				width: 0,
 				height: 0,
 				length: 0,
-
-
 			}
 		}
 	}
@@ -115,9 +113,7 @@ class EditBay extends Component {
 		let bId = this.props.match.params.id;
 		bId = parseInt(bId)
 		console.log(bId, "delete");
-
 		axios.delete(`http://localhost:8080/deleteMasterBay?id=${bId}`)
-
 		this.props.history.push('/?msg=deleted')
 	}
 
@@ -139,20 +135,27 @@ class EditBay extends Component {
 					<form className="bar" onSubmit={this.submitHandler}>
 						<label>
 							ID: MB
-
-			<input type="number" name="id" value={this.state.masterBayInfo.id} disabled />
+						<input type="number" name="id" 
+						value={this.state.masterBayInfo.id} disabled 
+						/>
 						</label>
 						<br />
 
 						<label>
 							Height:
-			<input type="number" name="height" value={this.state.masterBayInfo.height} onChange={this.handleChangeHeight()} />
+						<input type="number" name="height" 
+						value={this.state.masterBayInfo.height} 
+						onChange={this.handleChangeHeight()} 
+						/>
 						</label>
 						<br />
 
 						<label>
 							Width:
-			<input type="number" name="width" value={this.state.masterBayInfo.width} onChange={this.handleChangeWidth()} />
+						<input type="number" name="width" 
+						value={this.state.masterBayInfo.width} 
+						onChange={this.handleChangeWidth()} 
+						/>
 						</label>
 						<br />
 

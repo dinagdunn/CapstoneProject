@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import bootcamp.model.MasterBay;
 import bootcamp.model.Message;
 import bootcamp.service.MasterBayService;
@@ -26,7 +27,7 @@ public class MasterBayController {
   }
   
   @CrossOrigin
-  //given masterbay ID return a masterbay object with it's dimentions and all the subbays listed.
+  /* given masterbay ID return a masterbay object with it's dimentions and all the subbays listed. */
   @RequestMapping(value = "/getMasterbayById", method = RequestMethod.GET   )
   public MasterBay getMasterbayById(@RequestParam("id") int id) {
 	  return masterBayService.getMasterbayById(id);
@@ -34,8 +35,8 @@ public class MasterBayController {
   }
   @CrossOrigin
   @RequestMapping(value = "/addMasterBay", method=RequestMethod.POST)
-  public void addMasterBay(@RequestBody MasterBay masterBay) {
-	  masterBayService.addMasterBay(masterBay);
+  public int addMasterBay(@RequestBody MasterBay masterBay) {
+	 return masterBayService.addMasterBay(masterBay);
   }
   
   @CrossOrigin

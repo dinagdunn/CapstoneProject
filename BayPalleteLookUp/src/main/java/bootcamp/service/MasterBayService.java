@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import bootcamp.dao.MasterBayDao;
 import bootcamp.dao.PaletteDao;
 import bootcamp.model.Bay;
+import bootcamp.model.Id;
 import bootcamp.model.MasterBay;
 import bootcamp.model.Message;
 import bootcamp.model.Palette;
@@ -31,8 +32,8 @@ public class MasterBayService {
 	  return masterBayDao.getMasterbayById(id);
   }
   
-  public void addMasterBay(MasterBay masterBay) {
-	  masterBayDao.addMasterBay(masterBay);
+  public int addMasterBay(MasterBay masterBay) {
+	  return masterBayDao.addMasterBay(masterBay);
   }
   
   public Message deleteMasterBay(int id) {
