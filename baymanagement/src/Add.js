@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
-import AddCommon from './AddCommon.js'
 import axios from 'axios'
-import AddDropdown from './AddDropdown';
 
 class Add extends Component {
 	constructor(props) {
@@ -12,18 +9,17 @@ class Add extends Component {
 			selectedOption: 'Pallet',
 			height: '',
 			width: '',
-			depth: '',
+			length: '',
 			department: '',
 			class: '',
 			category: '',
 		}
 		this.changeHeight = this.changeHeight.bind(this)
 		this.changeWidth = this.changeWidth.bind(this)
-		this.changeDepth = this.changeDepth.bind(this)
+		this.changeLength = this.changeLength.bind(this)
 		this.changeDepartment = this.changeDepartment.bind(this)
 		this.changeClass = this.changeClass.bind(this)
 		this.changeCategory = this.changeCategory.bind(this)
-		
 		this.handleOptionChange = this.handleOptionChange.bind(this)
 		this.submitHandler = this.submitHandler.bind(this)
 	}
@@ -41,8 +37,8 @@ class Add extends Component {
 		this.setState({ width: e.target.value })
 	}
 
-	changeDepth(e) {
-		this.setState({ depth: e.target.value })
+	changeLength(e) {
+		this.setState({ length: e.target.value })
 	}
 
 	changeDepartment(e) {
@@ -58,23 +54,21 @@ class Add extends Component {
 	}
 
 	handleOptionChange(event) {
-		this.setState({
-			selectedOption: event.target.name
-		})
+		this.setState({ selectedOption: event.target.name })
 	}
 
 	submitHandler(event) {
 		event.preventDefault();
-		console.log("yo yo yo")
+		// console.log("yo yo yo")
 		if (this.state.selectedOption === 'Pallet') {
 			axios.post(`http://localhost:8080/addPallet`, {
-				height: this.state.height,
-				width: this.state.width,
-				depth: this.state.depth,
-				department: this.state.department,
-				class: this.state.class,
-				category: this.state.category
-			})
+					height: this.state.height,
+					width: this.state.width,
+					length: this.state.length,
+					department: this.state.department,
+					class: this.state.class,
+					category: this.state.category
+				})
 				.then((response) => {
 					console.log("Pallet ID: ", response.data)
 					this.props.history.push(`/load/P${response.data}`)
@@ -84,13 +78,12 @@ class Add extends Component {
 				});
 		}
 
-		if (this.state.selectedOption === 'Master Bay') {
-			console.log(`height: `, this.state.height)
+		else if (this.state.selectedOption === 'Master Bay') {
 			axios.post(`http://localhost:8080/addMasterBay`, {
-				height: this.state.height,
-				width: this.state.width,
-				depth: this.state.depth,
-			})
+					height: this.state.height,
+					width: this.state.width,
+					length: this.state.length,
+				})
 				.then((response) => {
 					console.log("Bay ID: ", response.data)
 					this.props.history.push(`/load/MB${response.data}`)
@@ -102,60 +95,102 @@ class Add extends Component {
 	}
 
 	render() {
-		return (
-			<div className="float-center">
-				<div className="container">
-					<div className="row float-center col-12">
-						<div className="col-sm-6 col-sm-offset-3">
+		return ( 
+		<div className = "float-center" >
+			<div className = "container" >
+				<div className = "row float-center col-12" >
+					<div className = "col-sm-6 col-sm-offset-3" >
+						<div className = "col-sm-3" >
+							<div className = "form-check" >
+								<label className = "form-check-label" >
+									<input type = "radio"
+										className = "form-check-input"
+										name = "Pallet"
+										checked = { this.state.selectedOption === 'Pallet'}
+										onChange = { this.handleOptionChange }
+									/>
+									Pallet 
+								</label > 
+								</div> 
+							</div >
 
-							<div className="col-sm-3">
-								<div className="form-check">
-									<label className="form-check-label">
-										<input type="radio" className="form-check-input"
-											name="Pallet"
-											checked={this.state.selectedOption === 'Pallet'}
-											onChange={this.handleOptionChange}
-										/>Pallet
-		 								</label>
-								</div>
+					<div className = "col-sm-3" >
+						<div className = "form-check" >
+							<label className = "form-check-label" >
+								<input type = "radio"
+									className = "form-check-input"
+									name = "Master Bay"
+									checked = { this.state.selectedOption === 'Master Bay' }
+									onChange = { this.handleOptionChange }
+								/>
+								Master Bay 
+								</label > 
+							</div> 
+						</div > 
+					</div> 
+			</div >
+
+			<div >
+				<form onSubmit = { this.submitHandler } >
+					<label >
+						Height:
+						<input type = "text" onChange = {this.changeHeight}
+							name = "height" />
+					</label> 
+					<br />
+
+					<label>
+						Width:
+						<input type = "text" onChange = {this.changeWidth}
+							name = "width" />
+					</label> 
+					<br />
+
+					<label>
+						Length:
+						<input type = "text" onChange = {this.changeLength}
+							name = "length" />
+					</label> 
+					<br /> 
+		
+						{this.state.selectedOption === 'Pallet' &&
+							<div>
+							<label>
+								Department:
+								<select name="department" onChange = {this.changeDepartment}>
+									<option value="D1">D1</option>
+								</select>
+							</label>
+							<br />
+		
+							<label>
+								Class:
+								<select name="class" onChange = {this.changeClass}>
+									<option value="Cl1">Cl1</option>
+								</select>
+							</label>
+							<br />
+		
+							<label>
+								Category:
+								<select name="category" onChange = {this.changeCategory}>
+									<option value="Ca1">Ca1</option>
+								</select>
+							</label>
+							<br />
 							</div>
+						}
 
-							<div className="col-sm-3">
-								<div className="form-check">
-									<label className="form-check-label">
-										<input type="radio" className="form-check-input"
-											name="Master Bay"
-											checked={this.state.selectedOption === 'Master Bay'}
-											onChange={this.handleOptionChange}
-										/>Master Bay
-										</label>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div>
-						<form onSubmit={this.submitHandler}>
-							<AddCommon
-								changeHeight={this.changeHeight}
-								changeWidth={this.changeWidth}
-								changeDepth={this.changeDepth}
-							/>
-							{this.state.selectedOption === 'Pallet' &&
-								<AddDropdown
-									changeDepartment={this.changeDepartment}
-									changeClass={this.changeClass}
-									changeCategory={this.changeCategory}
-								/>}
-							<button className="btn btn-primary" type="submit">
-								Submit
-                			</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		)
-	}
+					<button className = "btn btn-primary"
+						type = "submit" >
+						Submit 
+					</button> 					
+				</form > 
+			</div> 
+		</div > 
+	</div>
+	)
+}
 }
 
 export default Add

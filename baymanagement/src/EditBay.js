@@ -4,16 +4,13 @@ import './App.css';
 import axios from 'axios'
 
 class EditBay extends Component {
-
 	constructor() {
 		super();
-
 		this.submitHandler = this.submitHandler.bind(this)
 		this.deleteHandler = this.deleteHandler.bind(this)
 		this.handleChangeWidth = this.handleChangeWidth.bind(this)
 		this.handleChangeLength = this.handleChangeLength.bind(this)
 		this.handleChangeHeight = this.handleChangeHeight.bind(this)
-
 
 		this.state = {
 			masterBayInfo: {
@@ -47,8 +44,6 @@ class EditBay extends Component {
 		newMasterBayInfo.width = Number(event.target.value)
 		this.setState({ masterBayInfo: newMasterBayInfo })
 		console.log(newMasterBayInfo);
-
-
 	}
 
 	handleChangeHeight = () => (event) => {
@@ -58,21 +53,6 @@ class EditBay extends Component {
 	}
 
 	handleChangeLength = () => (event) => {
-
-
-		// this.state.masterBayInfo.width = event.target.value
-		// this.setState({
-		// 	masterBayInfo: {
-		// 		lenght: event.target.value
-		// 	}
-		// })
-
-		// let newMasterBayInfo = masterBayInfo;
-		// newMasterBayInfo.length = event.target.value;
-		// this.setState({
-		// 	masterBayInfo: newMasterBayInfo
-		// })
-
 		let newMasterBayInfo = Object.assign({}, this.state.masterBayInfo)
 		newMasterBayInfo.length = Number(event.target.value)
 		this.setState({ masterBayInfo: newMasterBayInfo })
@@ -80,8 +60,6 @@ class EditBay extends Component {
 
 	submitHandler(event) {
 		//push new data to db !!!
-
-		// const pId = event.target[0].value
 		event.preventDefault();
 		console.log("hellooooo", this.state.id)
 		axios.post(`http://localhost:8080/editMasterBay`, {
@@ -89,8 +67,6 @@ class EditBay extends Component {
 			width: this.state.masterBayInfo.width,
 			height: this.state.masterBayInfo.height,
 			length: this.state.masterBayInfo.length,
-
-
 		})
 			.then(res => {
 				console.log(res.data);
@@ -99,14 +75,9 @@ class EditBay extends Component {
 				});
 				console.log("called post");
 				console.log(this.state.masterBayInfo);
-
-
 			})
-
 		console.log("finished hitting post");
-
 	}
-
 
 	deleteHandler(event) {
 		//delete from the db
@@ -129,15 +100,12 @@ class EditBay extends Component {
 		return (
 			<BrowserRouter>
 				<div>
-
 					<h1>{this.state.masterBayInfo.message}</h1>
-
 					<form className="bar" onSubmit={this.submitHandler}>
 						<label>
 							ID: MB
-						<input type="number" name="id" 
-						value={this.state.masterBayInfo.id} disabled 
-						/>
+							<input type="number" name="id" 
+								value={this.state.masterBayInfo.id} disabled />
 						</label>
 						<br />
 
@@ -145,38 +113,47 @@ class EditBay extends Component {
 							Height:
 						<input type="number" name="height" 
 						value={this.state.masterBayInfo.height} 
-						onChange={this.handleChangeHeight()} 
-						/>
+						onChange={this.handleChangeHeight()} />
 						</label>
 						<br />
 
 						<label>
 							Width:
-						<input type="number" name="width" 
-						value={this.state.masterBayInfo.width} 
-						onChange={this.handleChangeWidth()} 
-						/>
+							<input type="number" name="width" 
+								value={this.state.masterBayInfo.width} 
+								onChange={this.handleChangeWidth()} />
 						</label>
 						<br />
 
 						<label>
 							Length:
-			<input type="number" name="length" value={this.state.masterBayInfo.length} onChange={this.handleChangeLength()} />
+							<input type="number" name="length" 
+								value={this.state.masterBayInfo.length} 
+								onChange={this.handleChangeLength()} />
 						</label>
 
 						<div className="row">
-							<button className="btn btn-primary" type="submit">Submit</button>
+							<button className="btn btn-primary" 
+								type="submit">
+								Submit
+							</button>
 						</div>
 					</form>
 					<div>
-						<button className="btn btn-primary" type="submit" onClick={this.deleteHandler}>Delete</button>
+						<button className="btn btn-primary" 
+							type="submit" 
+							onClick={this.deleteHandler}>
+							Delete
+						</button>
 					</div>
 
 					<div className="row">
-						<button className="btn btn-primary" type="submit" onClick={this.ManageSubs}>Manage Sub Bays</button>
+						<button className="btn btn-primary" 
+							type="submit" 
+							onClick={this.ManageSubs}>
+							Manage Sub Bays
+						</button>
 					</div>
-
-
 				</div>
 			</BrowserRouter>
 		)

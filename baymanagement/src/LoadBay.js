@@ -19,41 +19,23 @@ class LoadBay extends Component {
 				// length: 0,
 				bayList: [{}]
 			}
-
-
 		}
-
-
 	}
 
 	componentDidMount() {
 		let bId = this.props.match.params.id;
 		console.log(bId)
-
 		bId = parseInt(bId)
-
-
-
 		axios.get(`http://localhost:8080/getMasterbayById?id=${bId}`)
 			.then(res => {
-
 				this.setState({
 					masterBayInfo: res.data,
 				});
-
-
 				console.log("called MB");
-
 			})
-
-
-
 	}
 
 	// subBayList = () => {
-
-
-
 
 	clickHandler(event) {
 		event.preventDefault();
@@ -70,7 +52,6 @@ class LoadBay extends Component {
 			<div className="">
 
 				<p>MasterBay ID: {this.state.masterBayInfo.id}</p>
-
 				<p>Master Bay dimensions: </p>
 				<p>Width: {this.state.masterBayInfo.width}</p>
 				<p>Height: {this.state.masterBayInfo.height}</p>
@@ -83,16 +64,8 @@ class LoadBay extends Component {
 				<div className="col-sm-12" >
 					<LoadSubBay passedId={this.props.match.params.id} />
 				</div>
-
-
-
 			</div>
-
-
 		)
 	}
 }
-
-
-
 export default LoadBay

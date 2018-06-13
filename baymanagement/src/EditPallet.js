@@ -137,36 +137,40 @@ class EditPallet extends Component {
 					<form id="editPalette" name="editPalette" >
 						<label>
 							Height:
-			<input type="text" name="height" value={this.state.height} onChange={(e) => { 
-				this.changeHeight(e, 'height') }} />
+							<input type="text" name="height" 
+							value={this.state.height} onChange={(e) => { 
+								this.changeHeight(e, 'height') }} />
 						</label>
 						<br />
 
 						<label>
 							Width:
-			<input type="text" name="width" value={this.state.width} onChange={(e) => { 
-				this.changeHeight(e, 'width') }} />
+							<input type="text" name="width" 
+							value={this.state.width} onChange={(e) => { 
+								this.changeHeight(e, 'width') }} />
 						</label>
 						<br />
 
 						<label>
 							Depth:
-			<input type="text" name="depth" value={this.state.length} onChange={(e) => { 
-				this.changeHeight(e, 'length') }} />
+							<input type="text" name="depth" 
+							value={this.state.length} onChange={(e) => { 
+								this.changeHeight(e, 'length') }} />
 						</label>
 						<br />
-					</form>
 
 					<label>
 						Depth:
-			<input type="number" name="depth"  value={this.state.length} onChange={(e)=>{this.changeValue(e,'length')}}/>
+						<input type="number" name="depth"  
+							value={this.state.length} 
+							onChange={(e)=>{
+								this.changeValue(e,'length')}}/>
 					</label>
 					<br />
-			</form>
 					<label>
 
 						Department:
-			<select name="department" form="editPalette" >
+						<select name="department" form="editPalette" >
 							{this.state.deps}
 						</select>
 					</label>
@@ -174,7 +178,7 @@ class EditPallet extends Component {
 
 					<label>
 						Class:
-			<select name="class" form="editPalette">
+						<select name="class" form="editPalette">
 							{this.state.classes}
 						</select>
 					</label>
@@ -182,7 +186,7 @@ class EditPallet extends Component {
 
 					<label>
 						Category:
-			<select name="category" form="editPalette">
+						<select name="category" form="editPalette">
 							{this.state.categories}
 						</select>
 					</label>
@@ -190,7 +194,7 @@ class EditPallet extends Component {
 
 					<button className="btn btn-primary" onClick={this.submitHandler}>Submit</button>
 					<button className="btn btn-primary" onClick={this.deleteHandler}>Delete</button>
-
+				</form>
 				</div>
 			</BrowserRouter>
 		)
