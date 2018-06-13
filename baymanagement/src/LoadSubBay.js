@@ -38,7 +38,7 @@ class LoadSubBay extends Component {
     componentDidMount() {
         let bId = this.props.passedId
 
-        axios.get(`http://localhost:8080/getMasterbayById?id=${bId}`)
+        axios.get(`http://localhost:8081/getMasterbayById?id=${bId}`)
             .then(res => {
                 console.log(res.data);
                 this.setState({
