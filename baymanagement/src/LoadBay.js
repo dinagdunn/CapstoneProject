@@ -80,7 +80,7 @@ class LoadBay extends Component {
 						<button className="btn btn-primary" type="submit">Edit MasterBay</button>
 					</form>
 				</div>
-				<div className="col-sm-12">
+				<div className="col-sm-12" >
 					<LoadSubBay passedId={this.props.match.params.id} />
 				</div>
 

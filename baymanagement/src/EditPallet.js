@@ -36,8 +36,7 @@ class EditPallet extends Component {
 		palette.dep = this.state.dep
 		palette.paletteClass = this.state.class
 		palette.category = this.state.category;
-
-		palette.bay = this.state.bay;
+		palette.bay = this.state.bay
 		axios.post("http://localhost:8080/editPalette",palette).then((response) =>{
 		    console.log(response);
 		    console.log(response.data.dimensionMatch)
