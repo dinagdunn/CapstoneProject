@@ -50,7 +50,6 @@ class App extends Component {
     <Route path="/edit/P:id" component={ EditPallet } />
     <Route path="/edit/MB:id" component={ EditBay } />
     <Route path="/pblink/P:id" component={ PBLink } />
-
     <Route exact path="/load/message" component={Message}/>  
     <Route exact path="/editSubBay/SB:id" component={EditSubBay}/>
   

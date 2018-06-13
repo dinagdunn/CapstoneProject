@@ -23,6 +23,7 @@ class Add extends Component {
 		this.changeDepartment = this.changeDepartment.bind(this)
 		this.changeClass = this.changeClass.bind(this)
 		this.changeCategory = this.changeCategory.bind(this)
+		
 		this.handleOptionChange = this.handleOptionChange.bind(this)
 		this.submitHandler = this.submitHandler.bind(this)
 	}

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import bootcamp.dao.MasterBayDao;
 import bootcamp.dao.PaletteDao;
 import bootcamp.model.Bay;
+import bootcamp.model.Id;
 import bootcamp.model.MasterBay;
 import bootcamp.model.Message;
 import bootcamp.model.Palette;
