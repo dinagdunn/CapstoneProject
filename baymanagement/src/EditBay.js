@@ -130,7 +130,7 @@ class EditBay extends Component {
 							Length:
 							<input type="number" name="length" 
 								value={this.state.masterBayInfo.length} 
-								onChange={this.handleChangeLength()} />
+								onCgit hange={this.handleChangeLength()} />
 						</label>
 
 
