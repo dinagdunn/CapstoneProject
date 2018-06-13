@@ -74,7 +74,7 @@ class LoadPallet extends Component {
 	render() {
 		return (
 			<div>
-				<p>Palette ID: {this.state.palletInfo.id} </p>
+				<h2>Palette ID: P{this.state.palletInfo.id} </h2>
 				<p>Palette dimensions:</p>
 				<p>Width:  {this.state.palletInfo.width}</p>
 				<p>Height: {this.state.palletInfo.height}</p>

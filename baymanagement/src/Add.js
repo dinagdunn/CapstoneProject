@@ -10,9 +10,10 @@ class Add extends Component {
 			height: '',
 			width: '',
 			length: '',
-			department: 'D1',
-			class: 'Cl1',
-			category: 'Ca1',
+			deps: [],
+			classes: [],
+			categories: [],
+			addedItem: 'Pallet'
 		}
 		this.changeHeight = this.changeHeight.bind(this)
 		this.changeWidth = this.changeWidth.bind(this)
@@ -25,7 +26,45 @@ class Add extends Component {
 	}
 
 	componentDidMount() {
-		console.log("Mounted")
+		// console.log("Mounted")
+		let departments = axios.get("http://localhost:8080/getDepartments").then((response) => {
+			const dropDowns = response.data.map((department, index) => {
+				// console.log(department.value)
+				if (department.value === this.state.dep) {
+					return (<option value={department.value} selected>{department.value}</option>)
+				} else
+					return (<option value={department.value}>{department.value}</option>)
+			})
+			this.setState({
+				deps: dropDowns
+			})
+		})
+
+		let classes = axios.get("http://localhost:8080/getClasses").then((response) => {
+			const dropDowns = response.data.map((department, index) => {
+				console.log(department.value)
+				if (department.value === this.state.class) {
+					return (<option value={department.value} selected>{department.value}</option>)
+				} else
+					return (<option value={department.value}>{department.value}</option>)
+			})
+			this.setState({
+				classes: dropDowns
+			})
+		})
+
+		let categories = axios.get("http://localhost:8080/getCategories").then((response) => {
+			const dropDowns = response.data.map((department, index) => {
+				console.log(department.value)
+				if (department.value === this.state.category) {
+					return (<option value={department.value} selected>{department.value}</option>)
+				} else
+					return (<option value={department.value}>{department.value}</option>)
+			})
+			this.setState({
+				categories: dropDowns
+			})
+		})
 	}
 
 	changeHeight(e) {
@@ -55,6 +94,7 @@ class Add extends Component {
 
 	handleOptionChange(event) {
 		this.setState({ selectedOption: event.target.name })
+		this.setState({ addedItem: event.target.name })
 	}
 
 	submitHandler(event) {
@@ -99,11 +139,10 @@ class Add extends Component {
 		return ( 
 		<div className = "float-center" >
 			<div className = "container" >
-				<div className = "row float-center col-12" >
-					<div className = "col-sm-6 col-sm-offset-3" >
-						<div className = "col-sm-3" >
-							<div className = "form-check" >
-								<label className = "form-check-label" >
+				<div className = "row col-12" >
+					<h2>Add a {this.state.addedItem}</h2>
+							<div className = "form-check">
+								<label className = "form-check-label">
 									<input type = "radio"
 										className = "form-check-input"
 										name = "Pallet"
@@ -113,9 +152,7 @@ class Add extends Component {
 									Pallet 
 								</label > 
 								</div> 
-							</div >
 
-					<div className = "col-sm-3" >
 						<div className = "form-check" >
 							<label className = "form-check-label" >
 								<input type = "radio"
@@ -127,13 +164,11 @@ class Add extends Component {
 								Master Bay 
 								</label > 
 							</div> 
-						</div > 
-					</div> 
 			</div >
 
 			<div >
 				<form onSubmit = { this.submitHandler } >
-					<label >
+					<label>
 						Height:
 						<input type = "text" onChange = {this.changeHeight}
 							name = "height" />
@@ -159,21 +194,15 @@ class Add extends Component {
 							<label>
 								Department:
 								<select name="department" onChange = {this.changeDepartment}>
-									<option value="D1">D1</option>
-									<option value="D2">D2</option>
-									<option value="D3">D3</option>
-									<option value="D4">D4</option>
+									{this.state.deps.map(x => <option>{x}</option>)}
 								</select>
 							</label>
 							<br />
-		
+
 							<label>
 								Class:
 								<select name="class" onChange = {this.changeClass}>
-									<option value="Cl1">Cl1</option>
-									<option value="Cl2">Cl2</option>
-									<option value="Cl3">Cl3</option>
-									<option value="Cl4">Cl4</option>
+									{this.state.classes.map(x => <option>{x}</option>)}
 								</select>
 							</label>
 							<br />
@@ -181,10 +210,7 @@ class Add extends Component {
 							<label>
 								Category:
 								<select name="category" onChange = {this.changeCategory}>
-									<option value="Ca1">Ca1</option>
-									<option value="Ca2">Ca2</option>
-									<option value="Ca3">Ca3</option>
-									<option value="Ca4">Ca4</option>
+									{this.state.categories.map(x => <option>{x}</option>)}
 								</select>
 							</label>
 							<br />
