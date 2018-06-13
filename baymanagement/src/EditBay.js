@@ -35,7 +35,6 @@ class EditBay extends Component {
 				console.log(res.data);
 				this.setState({
 					masterBayInfo: res.data,
-					id: bId,
 
 				});
 			})
@@ -60,18 +59,6 @@ class EditBay extends Component {
 	handleChangeLength = () => (event) => {
 
 
-		// this.state.masterBayInfo.width = event.target.value
-		// this.setState({
-		// 	masterBayInfo: {
-		// 		lenght: event.target.value
-		// 	}
-		// })
-
-		// let newMasterBayInfo = masterBayInfo;
-		// newMasterBayInfo.length = event.target.value;
-		// this.setState({
-		// 	masterBayInfo: newMasterBayInfo
-		// })
 
 		let newMasterBayInfo = Object.assign({}, this.state.masterBayInfo)
 		newMasterBayInfo.length = Number(event.target.value)
@@ -83,9 +70,9 @@ class EditBay extends Component {
 
 		// const pId = event.target[0].value
 		event.preventDefault();
-		console.log("hellooooo", this.state.id)
+		console.log(this.state.masterBayInfo)
 		axios.post(`http://localhost:8080/editMasterBay`, {
-			id: this.state.masterBayInfo.id,
+			id: document.getElementById('id').value,
 			width: this.state.masterBayInfo.width,
 			height: this.state.masterBayInfo.height,
 			length: this.state.masterBayInfo.length,
@@ -94,8 +81,10 @@ class EditBay extends Component {
 		})
 			.then(res => {
 				console.log(res.data);
+				let newState = Object.assign({},this.state.masterBayInfo);
+				newState.message = res.data.message
 				this.setState({
-					masterBayInfo: res.data
+					masterBayInfo: newState
 				});
 				console.log("called post");
 				console.log(this.state.masterBayInfo);
@@ -130,14 +119,19 @@ class EditBay extends Component {
 			<BrowserRouter>
 				<div>
 
-					<h1>{this.state.masterBayInfo.message}</h1>
 
+					<h1>Edit MasterBay </h1>
 					<form className="bar" onSubmit={this.submitHandler}>
 						<label>
 							ID: MB
+
+
+			<input type="number" name="id" id='id' value={this.state.masterBayInfo.id} disabled />
+
 						<input type="number" name="id" 
 						value={this.state.masterBayInfo.id} disabled 
 						/>
+
 						</label>
 						<br />
 
@@ -164,6 +158,8 @@ class EditBay extends Component {
 			<input type="number" name="length" value={this.state.masterBayInfo.length} onChange={this.handleChangeLength()} />
 						</label>
 
+
+						<h3>{this.state.masterBayInfo.message}</h3>
 						<div className="row">
 							<button className="btn btn-primary" type="submit">Submit</button>
 						</div>
@@ -172,9 +168,6 @@ class EditBay extends Component {
 						<button className="btn btn-primary" type="submit" onClick={this.deleteHandler}>Delete</button>
 					</div>
 
-					<div className="row">
-						<button className="btn btn-primary" type="submit" onClick={this.ManageSubs}>Manage Sub Bays</button>
-					</div>
 
 
 				</div>
