@@ -27,7 +27,7 @@ class Add extends Component {
 
 	componentDidMount() {
 		// console.log("Mounted")
-		let departments = axios.get("http://localhost:8080/getDepartments").then((response) => {
+		let departments = axios.get("http://localhost:8081/getDepartments").then((response) => {
 			const dropDowns = response.data.map((department, index) => {
 				// console.log(department.value)
 				if (department.value === this.state.dep) {
@@ -40,7 +40,7 @@ class Add extends Component {
 			})
 		})
 
-		let classes = axios.get("http://localhost:8080/getClasses").then((response) => {
+		let classes = axios.get("http://localhost:8081/getClasses").then((response) => {
 			const dropDowns = response.data.map((department, index) => {
 				console.log(department.value)
 				if (department.value === this.state.class) {
@@ -53,7 +53,7 @@ class Add extends Component {
 			})
 		})
 
-		let categories = axios.get("http://localhost:8080/getCategories").then((response) => {
+		let categories = axios.get("http://localhost:8081/getCategories").then((response) => {
 			const dropDowns = response.data.map((department, index) => {
 				console.log(department.value)
 				if (department.value === this.state.category) {
@@ -101,7 +101,7 @@ class Add extends Component {
 		event.preventDefault();
 		if (this.state.selectedOption === 'Pallet') {
 			console.log("dept: ", this.state.department)
-			axios.post(`http://localhost:8080/addPalette`, {
+			axios.post(`http://localhost:8081/addPalette`, {
 					height: this.state.height,
 					width: this.state.width,
 					length: this.state.length,
@@ -120,7 +120,7 @@ class Add extends Component {
 		}
 
 		else if (this.state.selectedOption === 'Master Bay') {
-			axios.post(`http://localhost:8080/addMasterBay`, {
+			axios.post(`http://localhost:8081/addMasterBay`, {
 					height: this.state.height,
 					width: this.state.width,
 					length: this.state.length,

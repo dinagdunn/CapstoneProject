@@ -33,7 +33,8 @@ class EditSubBay extends Component {
     subBay.dep = this.state.dep
     subBay.bayClass = this.state.class
     subBay.category = this.state.category;
-    axios.post("http://localhost:8080/editBay",subBay).then((response) =>{
+    subBay.palette = 0
+    axios.post("http://localhost:8081/editBay",subBay).then((response) =>{
         console.log(response);
         console.log(response.data.message)
         if(response.data.message === "Bay too wide"){
@@ -71,7 +72,7 @@ class EditSubBay extends Component {
         const pId = this.props.match.params.id;
         console.log(pId)
         this.props.history.push('/?msg=deleted')
-        axios.delete(`http://localhost:8080/deleteBay?id=${pId}`)
+        axios.delete(`http://localhost:8081/deleteBay?id=${pId}`)
     }
 
     changeValue(event,box){
@@ -86,7 +87,7 @@ class EditSubBay extends Component {
 
     componentWillMount(){
         
-        let departments = axios.get("http://localhost:8080/getDepartments").then((response)=>{
+        let departments = axios.get("http://localhost:8081/getDepartments").then((response)=>{
             const dropDowns = response.data.map((department,index)=>{
                 console.log(department.value)
                 if(department.value === this.state.dep){
@@ -99,7 +100,7 @@ class EditSubBay extends Component {
             })
         })  
 
-        let classes = axios.get("http://localhost:8080/getClasses").then((response)=>{
+        let classes = axios.get("http://localhost:8081/getClasses").then((response)=>{
             const dropDowns = response.data.map((department,index)=>{
                 console.log(department.value)
                 if(department.value === this.state.class){
@@ -112,7 +113,7 @@ class EditSubBay extends Component {
             })
         })  
 
-        let categories = axios.get("http://localhost:8080/getCategories").then((response)=>{
+        let categories = axios.get("http://localhost:8081/getCategories").then((response)=>{
             const dropDowns = response.data.map((department,index)=>{
                 console.log(department.value)
                 if(department.value === this.state.category){

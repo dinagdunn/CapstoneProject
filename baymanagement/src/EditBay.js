@@ -27,7 +27,7 @@ class EditBay extends Component {
 		this.setState({id: parseInt(bId)})
 
 
-		axios.get(`http://localhost:8080/getMasterbayById?id=${bId}`)
+		axios.get(`http://localhost:8081/getMasterbayById?id=${bId}`)
 			.then(res => {
 				console.log(res.data);
 				this.setState({
@@ -60,7 +60,7 @@ class EditBay extends Component {
 		//push new data to db !!!
 		event.preventDefault();
 		console.log(this.state.masterBayInfo)
-		axios.post(`http://localhost:8080/editMasterBay`, {
+		axios.post(`http://localhost:8081/editMasterBay`, {
 			id: this.state.masterBayInfo.id,
 			width: this.state.masterBayInfo.width,
 			height: this.state.masterBayInfo.height,
@@ -84,7 +84,7 @@ class EditBay extends Component {
 		let bId = this.props.match.params.id;
 		bId = parseInt(bId)
 		console.log(bId, "delete");
-		axios.delete(`http://localhost:8080/deleteMasterBay?id=${bId}`)
+		axios.delete(`http://localhost:8081/deleteMasterBay?id=${bId}`)
 		this.props.history.push('/?msg=deleted')
 	}
 
@@ -144,11 +144,6 @@ class EditBay extends Component {
 					</div>
 
 					<div className="row">
-						<button className="btn btn-primary" 
-							type="submit" 
-							onClick={this.ManageSubs}>
-							Manage Sub Bays
-						</button>
 					</div>
 				</div>
 			// </BrowserRouter>

@@ -24,7 +24,7 @@ class PBLink extends Component {
 
 	  componentWillMount() {
 	  	let pId = this.props.match.params.id;
-	  	let bays = axios.get(`http://localhost:8080/getEmptyBays?id=${pId}`).then((response)=>{
+	  	let bays = axios.get(`http://localhost:8081/getEmptyBays?id=${pId}`).then((response)=>{
 	  		console.log(response.data)
 	  		const bayList = response.data.map((bay)=>{
 	  			return (<div className="subBayDisplay" onClick={()=>this.bayClick(bay)}>
@@ -54,7 +54,7 @@ class PBLink extends Component {
 		palette.paletteClass = this.state.class
 		palette.category = this.state.category;
 		palette.bay = bay.id
-		axios.post(`http://localhost:8080/editPalette`,palette).then((message)=>{
+		axios.post(`http://localhost:8081/editPalette`,palette).then((message)=>{
 		this.props.history.push({
 			pathname: `/load/message`,
 			state: {message: "Palette was associated with the bay successfully!"}
