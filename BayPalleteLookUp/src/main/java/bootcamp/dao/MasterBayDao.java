@@ -1,10 +1,14 @@
 package bootcamp.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
 import bootcamp.model.Bay;
@@ -19,7 +23,7 @@ public class MasterBayDao {
 	private final String GET_MASTERBAY_LIST = "SELECT * FROM masterbay;";
 	private final String GET_BAY_LIST = "SELECT * FROM Bay WHERE masterbay =?;";
 	private final String GET_MASTERBAY = "SELECT * FROM masterbay WHERE id = ?;";
-	private final String ADD_MASTERBAY = "INSERT INTO masterbay (id, width, height, length) VALUES (?, ?, ?, ?);";
+	private final String ADD_MASTERBAY = "INSERT INTO masterbay (width, height, length) VALUES (?, ?, ?);";
 	private final String DELETE_MASTERBAY = "DELETE FROM masterbay WHERE id = ?";
 	private final String EDIT_MASTERBAY = "UPDATE masterbay SET width =?, height=?, length=? WHERE id = ?; ";
 	
@@ -35,9 +39,19 @@ public class MasterBayDao {
 		return new MasterBay(masterBay.getId(), masterBay.getWidth(), masterBay.getHeight(), masterBay.getLength(), bayList);
 	}
 	
-	public void addMasterBay(MasterBay masterBay) {
-		Object[] args = {masterBay.getId(), masterBay.getWidth(), masterBay.getHeight(), masterBay.getLength()};
-		jdbctemplate.update(ADD_MASTERBAY, args);
+	public int addMasterBay(MasterBay masterBay) {
+	      KeyHolder keyHolder = new GeneratedKeyHolder();
+	      jdbctemplate.update(
+	              connection -> {
+	                  PreparedStatement ps = connection.prepareStatement(ADD_MASTERBAY, Statement.RETURN_GENERATED_KEYS);
+	                  ps.setLong(1, masterBay.getWidth());
+	                  ps.setLong(2, masterBay.getHeight());
+	                  ps.setLong(3, masterBay.getLength());
+	                  return ps;
+	              }, keyHolder);
+
+	      Number key = keyHolder.getKey();
+	      return key.intValue();
 	}
 	
 	public void deleteMasterBay(int id) {

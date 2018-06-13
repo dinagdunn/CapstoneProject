@@ -31,8 +31,8 @@ public class MasterBayService {
 	  return masterBayDao.getMasterbayById(id);
   }
   
-  public void addMasterBay(MasterBay masterBay) {
-	  masterBayDao.addMasterBay(masterBay);
+  public int addMasterBay(MasterBay masterBay) {
+	  return masterBayDao.addMasterBay(masterBay);
   }
   
   public Message deleteMasterBay(int id) {
