@@ -62,9 +62,10 @@ class LoadBay extends Component {
 		bId = parseInt(bId)
 		this.props.history.push(`/edit/mb${bId}`)
 	}
-
+//need to have an error for ID does not exist
 
 	render() {
+		
 
 		return (
 			<div className="">
@@ -80,8 +81,13 @@ class LoadBay extends Component {
 						<button className="btn btn-primary" type="submit">Edit MasterBay</button>
 					</form>
 				</div>
+
+				<div className="col-sm-12">
+					<LoadSubBay history={this.props.history} passedId={this.props.match.params.id} />
+
 				<div className="col-sm-12" >
 					<LoadSubBay passedId={this.props.match.params.id} />
+
 				</div>
 
 
