@@ -21,7 +21,7 @@ class LoadBay extends Component {
 		let bId = this.props.match.params.id;
 		console.log(bId)
 		bId = parseInt(bId)
-		axios.get(`http://localhost:8080/getMasterbayById?id=${bId}`)
+		axios.get(`http://localhost:8081/getMasterbayById?id=${bId}`)
 			.then(res => {
 				this.setState({
 					masterBayInfo: res.data,

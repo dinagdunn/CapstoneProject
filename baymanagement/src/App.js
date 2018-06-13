@@ -10,6 +10,8 @@ import EditBay from './EditBay.js'
 import PBLink from './PBLink.js'
 import Message from './Message';
 import EditSubBay from './EditSubBay'
+import { Carousel } from 'react-responsive-carousel';
+
 
 class App extends Component {
 
@@ -19,53 +21,41 @@ class App extends Component {
   }
 
   render() {
+
     return (
 
       <div className="App">
-      <div className="routed">
-      <header className="App-header">
+        <div className="routed">
+          <header className="App-header">
     
-    <Link to="/"><h1 className="App-title">Overhead Bay Manager</h1></Link>
-    <div className="container">
-    <div className="row">
+          <Link to="/"><h1 className="App-title">Overhead Bay Manager</h1></Link>
+          <div className="container">
+            <div className="row">
 
-    <switch>
-    <div className="col-sm-6 col-sm-offset-3">
-      <div className="col-xs-6 headerButton"><Link to="/search">Search</Link></div>
-      {/* <div className="col-xs-4 logo"><img src={require('./images/logo.jpg')} /></div> */}
-      <div className="col-xs-6 headerButton"><Link to="/add">Add</Link></div>
-    </div>
-    </switch>
+              <switch>
+                <div className="col-sm-6 col-sm-offset-3">
+                  <div className="col-xs-6 headerButton"><Link to="/search">Search</Link></div>
+                  <div className="col-xs-6 headerButton"><Link to="/add">Add</Link></div>
+                </div>
+                
+              </switch>
+            </div>
+          </div>
+          </header>
 
-    </div>
-    </div>
-
-    </header>
-
-
-    <Route path="/add" component={ Add } />
-    <Route exact path="/search" component={ Search } />
-    <Route path="/load/P:id" component={ LoadPallet } />
-    <Route path="/load/MB:id" component={ LoadBay } />
-    <Route path="/edit/P:id" component={ EditPallet } />
-    <Route path="/edit/MB:id" component={ EditBay } />
-    <Route path="/pblink/P:id" component={ PBLink } />
-    <Route exact path="/load/message" component={Message}/>  
-    <Route exact path="/editSubBay/SB:id" component={EditSubBay}/>
-  
-
-    <Route exact path ="/" render={() =>
-      <p className="App-intro">
-      Input P#### to search for a PalletID
-      <br/><br/>
-      Input MB#### for a MasterBayID
-      </p>
-    } />
-
-    </div>
-    </div>
-    );
-  }
+          <Route path="/add" component={ Add } />
+          <Route exact path="/search" component={ Search } />
+          <Route path="/load/P:id" component={ LoadPallet } />
+          <Route path="/load/MB:id" component={ LoadBay } />
+          <Route path="/edit/P:id" component={ EditPallet } />
+          <Route path="/edit/MB:id" component={ EditBay } />
+          <Route path="/pblink/P:id" component={ PBLink } />
+          <Route exact path="/load/message" component={Message} />  
+          <Route exact path="/editSubBay/SB:id" component={EditSubBay} /> 
+        </div> 
+      </div>
+    )
+  }  
 }
 
 export default App;

@@ -28,7 +28,7 @@ class EditBay extends Component {
 		this.setState({id: parseInt(bId)})
 
 
-		axios.get(`http://localhost:8080/getMasterbayById?id=${bId}`)
+		axios.get(`http://localhost:8081/getMasterbayById?id=${bId}`)
 			.then(res => {
 				console.log(res.data);
 				this.setState({
@@ -61,7 +61,7 @@ class EditBay extends Component {
 		//push new data to db !!!
 		event.preventDefault();
 		console.log(this.state.masterBayInfo)
-		axios.post(`http://localhost:8080/editMasterBay`, {
+		axios.post(`http://localhost:8081/editMasterBay`, {
 			id: this.state.masterBayInfo.id,
 			width: this.state.masterBayInfo.width,
 			height: this.state.masterBayInfo.height,
@@ -103,7 +103,7 @@ class EditBay extends Component {
 			  swal(`MasterBay ${bId} has been deleted.`, {
 				icon: "success",
 			  });
-			  	axios.delete(`http://localhost:8080/deleteMasterBay?id=${bId}`)
+			  	axios.delete(`http://localhost:8081/deleteMasterBay?id=${bId}`)
 				this.props.history.push('/')
 			} else {
 			  swal("Delete cancelled");
@@ -123,26 +123,22 @@ class EditBay extends Component {
 
 	render() {
 		return (
-			// <BrowserRouter>
 				<div>
-
-					
 					<form className="bar" onSubmit={this.submitHandler}>
 						<label>
-							ID: MB
+						<h2>Editing MB{this.state.masterBayInfo.id}</h2>
 							<input type="number" name="id" id="id"
 								value={this.state.masterBayInfo.id} disabled />
 						</label>
 						<br />
-
-						<label>
+						{/* <label>
 							Height:
-						<input type="number" name="height" 
-						value={this.state.masterBayInfo.height} 
-						onChange={this.handleChangeHeight()} />
-
-					<h2>Editing MB{this.state.masterBayInfo.id}</h2>
-					<form className="bar" onSubmit={this.submitHandler}>
+							<input type="number" name="height" 
+							value={this.state.masterBayInfo.height} 
+							onChange={this.handleChangeHeight()} />
+							
+							<form className="bar" onSubmit={this.submitHandler} />
+						</label> */}
 						<label>
 							Length:
 							<input type="text" name="length" 
@@ -162,10 +158,10 @@ class EditBay extends Component {
 
 						<label>
 
-							Length:
+							{/* Length:
 							<input type="number" name="length" 
 								value={this.state.masterBayInfo.length} 
-								onChange={this.handleChangeLength()} />
+								onChange={this.handleChangeLength()} /> */}
 
 							Height:
 						<input type="text" name="height" 
@@ -191,16 +187,7 @@ class EditBay extends Component {
 							Delete
 						</button>
 					</div>
-
-					{/* <div className="row">
-						<button className="btn btn-primary custom-btn" 
-							type="submit" 
-							onClick={this.ManageSubs}>
-							Manage Sub Bays
-						</button>
-					</div> */}
 				</div>
-			// </BrowserRouter>
 		)
 	}
 }
