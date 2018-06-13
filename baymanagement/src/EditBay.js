@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 import axios from 'axios'
 import swal from 'sweetalert'
@@ -18,7 +17,7 @@ class EditBay extends Component {
 				id: 0,
 				width: 0,
 				height: 0,
-				length: 0,
+				length: 0
 			}
 		}
 	}
@@ -26,14 +25,14 @@ class EditBay extends Component {
 
 	componentDidMount() {
 		let bId = this.props.match.params.id;
-		bId = parseInt(bId)
+		this.setState({id: parseInt(bId)})
+
 
 		axios.get(`http://localhost:8080/getMasterbayById?id=${bId}`)
 			.then(res => {
 				console.log(res.data);
 				this.setState({
 					masterBayInfo: res.data,
-
 				});
 			})
 	}
@@ -63,7 +62,7 @@ class EditBay extends Component {
 		event.preventDefault();
 		console.log(this.state.masterBayInfo)
 		axios.post(`http://localhost:8080/editMasterBay`, {
-			id: document.getElementById('id').value,
+			id: this.state.masterBayInfo.id,
 			width: this.state.masterBayInfo.width,
 			height: this.state.masterBayInfo.height,
 			length: this.state.masterBayInfo.length,
@@ -124,8 +123,9 @@ class EditBay extends Component {
 
 	render() {
 		return (
-			<BrowserRouter>
+			// <BrowserRouter>
 				<div>
+
 					
 					<form className="bar" onSubmit={this.submitHandler}>
 						<label>
@@ -140,24 +140,40 @@ class EditBay extends Component {
 						<input type="number" name="height" 
 						value={this.state.masterBayInfo.height} 
 						onChange={this.handleChangeHeight()} />
+
+					<h2>Editing MB{this.state.masterBayInfo.id}</h2>
+					<form className="bar" onSubmit={this.submitHandler}>
+						<label>
+							Length:
+							<input type="text" name="length" 
+								value={this.state.masterBayInfo.length} 
+								onChange={this.handleChangeLength()} />
+
 						</label>
 						<br />
 
 						<label>
 							Width:
-							<input type="number" name="width" 
+							<input type="text" name="width" 
 								value={this.state.masterBayInfo.width} 
 								onChange={this.handleChangeWidth()} />
 						</label>
 						<br />
 
 						<label>
+
 							Length:
 							<input type="number" name="length" 
 								value={this.state.masterBayInfo.length} 
 								onChange={this.handleChangeLength()} />
-						</label>
 
+							Height:
+						<input type="text" name="height" 
+						value={this.state.masterBayInfo.height} 
+						onChange={this.handleChangeHeight()} />
+
+						</label>
+						<br />
 
 					
 						<div className="row ">
@@ -167,6 +183,7 @@ class EditBay extends Component {
 							</button>
 						</div>
 					</form>
+
 					<div>
 						<button className="btn btn-primary custom-btn" 
 							type="submit" 
@@ -183,7 +200,7 @@ class EditBay extends Component {
 						</button>
 					</div> */}
 				</div>
-			</BrowserRouter>
+			// </BrowserRouter>
 		)
 	}
 }
