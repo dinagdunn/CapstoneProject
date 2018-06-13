@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 import axios from 'axios'
+import EditSubBay from './EditSubBay.js'
 
 
 class LoadSubBay extends Component {
@@ -10,12 +11,23 @@ class LoadSubBay extends Component {
         super(props);
         this.clickHandler = this.clickHandler.bind(this)
         // this.subBayList = this.subBayList.bind(this)
+        this.editBay = this.editBay.bind(this)
 
 
         this.state = {
             masterBayInfo: {
 
                 bayList: [{}]
+            },
+
+            subBayInfo: {
+                id: 0,
+                width: 0,
+                height: 0,
+                length: 0,
+                dep: "",
+                bayClass: "",
+                category: ""
             }
         }
 
@@ -46,6 +58,23 @@ class LoadSubBay extends Component {
         this.props.history.push(`/edit/mb${bId}`)
     }
 
+    editBay(sB, e) {
+
+        console.log({ sB });
+
+        this.props.history.push({
+            pathname: `/editSubBay/SB${sB.id}`,
+            state: { subBay: sB }
+        })
+    }
+
+pText(sB) {
+    let pText = `Palette ID${sB.palette} associated with subBay`
+    if(sB.palette === 0) {
+        pText=`No associated Palettes`
+    }
+    return pText
+}
 
     //add an onClick for each of these divs, and add a Flip feature 
     render() {
@@ -55,29 +84,34 @@ class LoadSubBay extends Component {
         }
 
         if (this.state.masterBayInfo.bayList) {
+
+
+
             return (
                 <div>
                     <h3>Associated SubBays</h3>
-                    {this.state.masterBayInfo.bayList.map((sB =>
-                        <div className="col-sm-4 subBayDisplay">
-                            <p>SubBay ID: {sB.id}</p>
-                            <p>SubBay Width: {sB.width}</p>
-                            <p>SubBay Height: {sB.height}</p>
-                            <p>SubBay Length: {sB.length}</p>
-                            <p>SubBay Dept: {sB.dep}</p>
-                            <p>SubBay BayClass: {sB.bayClass}</p>
-                            <p>SubBay Category: {sB.category}</p>
-                            <p>Palette ID{sB.palette} associated with subBay</p>
-                        </div>
-                    ))}
+                    {this.state.masterBayInfo.bayList.map((sB, i) => {
+                        return (
+
+                            <div key={i} className="col-sm-3 subBayDisplay">
+                                <div onClick={(e) => { this.editBay(sB, e) }}>
+                                    <p>SubBay ID: {sB.id}</p>
+                                    <p>SubBay Width: {sB.width}</p>
+                                    <p>SubBay Height: {sB.height}</p>
+                                    <p>SubBay Length: {sB.length}</p>
+                                    <p>SubBay Dept: {sB.dep}</p>
+                                    <p>SubBay BayClass: {sB.bayClass}</p>
+                                    <p>SubBay Category: {sB.category}</p>
+                                    <p>{this.pText(sB)}</p>
+                                </div>
+                            </div>
+                        )
+                    })}
                 </div>
-
             )
-
-
         }
     }
 }
 
 
-export default LoadSubBay
+        export default LoadSubBay
