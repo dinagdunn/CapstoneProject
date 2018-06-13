@@ -41,6 +41,7 @@ public class PaletteController {
     	paletteService.deletePalette(id);
     }
     
+	@CrossOrigin
     @RequestMapping(value = "/unlinkPalette", method = RequestMethod.GET)
     public void unlinkPalette(@RequestParam("id") int id) {
     	paletteService.unlinkPalette(id);

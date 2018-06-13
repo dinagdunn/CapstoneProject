@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-
 import bootcamp.model.Bay;
+import bootcamp.model.Id;
 import bootcamp.model.MasterBay;
 
 @Component
@@ -19,9 +19,11 @@ public class MasterBayDao {
 	private final String GET_MASTERBAY_LIST = "SELECT * FROM masterbay;";
 	private final String GET_BAY_LIST = "SELECT * FROM Bay WHERE masterbay =?;";
 	private final String GET_MASTERBAY = "SELECT * FROM masterbay WHERE id = ?;";
-	private final String ADD_MASTERBAY = "INSERT INTO masterbay (id, width, height, length) VALUES (?, ?, ?, ?);";
+	private final String ADD_MASTERBAY = "INSERT INTO masterbay (width, height, length) VALUES (?, ?, ?);";
 	private final String DELETE_MASTERBAY = "DELETE FROM masterbay WHERE id = ?";
 	private final String EDIT_MASTERBAY = "UPDATE masterbay SET width =?, height=?, length=? WHERE id = ?; ";
+	private final String GET_LAST_ID= "SELECT LAST_INSERT_ID() as id;";
+	
 	
 	public List<MasterBay> getMasterBayList() {
 		return jdbctemplate.query(GET_MASTERBAY_LIST, new BeanPropertyRowMapper<>(MasterBay.class));
@@ -35,9 +37,11 @@ public class MasterBayDao {
 		return new MasterBay(masterBay.getId(), masterBay.getWidth(), masterBay.getHeight(), masterBay.getLength(), bayList);
 	}
 	
-	public void addMasterBay(MasterBay masterBay) {
-		Object[] args = {masterBay.getId(), masterBay.getWidth(), masterBay.getHeight(), masterBay.getLength()};
+	public Id addMasterBay(MasterBay masterBay) {
+		Object[] args = { masterBay.getWidth(), masterBay.getHeight(), masterBay.getLength()};
 		jdbctemplate.update(ADD_MASTERBAY, args);
+		List<Id> idList = jdbctemplate.query(GET_LAST_ID, args,new BeanPropertyRowMapper<>(Id.class));
+		return idList.get(0);
 	}
 	
 	public void deleteMasterBay(int id) {
