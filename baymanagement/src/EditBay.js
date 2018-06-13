@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 import axios from 'axios'
+import swal from 'sweetalert'
 
 class EditBay extends Component {
 	constructor() {
@@ -71,6 +72,7 @@ class EditBay extends Component {
 				console.log(res.data);
 				let newState = Object.assign({},this.state.masterBayInfo);
 				newState.message = res.data.message
+				newState.message == "edit successful" ? swal(`${newState.message}`, "", "success") : swal(`${newState.message}`, "", "error")
 				this.setState({
 					masterBayInfo: newState
 				});
@@ -78,6 +80,10 @@ class EditBay extends Component {
 				console.log(this.state.masterBayInfo);
 			})
 		console.log("finished hitting post");
+
+		
+		
+
 	}
 
 	deleteHandler(event) {
@@ -85,8 +91,27 @@ class EditBay extends Component {
 		let bId = this.props.match.params.id;
 		bId = parseInt(bId)
 		console.log(bId, "delete");
-		axios.delete(`http://localhost:8080/deleteMasterBay?id=${bId}`)
-		this.props.history.push('/?msg=deleted')
+
+		  swal({
+			title: "Are you sure?",
+			text: `MasterBay ${bId} will be deleted!`,
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		  })
+		  .then((willDelete) => {
+			if (willDelete) {
+			  swal(`MasterBay ${bId} has been deleted.`, {
+				icon: "success",
+			  });
+			  	axios.delete(`http://localhost:8080/deleteMasterBay?id=${bId}`)
+				this.props.history.push('/')
+			} else {
+			  swal("Delete cancelled");
+			}
+		  });
+
+
 	}
 
 	addSubHandler(event) {
@@ -101,11 +126,11 @@ class EditBay extends Component {
 		return (
 			<BrowserRouter>
 				<div>
-					<h1>{this.state.masterBayInfo.message}</h1>
+					
 					<form className="bar" onSubmit={this.submitHandler}>
 						<label>
 							ID: MB
-							<input type="number" name="id" 
+							<input type="number" name="id" id="id"
 								value={this.state.masterBayInfo.id} disabled />
 						</label>
 						<br />
@@ -130,33 +155,33 @@ class EditBay extends Component {
 							Length:
 							<input type="number" name="length" 
 								value={this.state.masterBayInfo.length} 
-								onCgit hange={this.handleChangeLength()} />
+								onChange={this.handleChangeLength()} />
 						</label>
 
 
-						<h3>{this.state.masterBayInfo.message}</h3>
-						<div className="row">
-							<button className="btn btn-primary" 
+					
+						<div className="row ">
+							<button className="btn btn-primary custom-btn" 
 								type="submit">
 								Submit
 							</button>
 						</div>
 					</form>
 					<div>
-						<button className="btn btn-primary" 
+						<button className="btn btn-primary custom-btn" 
 							type="submit" 
 							onClick={this.deleteHandler}>
 							Delete
 						</button>
 					</div>
 
-					<div className="row">
-						<button className="btn btn-primary" 
+					{/* <div className="row">
+						<button className="btn btn-primary custom-btn" 
 							type="submit" 
 							onClick={this.ManageSubs}>
 							Manage Sub Bays
 						</button>
-					</div>
+					</div> */}
 				</div>
 			</BrowserRouter>
 		)

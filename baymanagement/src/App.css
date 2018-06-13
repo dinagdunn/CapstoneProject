@@ -1,9 +1,19 @@
+/* *{
+  border: 1px solid black;
+} */
+
 .bar {
   text-align: center;
 }
 
 .headerButton {
   margin-top: 10px;
+}
+
+
+#searchBar{
+  width: 400px;
+  margin: 5px;
 }
 
 .headerButton a {
@@ -90,4 +100,23 @@ li{
 
 .subBayDisplay:hover {
   background-color: lightgreen;
+}
+input{
+  box-sizing: border-box;
+width: 100%;
+padding: 15px;
+border: 1px solid #d0d0d0;
+outline: none !important;
+background: none;
+font-size: 16px;
+margin-bottom: 5px;
+color: #666a73 !important;
+}
+
+.custom-btn{
+right: 0;
+border-radius: 5px;
+background-color: #00a3fa;
+color: #fff;
+
 }
