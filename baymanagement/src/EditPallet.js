@@ -53,7 +53,7 @@ class EditPallet extends Component {
 		    if(response.data.dimensionMatch === false){
 		    this.props.history.push({
 				pathname: `/load/message`,
-				state: {message: "Edit unsuccessful, the bay that is associated with this palette is smaller!"}
+				state: {message: "Edit unsuccessful, the bay that is associated with this palette is too small!"}
 			})
 			window.setTimeout(()=>
 				this.props.history.push({
@@ -95,7 +95,6 @@ class EditPallet extends Component {
 		console.log(stateChange[box]);
 		this.setState(stateChange);
 	}
-
 
 	componentWillMount() {
 		let departments = axios.get("http://localhost:8080/getDepartments").then((response) => {
@@ -144,7 +143,6 @@ class EditPallet extends Component {
 		return (
 			<BrowserRouter>
 				<div>
-
 					<h4>Palette: P{this.props.location.state.paletteInfo.id}</h4>
 					<form id="editPalette" name="editPalette" >
 						<label>

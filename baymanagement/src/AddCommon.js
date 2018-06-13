@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 
 class AddCommon extends Component {
@@ -23,35 +22,6 @@ class AddCommon extends Component {
 			<input type="text" name="depth" />
 				</label>
 				<br />
-
-				<label>
-					Department:
-			<select name="department">
-						<option value="D1">D1</option>
-					</select>
-				</label>
-				<br />
-
-				<label>
-					Class:
-			<select name="class">
-						<option value="Cl1">Cl1</option>
-					</select>
-				</label>
-				<br />
-
-				<label>
-					Category:
-			<select name="category">
-						<option value="Ca1">Ca1</option>
-					</select>
-				</label>
-				<br />
-
-				<button className="btn btn-primary" type="submit">
-					Submit
-                </button>
-				
 			</div>
 		)
 	}
