@@ -32,7 +32,6 @@ class EditBay extends Component {
 				console.log(res.data);
 				this.setState({
 					masterBayInfo: res.data,
-					id: bId,
 
 				});
 			})
@@ -61,17 +60,19 @@ class EditBay extends Component {
 	submitHandler(event) {
 		//push new data to db !!!
 		event.preventDefault();
-		console.log("hellooooo", this.state.id)
+		console.log(this.state.masterBayInfo)
 		axios.post(`http://localhost:8080/editMasterBay`, {
-			id: this.state.masterBayInfo.id,
+			id: document.getElementById('id').value,
 			width: this.state.masterBayInfo.width,
 			height: this.state.masterBayInfo.height,
 			length: this.state.masterBayInfo.length,
 		})
 			.then(res => {
 				console.log(res.data);
+				let newState = Object.assign({},this.state.masterBayInfo);
+				newState.message = res.data.message
 				this.setState({
-					masterBayInfo: res.data
+					masterBayInfo: newState
 				});
 				console.log("called post");
 				console.log(this.state.masterBayInfo);
@@ -132,6 +133,8 @@ class EditBay extends Component {
 								onChange={this.handleChangeLength()} />
 						</label>
 
+
+						<h3>{this.state.masterBayInfo.message}</h3>
 						<div className="row">
 							<button className="btn btn-primary" 
 								type="submit">
