@@ -19,8 +19,8 @@ public class PaletteController {
 	
 	@CrossOrigin
     @RequestMapping(value = "/addPalette", method = RequestMethod.POST)
-    public void addPalette(@RequestBody Palette palette) {
-    	paletteService.addPalette(palette);
+    public int addPalette(@RequestBody Palette palette) { 
+		return paletteService.addPalette(palette);
     }
 	
 	@CrossOrigin

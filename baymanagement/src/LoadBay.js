@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 import axios from 'axios'
 import LoadSubBay from "./LoadSubBay.js"
@@ -13,10 +12,6 @@ class LoadBay extends Component {
 
 		this.state = {
 			masterBayInfo: {
-				// id: 0,
-				// width: 0,
-				// height: 0,
-				// length: 0,
 				bayList: [{}]
 			}
 		}
@@ -50,7 +45,6 @@ class LoadBay extends Component {
 
 		return (
 			<div className="">
-
 				<p>MasterBay ID: {this.state.masterBayInfo.id}</p>
 				<p>Master Bay dimensions: </p>
 				<p>Width: {this.state.masterBayInfo.width}</p>

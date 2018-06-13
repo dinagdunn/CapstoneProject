@@ -18,8 +18,8 @@ public class PaletteService {
 	@Autowired 
 	BayDao bayDao;
 		
-    public void addPalette(Palette palette) {
-    	paletteDao.addPalette(palette);
+    public int addPalette(Palette palette) {
+		return paletteDao.addPalette(palette);
     }
     
     public Palette getPaletteById(int id) {

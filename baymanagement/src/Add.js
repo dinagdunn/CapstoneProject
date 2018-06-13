@@ -10,9 +10,9 @@ class Add extends Component {
 			height: '',
 			width: '',
 			length: '',
-			department: '',
-			class: '',
-			category: '',
+			department: 'D1',
+			class: 'Cl1',
+			category: 'Ca1',
 		}
 		this.changeHeight = this.changeHeight.bind(this)
 		this.changeWidth = this.changeWidth.bind(this)
@@ -59,15 +59,16 @@ class Add extends Component {
 
 	submitHandler(event) {
 		event.preventDefault();
-		// console.log("yo yo yo")
 		if (this.state.selectedOption === 'Pallet') {
-			axios.post(`http://localhost:8080/addPallet`, {
+			console.log("dept: ", this.state.department)
+			axios.post(`http://localhost:8080/addPalette`, {
 					height: this.state.height,
 					width: this.state.width,
 					length: this.state.length,
-					department: this.state.department,
-					class: this.state.class,
-					category: this.state.category
+					dep: this.state.department,
+					paletteClass: this.state.class,
+					category: this.state.category,
+					bay: 0
 				})
 				.then((response) => {
 					console.log("Pallet ID: ", response.data)
@@ -159,6 +160,9 @@ class Add extends Component {
 								Department:
 								<select name="department" onChange = {this.changeDepartment}>
 									<option value="D1">D1</option>
+									<option value="D2">D2</option>
+									<option value="D3">D3</option>
+									<option value="D4">D4</option>
 								</select>
 							</label>
 							<br />
@@ -167,6 +171,9 @@ class Add extends Component {
 								Class:
 								<select name="class" onChange = {this.changeClass}>
 									<option value="Cl1">Cl1</option>
+									<option value="Cl2">Cl2</option>
+									<option value="Cl3">Cl3</option>
+									<option value="Cl4">Cl4</option>
 								</select>
 							</label>
 							<br />
@@ -175,6 +182,9 @@ class Add extends Component {
 								Category:
 								<select name="category" onChange = {this.changeCategory}>
 									<option value="Ca1">Ca1</option>
+									<option value="Ca2">Ca2</option>
+									<option value="Ca3">Ca3</option>
+									<option value="Ca4">Ca4</option>
 								</select>
 							</label>
 							<br />
@@ -182,7 +192,7 @@ class Add extends Component {
 						}
 
 					<button className = "btn btn-primary"
-						type = "submit" >
+						type = "submit">
 						Submit 
 					</button> 					
 				</form > 

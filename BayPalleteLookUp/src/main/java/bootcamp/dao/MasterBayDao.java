@@ -11,7 +11,6 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 import bootcamp.model.Bay;
-import bootcamp.model.Id;
 import bootcamp.model.MasterBay;
 
 @Component
@@ -26,8 +25,6 @@ public class MasterBayDao {
 	private final String ADD_MASTERBAY = "INSERT INTO masterbay (width, height, length) VALUES (?, ?, ?);";
 	private final String DELETE_MASTERBAY = "DELETE FROM masterbay WHERE id = ?";
 	private final String EDIT_MASTERBAY = "UPDATE masterbay SET width =?, height=?, length=? WHERE id = ?; ";
-	private final String GET_LAST_ID= "SELECT LAST_INSERT_ID() as id;";
-	
 	
 	public List<MasterBay> getMasterBayList() {
 		return jdbctemplate.query(GET_MASTERBAY_LIST, new BeanPropertyRowMapper<>(MasterBay.class));
