@@ -18,6 +18,8 @@ class EditSubBay extends Component {
             dep:this.props.location.state.subBayInfo.dep,
             class:this.props.location.state.subBayInfo.bayClass,
             category:this.props.location.state.subBayInfo.category,
+            palette:this.props.location.state.subBayInfo.palette,
+            masterbay:this.props.location.state.subBayInfo.masterbay
            
         }
     }
@@ -33,7 +35,9 @@ class EditSubBay extends Component {
     subBay.dep = this.state.dep
     subBay.bayClass = this.state.class
     subBay.category = this.state.category;
-    subBay.palette = 0
+    subBay.masterbay = this.state.masterbay;
+    subBay.palette = this.state.palette
+    console.log(subBay)
     axios.post("http://localhost:8081/editBay",subBay).then((response) =>{
         console.log(response);
         console.log(response.data.message)
