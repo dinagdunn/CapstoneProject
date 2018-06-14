@@ -10,8 +10,7 @@ import EditBay from './EditBay.js'
 import PBLink from './PBLink.js'
 import Message from './Message';
 import EditSubBay from './EditSubBay'
-import { Carousel } from 'react-responsive-carousel';
-
+import AddSubBay from './AddSubBay'
 
 class App extends Component {
 
@@ -52,6 +51,8 @@ class App extends Component {
           <Route path="/pblink/P:id" component={ PBLink } />
           <Route exact path="/load/message" component={Message} />  
           <Route exact path="/editSubBay/SB:id" component={EditSubBay} /> 
+          <Route exact path="/addSubBay" component={AddSubBay} /> 
+
         </div> 
       </div>
     )

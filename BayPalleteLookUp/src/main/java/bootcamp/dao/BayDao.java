@@ -14,8 +14,8 @@ import bootcamp.model.Palette;
 public class BayDao {
 
 	private final String GET_BAY_BY_ID = "SELECT * FROM baymanagement.Bay WHERE id = ?;";
-	private final String ADD_BAY = "INSERT INTO Bay (id, width, length, height, dep, "
-			+ "bayClass, category, masterbay, palette) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) SELECT id from where LAST_INSERT_ID();";	
+	private final String ADD_BAY = "INSERT INTO Bay (width, length, height, dep, "
+			+ "bayClass, category, masterbay, palette) VALUES ( ?, ?, ?, ?, ?, ?, ?, 0)";	
 	private final String EDIT_BAY =  "UPDATE Bay SET width=?, length=?, height=?, dep=?, "
 			+ "bayClass=?, category=?, masterbay=?, palette=? WHERE id = ?;";
 	private final String DELETE_BAY ="DELETE FROM Bay where id=?;";
@@ -41,7 +41,7 @@ public class BayDao {
 	}
 	
 	public void addBay(Bay bay) {
-		java.lang.Object[] args = {bay.getId(), bay.getWidth(), bay.getLength(), bay.getHeight(), bay.getDep(), bay.getBayClass(), bay.getCategory(), bay.getMasterbay(), bay.getPalette()};
+		java.lang.Object[] args = {bay.getWidth(), bay.getLength(), bay.getHeight(), bay.getDep(), bay.getBayClass(), bay.getCategory(), bay.getMasterbay()};
 		jdbctemplate.update(ADD_BAY, args);
 	}
 	

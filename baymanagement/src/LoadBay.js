@@ -8,6 +8,7 @@ class LoadBay extends Component {
 	constructor(props) {
 		super(props);
 		this.clickHandler = this.clickHandler.bind(this)
+		this.addSubBay = this.addSubBay.bind(this)
 		// this.subBayList = this.subBayList.bind(this)
 
 		this.state = {
@@ -39,7 +40,14 @@ class LoadBay extends Component {
 		bId = parseInt(bId)
 		this.props.history.push(`/edit/mb${bId}`)
 	}
-//need to have an error for ID does not exist
+
+	addSubBay(event){
+		event.preventDefault();
+		this.props.history.push({
+			pathname: `/addSubBay`,
+			state: { masterBayInfo: this.state.masterBayInfo }
+		})
+	}
 
 	render() {
 		
@@ -52,7 +60,7 @@ class LoadBay extends Component {
 				<p>Height: {this.state.masterBayInfo.height}</p>
 				<p>Length:  {this.state.masterBayInfo.length}</p>
 				<div className="col-sm-12">
-					<form onSubmit={this.clickHandler} className="bar">
+					<form onClick={this.clickHandler} className="bar">
 						<button className="btn btn-primary" type="submit">Edit MasterBay</button>
 					</form>
 				</div>
@@ -60,7 +68,11 @@ class LoadBay extends Component {
 				<div className="col-sm-12">
 					<LoadSubBay history={this.props.history} passedId={this.props.match.params.id} />
 				</div>
-
+				<div className="col-sm-12">
+					<form onClick={this.addSubBay} className="bar" >
+						<button className="btn btn-primary" type="submit">Add SubBay</button>
+					</form>
+				</div>
 				{/* <div className="col-sm-12" > */}
 			 	{/* <LoadSubBay passedId={this.props.match.params.id} /> */}
 				{/* </div> */}
