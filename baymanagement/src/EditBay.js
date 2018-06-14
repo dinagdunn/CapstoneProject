@@ -101,7 +101,7 @@ class EditBay extends Component {
 			  swal(`MasterBay ${bId} has been deleted`, {
 				icon: "success",
 			  });
-			  	  // axios.delete(`http://localhost:8081/deleteMasterBay?id=${bId}`)
+			  	  axios.delete(`http://localhost:8081/deleteMasterBay?id=${bId}`)
 		this.props.history.push('/')
 			} else {
 			  swal("Delete cancelled");
