@@ -34,7 +34,7 @@ class Search extends Component {
                         console.log("axios comes back with: ",res.data.id)
                         if (res.data.id === 0) {
                             //sweet alert about data not found
-                            console.log("not here for pallets")
+                            console.log("not here for masterbays")
                         } else {
                             this.props.history.push(`/load/${query}`)
                         }
