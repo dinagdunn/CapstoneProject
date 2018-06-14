@@ -45,21 +45,27 @@ class LoadBay extends Component {
 		
 
 		return (
-			<div>
+			<div class="loadData">
 				<h2>MasterBay ID: MB{this.state.masterBayInfo.id}</h2>
+		
 				<p>Master Bay dimensions: </p>
 				<p>Width: {this.state.masterBayInfo.width}</p>
 				<p>Height: {this.state.masterBayInfo.height}</p>
 				<p>Length:  {this.state.masterBayInfo.length}</p>
 				<div className="col-sm-12">
 					<form onSubmit={this.clickHandler} className="bar">
-						<button className="btn btn-primary" type="submit">Edit MasterBay</button>
+						<button className="btn btn-primary custom-btn" type="submit">Edit MasterBay</button>
 					</form>
 				</div>
 
-				<div className="col-sm-12">
+				<div className="col-sm-12 ">
+					
+			<div className="col-sm-12 text-center">
+			<br/>
 					<LoadSubBay history={this.props.history} passedId={this.props.match.params.id} />
+					</div>
 				</div>
+				
 
 				{/* <div className="col-sm-12" > */}
 			 	{/* <LoadSubBay passedId={this.props.match.params.id} /> */}

@@ -102,11 +102,11 @@ class EditBay extends Component {
 
 	render() {
 		return (
-				<div>
+				<div className="formStyle">
 					<form className="bar" onSubmit={this.submitHandler}>
 						<label>
-						<h2>Editing MB{this.state.masterBayInfo.id}</h2>
-							<input type="number" name="id" id="id"
+						<h2>Editing MasterBay {this.state.masterBayInfo.id}</h2>
+							<input type="number" name="id" id="id" className="id"
 								value={this.state.masterBayInfo.id} disabled />
 						</label>
 						<br />
@@ -120,7 +120,7 @@ class EditBay extends Component {
 						</label> */}
 						<label>
 							Length:
-							<input type="text" name="length" 
+							<input type="number" name="length" 
 								value={this.state.masterBayInfo.length} 
 								onChange={this.handleChangeLength()} />
 
@@ -129,7 +129,7 @@ class EditBay extends Component {
 
 						<label>
 							Width:
-							<input type="text" name="width" 
+							<input type="number" name="width" 
 								value={this.state.masterBayInfo.width} 
 								onChange={this.handleChangeWidth()} />
 						</label>
@@ -143,12 +143,12 @@ class EditBay extends Component {
 								onChange={this.handleChangeLength()} /> */}
 
 							Height:
-						<input type="text" name="height" 
+						<input type="number" name="height" 
 						value={this.state.masterBayInfo.height} 
 						onChange={this.handleChangeHeight()} />
 
 						</label>
-						<br />
+						<br /><br/>
 
 					
 						<div className="row ">
@@ -158,7 +158,7 @@ class EditBay extends Component {
 							</button>
 						</div>
 					</form>
-
+<br/>
 					<div>
 						<button className="btn btn-primary custom-btn" 
 							type="submit" 
