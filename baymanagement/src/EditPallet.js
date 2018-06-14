@@ -72,6 +72,20 @@ class EditPallet extends Component {
 		axios.delete(`http://localhost:8081/deletePalette?id=${pId}`)
 	}
 
+	changeWidth(event) {
+		this.setState({ width: event.target.value })
+		console.log("new width: ", this.state.width);
+	}
+
+	changeHeight(event) {
+		this.setState({ height: event.target.value })
+		console.log("new heigth: ", this.state.height)
+	}
+
+	changeLength(event) {
+		this.setState({ length: event.target.value })
+		console.log("new length: ", this.state.length)
+	}
 
 	changeValue(event,box){
 		// console.log(event.target)
@@ -127,11 +141,11 @@ class EditPallet extends Component {
 	render() {
 		return (
 				<div>
-					<h4>Palette: P{this.props.location.state.paletteInfo.id}</h4>
+					<h2>Editing Palette P{this.props.location.state.paletteInfo.id}</h2>
 					<form id="editPalette" name="editPalette" >
 						<label>
 							Length:
-							<input type="text" name="length" 
+							<input type="number" name="length" 
 							value={this.state.length} onChange={(e) => { 
 								this.changeLength(e, 'length') }} />
 						</label>
@@ -139,7 +153,7 @@ class EditPallet extends Component {
 
 						<label>
 							Width:
-							<input type="text" name="width" 
+							<input type="number" name="width" 
 							value={this.state.width} onChange={(e) => { 
 								this.changeWidth(e, 'width') }} />
 						</label>
@@ -147,7 +161,7 @@ class EditPallet extends Component {
 
 						<label>
 							Height:
-							<input type="text" name="height" 
+							<input type="number" name="height" 
 							value={this.state.height} onChange={(e) => { 
 								this.changeHeight(e, 'height') }} />
 						</label>

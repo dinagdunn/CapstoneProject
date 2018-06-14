@@ -139,9 +139,9 @@ class Add extends Component {
 					<div >
 						<form onSubmit={this.submitHandler} >
 							<label>
-								Height:
-						<input type="number" onChange={this.changeHeight}
-									name="height" />
+								Length:
+						<input type="number" onChange={this.changeLength}
+									name="length" />
 							</label>
 							<br />
 
@@ -153,9 +153,9 @@ class Add extends Component {
 							<br />
 
 							<label>
-								Length:
-						<input type="number" onChange={this.changeLength}
-									name="length" />
+								Height:
+						<input type="number" onChange={this.changeHeight}
+									name="height" />
 							</label>
 							<br />
 
