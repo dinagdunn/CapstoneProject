@@ -24,7 +24,7 @@ class Search extends Component {
                             console.log("not here for pallets")
                             swal({
                                 title: "Pallet Not Found",
-                                text: `Pallet ${query.toUpperCase()} not fount in database.`,
+                                text: `Pallet ${query.toUpperCase()} not found in database.`,
                                 icon: "warning",
                                 button: "OK"
                             })
@@ -44,7 +44,7 @@ class Search extends Component {
                             console.log("not here for masterbays")
                              swal({
                                 title: "Master Bay Not Found",
-                                text: `Master Bay ${query.toUpperCase()} not fount in database.`,
+                                text: `Master Bay ${query.toUpperCase()} not found in database.`,
                                 icon: "warning",
                                 button: "OK"
                             })
