@@ -66,15 +66,12 @@ class EditBay extends Component {
 			length: this.state.masterBayInfo.length,
 		})
 			.then(res => {
-				console.log(res.data);
-				let newState = Object.assign({},this.state.masterBayInfo);
-				newState.message = res.data.message
-				newState.message == "edit successful" ? swal(`${newState.message}`, "", "success") : swal(`${newState.message}`, "", "error")
-				this.setState({
-					masterBayInfo: newState
-				});
-				console.log("called post");
-				console.log(this.state.masterBayInfo);
+				swal({
+                    title: "Edit Successful",
+                    icon: "success",
+                    button: "OK"
+                })
+                this.props.history.push(`/load/MB${this.state.masterBayInfo.id}`)
 			})
 		console.log("finished hitting post");
 
@@ -101,7 +98,7 @@ class EditBay extends Component {
 			  swal(`MasterBay ${bId} has been deleted`, {
 				icon: "success",
 			  });
-			  	  // axios.delete(`http://localhost:8081/deleteMasterBay?id=${bId}`)
+			  	  axios.delete(`http://localhost:8081/deleteMasterBay?id=${bId}`)
 		this.props.history.push('/')
 			} else {
 			  swal("Delete cancelled");
