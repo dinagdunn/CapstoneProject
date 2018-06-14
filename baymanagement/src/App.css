@@ -1,9 +1,19 @@
+/* *{
+  border: 1px solid black;
+} */
+
 .bar {
   text-align: center;
 }
 
 .headerButton {
   margin-top: 10px;
+}
+
+
+#searchBar{
+  width: 400px;
+  margin: 5px;
 }
 
 .headerButton a {
@@ -77,11 +87,21 @@ p{
 }
 
 .subBayDisplay{
-  border: 1px solid black;
+  border: 1px solid gray;
+  border-radius: 4px;
   cursor: pointer;
   margin: 5px;
+  width: 24%;
+  box-sizing: border-box;
+  float: none;
+  display: inline-block; 
 }
 
+@media only screen and (max-width: 600px) {
+  .subBayDisplay {
+      width: 100%;
+  }
+}
 li{
   font-size: 2em;
   border: 1px solid black;

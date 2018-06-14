@@ -47,6 +47,7 @@ public class BayService {
     
     public Message editBay(Bay bay) {
     	int bayCurrentWidth =   bayDao.getBayById(bay.getId()).getWidth();
+    	System.out.println(bay.getMasterbay());
     	MasterBay masterBay = masterBayDao.getMasterbayById(bay.getMasterbay());
     	List<Bay> bayList = masterBay.getBayList();
     	int bayWidthSum=0;

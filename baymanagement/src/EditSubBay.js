@@ -17,6 +17,8 @@ class EditSubBay extends Component {
             dep:this.props.location.state.subBayInfo.dep,
             class:this.props.location.state.subBayInfo.bayClass,
             category:this.props.location.state.subBayInfo.category,
+            palette:this.props.location.state.subBayInfo.palette,
+            masterbay:this.props.location.state.subBayInfo.masterbay
            
         }
     }

@@ -63,7 +63,7 @@ class LoadSubBay extends Component {
 
         this.props.history.push({
             pathname: `/editSubBay/SB${sB.id}`,
-            state: { subBay: sB }
+            state: { subBayInfo: sB }
         })
     }
 
