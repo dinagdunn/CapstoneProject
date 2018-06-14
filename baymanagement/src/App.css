@@ -90,6 +90,7 @@ a:active {
 
 p{
   font-weight: bold;
+  font-size: 16px;
 }
 
 .subBayDisplay{
@@ -102,6 +103,7 @@ p{
   float: none;
   display: inline-block; 
   background-color: white;
+  padding-top: 7px;
 }
 
 @media only screen and (max-width: 600px) {

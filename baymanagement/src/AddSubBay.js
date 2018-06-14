@@ -114,21 +114,21 @@ class AddSubBay extends Component {
 					<form onSubmit = { this.submitHandler } >
 						<label>
 							Height:
-							<input type = "text" value={this.state.height}
+							<input type = "number" value={this.state.height}
 							name = "height" />
 						</label> 
 						<br />
 
 						<label>
 							Length:
-							<input type = "text" value={this.state.length}
+							<input type = "number" value={this.state.length}
 								name = "length" />
 						</label> 
 						<br /> 
 
 						<label>
 							Width:
-							<input type = "text" onChange = {this.changeWidth}
+							<input type = "number" onChange = {this.changeWidth}
 							name = "width" />
 						</label> 
 						<br />
@@ -157,7 +157,7 @@ class AddSubBay extends Component {
 					</label>
 					<br />
 					<h3>{this.state.tooWide}</h3>
-						<button className = "btn btn-primary"
+						<button className = "btn btn-primary custom-btn"
 							type = "submit">
 							Submit 
 						</button> 					

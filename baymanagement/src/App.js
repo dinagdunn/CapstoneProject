@@ -64,7 +64,7 @@ class App extends Component {
         </div> 
         <br/>
       <Route exact path="/" render={()=> 
-        <div className="col-sm-6 carousel box col-xs-3 col-md-offset-3" >
+        <div className="col-sm-6 carousel box col-sm-offset-2" >
         <Carousel className="carousel-box">
           <Carousel.Item>
             <img  height="500" width="1000" alt="900x500" src={img1} />
