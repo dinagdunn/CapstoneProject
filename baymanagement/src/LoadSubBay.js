@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 import axios from 'axios'
 import EditSubBay from './EditSubBay.js'
@@ -69,9 +68,9 @@ class LoadSubBay extends Component {
     }
 
 pText(sB) {
-    let pText = `Palette ID${sB.palette} associated with subBay`
+    let pText = `Pallet ID${sB.palette} associated with subBay`
     if(sB.palette === 0) {
-        pText=`No associated Palettes`
+        pText=`No associated Pallets`
     }
     return pText
 }
