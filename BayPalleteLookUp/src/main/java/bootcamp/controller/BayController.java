@@ -20,31 +20,31 @@ public class BayController {
 	@Autowired
 	BayService bayService;
 
-	 @CrossOrigin
+	@CrossOrigin
     @RequestMapping(value = "/addBay", method = RequestMethod.POST)
     public Message addBay(@RequestBody Bay bay) {
     	return bayService.addBay(bay);
     }
     
-	 @CrossOrigin
+	@CrossOrigin
     @RequestMapping(value ="/getBayById", method = RequestMethod.GET)
     public Bay getBayById(@RequestParam("id") int id) {
     	return bayService.getBayById(id);
     }
     
-	 @CrossOrigin
+	@CrossOrigin
     @RequestMapping(value ="/editBay", method = RequestMethod.POST)
     public Message editBay(@RequestBody Bay bay) {
     	return bayService.editBay(bay);
     }
     
-	 @CrossOrigin
+	@CrossOrigin
     @RequestMapping(value ="/deleteBay", method = RequestMethod.DELETE) 
     public Message deleteBay(@RequestParam("id") int id) {
     	return bayService.deleteBay(id);
     }
     
-	 @CrossOrigin
+	@CrossOrigin
     @RequestMapping(value="/getEmptyBays", method=RequestMethod.GET)
     public List<Bay> getEmptyBays(@RequestParam("id") int paletteId){
     	return bayService.getEmptyBays(paletteId);
