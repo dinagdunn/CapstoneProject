@@ -17,7 +17,7 @@ import bootcamp.model.Palette;
 @Component
 public class PaletteDao {
 
-	private final String ADD_PALETTE= "INSERT INTO palette (width, length, height, dep, paletteClass, category, bay) VALUES (?, ?, ?, ?, ? ,?, ?);";
+	private final String ADD_PALETTE= "INSERT INTO palette (width, length, height, dep, paletteClass, category, bay) VALUES ( ?, ?, ?, ? ,?, ?,?);";
 	private final String GET_PALETTE_BY_ID = "SELECT * FROM palette WHERE id = ?;";
 	private final String EDIT_PALETTE = "UPDATE palette SET width=?, length=?, height=?, dep=?, paletteClass=?, category=?, bay=? WHERE id = ?;";
 	private final String DELETE_PALETTE = "DELETE FROM palette where id=?;";
