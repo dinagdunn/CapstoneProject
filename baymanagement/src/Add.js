@@ -10,6 +10,7 @@ class Add extends Component {
 			height: '',
 			width: '',
 			length: '',
+			dep:'',
 			deps: [],
 			classes: [],
 			categories: [],
@@ -25,21 +26,24 @@ class Add extends Component {
 		this.submitHandler = this.submitHandler.bind(this)
 	}
 
-	componentDidMount() {
+	componentWillMount() {
 		axios.get("http://localhost:8081/getDepartments")
 			.then((response) => {
 				console.log("departments on load: ", response.data)
-				this.setState({ deps: response.data })
+				this.setState({ deps: response.data,
+				dep:response.data[0].value })
 			})
 
 		axios.get("http://localhost:8081/getClasses").then((response) => {
 			console.log("classes: ", response.data)
-			this.setState({ classes: response.data })
+			this.setState({ classes: response.data,
+			paletteClass:response.data[0].value })
 		})
 
 		axios.get("http://localhost:8081/getCategories").then((response) => {
 			console.log("categories on load: ", response.data)
-			this.setState({ categories: response.data })
+			this.setState({ categories: response.data,
+			category:response.data[0].value })
 		})
 	}
 
@@ -54,7 +58,7 @@ class Add extends Component {
 		this.setState({ length: e.target.value })
 	}
 	changeDepartment(e) {
-		this.setState({ department: e.target.value })
+		this.setState({ dep: e.target.value })
 	}
 	changeClass(e) {
 		this.setState({ class: e.target.value })
@@ -71,13 +75,13 @@ class Add extends Component {
 	submitHandler(event) {
 		event.preventDefault();
 		if (this.state.selectedOption === 'Pallet') {
-			console.log("dept: ", this.state.department)
+			console.log("dept: ", this.state.dep)
 			axios.post(`http://localhost:8081/addPalette`, {
 				height: this.state.height,
 				width: this.state.width,
 				length: this.state.length,
-				dep: this.state.department,
-				paletteClass: this.state.class,
+				dep: this.state.dep,
+				paletteClass: this.state.paletteClass,
 				category: this.state.category,
 				bay: 0
 			})
