@@ -9,6 +9,8 @@ class LoadBay extends Component {
 		super(props);
 		this.clickHandler = this.clickHandler.bind(this)
 		this.addSubBay = this.addSubBay.bind(this)
+		this.componentWillMount = this.componentWillMount.bind(this)
+		this.render = this.render.bind(this)
 		// this.subBayList = this.subBayList.bind(this)
 
 		this.state = {
@@ -18,12 +20,13 @@ class LoadBay extends Component {
 		}
 	}
 
-	componentDidMount() {
+	componentWillMount() {
 		let bId = this.props.match.params.id;
 		console.log(bId)
 		bId = parseInt(bId)
 		axios.get(`http://localhost:8081/getMasterbayById?id=${bId}`)
 			.then(res => {
+				console.log(res.data)
 				this.setState({
 					masterBayInfo: res.data,
 				});
@@ -50,9 +53,12 @@ class LoadBay extends Component {
 	}
 
 	render() {
-		
-
+			console.log(this.state.masterBayInfo)
+			if(this.state.masterBayInfo.id ===0){
+				return(<h2>Master bay doesn't exist</h2>)
+			}else{
 		return (
+
 			<div class="loadData">
 				<h2>MasterBay ID: MB{this.state.masterBayInfo.id}</h2>
 		
@@ -87,6 +93,7 @@ class LoadBay extends Component {
 				{/* </div> */}
 			</div>
 		)
+	}
 	}
 }
 export default LoadBay
