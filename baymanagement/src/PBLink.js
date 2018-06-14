@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 import axios from 'axios'
+import swal from 'sweetalert'
+
+
 
 class PBLink extends Component {
 
@@ -54,14 +57,16 @@ class PBLink extends Component {
 		palette.paletteClass = this.state.class
 		palette.category = this.state.category;
 		palette.bay = bay.id
-		axios.post(`http://localhost:8081/editPalette`,palette).then((message)=>{
-		this.props.history.push({
-			pathname: `/load/message`,
-			state: {message: "Palette was associated with the bay successfully!"}
-		})
-			window.setTimeout(()=>this.props.history.push(`/load/P${palette.id}`), 4000);
-		})
-	}  
+		axios.post(`http://localhost:8081/editPalette`,palette).then(()=>{
+			swal({
+				title: "Pallet Linked Sucessfully",
+                text: `Pallet P${palette.id} linked successfully to Bay SB${palette.bay}.`,
+                icon: "success",
+                button: "OK"
+            })
+		this.props.history.push(`/load/P${palette.id}`)
+	})
+	}
 
 	clickHandler(event) {
 		event.preventDefault();
