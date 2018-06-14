@@ -53,7 +53,7 @@ class Search extends Component {
         return (
             <React.Fragment>
                 <form onSubmit={this.clickHandler} className="bar">
-                    <input type="text" />
+                    <input type="text" id="search" placeholder="Enter P# or MB#"/>
 
                     {/* <LoadPallet palletInfo={this.props.palletInfo}/> */}
                     <button 
