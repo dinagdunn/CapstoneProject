@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios'
+import swal from 'sweetalert'
 
 class Search extends Component {
 
@@ -21,6 +22,12 @@ class Search extends Component {
                         if (res.data.id === 0) {
                             //sweet alert about data not found
                             console.log("not here for pallets")
+                            swal({
+                                title: "Pallet Not Found",
+                                text: `Pallet ${query.toUpperCase()} not fount in database.`,
+                                icon: "warning",
+                                button: "OK"
+                            })
                         } else {
                             this.props.history.push(`/load/${query}`)
                         }
@@ -34,7 +41,13 @@ class Search extends Component {
                         console.log("axios comes back with: ",res.data.id)
                         if (res.data.id === 0) {
                             //sweet alert about data not found
-                            console.log("not here for pallets")
+                            console.log("not here for masterbays")
+                             swal({
+                                title: "Master Bay Not Found",
+                                text: `Master Bay ${query.toUpperCase()} not fount in database.`,
+                                icon: "warning",
+                                button: "OK"
+                            })
                         } else {
                             this.props.history.push(`/load/${query}`)
                         }
@@ -42,7 +55,12 @@ class Search extends Component {
                 
         } else {
             // console.log("this is where the bad search goes")
-            document.querySelector('[data-error]').style.display = "block";
+            swal({
+                    title: "Invalid Search Query",
+                    icon: "warning",
+                    button: "OK"
+                })
+                // this.props.history.push(`/search`)
             //DISPLAY A SWEET ALERT HERE ABOUT THE BAD SEARCH
         }
     }
@@ -51,7 +69,6 @@ class Search extends Component {
 
     render() {
         return (
-            <React.Fragment>
                 <form onSubmit={this.clickHandler} className="bar">
                     <input type="text" id="search" placeholder="Enter P# or MB#"/>
 
@@ -63,10 +80,6 @@ class Search extends Component {
                     >Search</button>
 
                 </form>
-                <div style={{ display: "none" }} data-error>
-                    <h3>Incorrect value. Please try again.</h3>
-                </div>
-            </React.Fragment>
         )
     }
 }

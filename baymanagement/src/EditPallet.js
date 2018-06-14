@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
+import swal from 'sweetalert'
 
 class EditPallet extends Component {
 
@@ -38,25 +39,19 @@ class EditPallet extends Component {
 		    console.log(response);
 		    console.log(response.data.dimensionMatch)
 		    if(response.data.dimensionMatch === false){
-		    this.props.history.push({
-				pathname: `/load/message`,
-				state: {message: "Edit unsuccessful, the bay that is associated with this palette is too small!"}
-			})
-			window.setTimeout(()=>
-				this.props.history.push({
-					pathname: `/edit/p${this.state.id}`,
-					state: {paletteInfo: this.props.location.state.paletteInfo}
-				}), 4000);
+		    	swal({
+		    		title: "Dimension Mismatch",
+                    text: `Pallet changes do not match the dimensions of its bay. Changes not saved.`,
+                    icon: "warning",
+                    button: "OK"
+                })
 		    }else{
-		    	this.props.history.push({
-				pathname: `/load/message`,
-				state: {message: "Edit  was successful!"}
-				})
-				window.setTimeout(()=>
-				this.props.history.push({
-					pathname: `/load/P${this.state.id}`,
-					state: {paletteInfo: this.props.location.state.paletteInfo}
-				}), 4000);
+		    	swal({
+                    title: "Edit Successful",
+                    icon: "success",
+                    button: "OK"
+                })
+                this.props.history.push(`/load/P${palette.id}`)
 		    }
 		}).catch(function (error) {
 	    	console.log(error);

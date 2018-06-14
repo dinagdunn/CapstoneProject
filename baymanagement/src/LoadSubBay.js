@@ -42,11 +42,8 @@ class LoadSubBay extends Component {
                 console.log(res.data);
                 this.setState({
                     masterBayInfo: res.data,
-
                 });
-
-                console.log("called MB");
-
+            console.log("called MB");
             })
     }
     clickHandler(event) {
@@ -109,6 +106,7 @@ pText(sB) {
                 </div>
             )
         }
+    
     }
 }
 
