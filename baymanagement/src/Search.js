@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios'
+import swal from 'sweetalert'
 
 class Search extends Component {
 
@@ -21,6 +22,12 @@ class Search extends Component {
                         if (res.data.id === 0) {
                             //sweet alert about data not found
                             console.log("not here for pallets")
+                            swal({
+                                title: "Pallet Not Found",
+                                text: `Pallet ${query.toUpperCase()} not fount in database.`,
+                                icon: "warning",
+                                button: "OK"
+                            })
                         } else {
                             this.props.history.push(`/load/${query}`)
                         }
@@ -35,6 +42,12 @@ class Search extends Component {
                         if (res.data.id === 0) {
                             //sweet alert about data not found
                             console.log("not here for masterbays")
+                             swal({
+                                title: "Master Bay Not Found",
+                                text: `Master Bay ${query.toUpperCase()} not fount in database.`,
+                                icon: "warning",
+                                button: "OK"
+                            })
                         } else {
                             this.props.history.push(`/load/${query}`)
                         }
