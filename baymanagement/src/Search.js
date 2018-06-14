@@ -57,7 +57,7 @@ class Search extends Component {
 
                     {/* <LoadPallet palletInfo={this.props.palletInfo}/> */}
                     <button 
-                    className="btn btn-primary" 
+                    className="btn btn-primary custom-btn" 
                     type="submit"
                     onClick = { this.buttonTest }
                     >Search</button>
