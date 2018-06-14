@@ -22,11 +22,9 @@ class EditBay extends Component {
 		}
 	}
 
-
 	componentDidMount() {
 		let bId = this.props.match.params.id;
 		this.setState({id: parseInt(bId)})
-
 
 		axios.get(`http://localhost:8081/getMasterbayById?id=${bId}`)
 			.then(res => {
@@ -90,29 +88,8 @@ class EditBay extends Component {
 		let bId = this.props.match.params.id;
 		bId = parseInt(bId)
 		console.log(bId, "delete");
-
-
-		  swal({
-			title: "Are you sure?",
-			text: `MasterBay ${bId} will be deleted!`,
-			icon: "warning",
-			buttons: true,
-			dangerMode: true,
-		  })
-		  .then((willDelete) => {
-			if (willDelete) {
-			  swal(`MasterBay ${bId} has been deleted.`, {
-				icon: "success",
-			  });
-			  	axios.delete(`http://localhost:8081/deleteMasterBay?id=${bId}`)
-				this.props.history.push('/')
-			} else {
-			  swal("Delete cancelled");
-			}
-		  });
-
-
-
+		axios.delete(`http://localhost:8081/deleteMasterBay?id=${bId}`)
+		this.props.history.push('/?msg=deleted')
 	}
 
 	addSubHandler(event) {

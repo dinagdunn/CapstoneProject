@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
-import AddCommon from './AddCommon.js'
 import axios from 'axios';
 
 class EditSubBay extends Component {
@@ -35,9 +34,6 @@ class EditSubBay extends Component {
     subBay.dep = this.state.dep
     subBay.bayClass = this.state.class
     subBay.category = this.state.category;
-    subBay.masterbay = this.state.masterbay;
-    subBay.palette = this.state.palette
-    console.log(subBay)
     axios.post("http://localhost:8081/editBay",subBay).then((response) =>{
         console.log(response);
         console.log(response.data.message)

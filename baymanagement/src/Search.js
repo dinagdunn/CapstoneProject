@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
-import LoadPallet from './LoadPallet.js'
-import LoadBay from './LoadBay.js'
 import axios from 'axios'
 
 class Search extends Component {

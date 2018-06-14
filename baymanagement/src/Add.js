@@ -26,44 +26,20 @@ class Add extends Component {
 	}
 
 	componentDidMount() {
-		// console.log("Mounted")
-		let departments = axios.get("http://localhost:8081/getDepartments").then((response) => {
-			const dropDowns = response.data.map((department, index) => {
-				// console.log(department.value)
-				if (department.value === this.state.dep) {
-					return (<option value={department.value} selected>{department.value}</option>)
-				} else
-					return (<option value={department.value}>{department.value}</option>)
+		axios.get("http://localhost:8081/getDepartments")
+			.then((response) => {
+				console.log("departments on load: ", response.data)
+				this.setState({ deps: response.data })
 			})
-			this.setState({
-				deps: dropDowns
-			})
+
+		axios.get("http://localhost:8081/getClasses").then((response) => {
+			console.log("classes: ", response.data)
+			this.setState({ classes: response.data })
 		})
 
-		let classes = axios.get("http://localhost:8081/getClasses").then((response) => {
-			const dropDowns = response.data.map((department, index) => {
-				console.log(department.value)
-				if (department.value === this.state.class) {
-					return (<option value={department.value} selected>{department.value}</option>)
-				} else
-					return (<option value={department.value}>{department.value}</option>)
-			})
-			this.setState({
-				classes: dropDowns
-			})
-		})
-
-		let categories = axios.get("http://localhost:8081/getCategories").then((response) => {
-			const dropDowns = response.data.map((department, index) => {
-				console.log(department.value)
-				if (department.value === this.state.category) {
-					return (<option value={department.value} selected>{department.value}</option>)
-				} else
-					return (<option value={department.value}>{department.value}</option>)
-			})
-			this.setState({
-				categories: dropDowns
-			})
+		axios.get("http://localhost:8081/getCategories").then((response) => {
+			console.log("categories on load: ", response.data)
+			this.setState({ categories: response.data })
 		})
 	}
 
@@ -71,27 +47,22 @@ class Add extends Component {
 		this.setState({ height: e.target.value })
 		console.log("height here:", e.target.value)
 	}
-
 	changeWidth(e) {
 		this.setState({ width: e.target.value })
 	}
-
 	changeLength(e) {
 		this.setState({ length: e.target.value })
 	}
-
 	changeDepartment(e) {
 		this.setState({ department: e.target.value })
 	}
-
 	changeClass(e) {
 		this.setState({ class: e.target.value })
 	}
-
 	changeCategory(e) {
 		this.setState({ category: e.target.value })
+		console.log("category check: ", e.target.value)
 	}
-
 	handleOptionChange(event) {
 		this.setState({ selectedOption: event.target.name })
 		this.setState({ addedItem: event.target.name })
@@ -102,14 +73,14 @@ class Add extends Component {
 		if (this.state.selectedOption === 'Pallet') {
 			console.log("dept: ", this.state.department)
 			axios.post(`http://localhost:8081/addPalette`, {
-					height: this.state.height,
-					width: this.state.width,
-					length: this.state.length,
-					dep: this.state.department,
-					paletteClass: this.state.class,
-					category: this.state.category,
-					bay: 0
-				})
+				height: this.state.height,
+				width: this.state.width,
+				length: this.state.length,
+				dep: this.state.department,
+				paletteClass: this.state.class,
+				category: this.state.category,
+				bay: 0
+			})
 				.then((response) => {
 					console.log("Pallet ID: ", response.data)
 					this.props.history.push(`/load/P${response.data}`)
@@ -118,13 +89,12 @@ class Add extends Component {
 					console.log(error);
 				});
 		}
-
 		else if (this.state.selectedOption === 'Master Bay') {
 			axios.post(`http://localhost:8081/addMasterBay`, {
-					height: this.state.height,
-					width: this.state.width,
-					length: this.state.length,
-				})
+				height: this.state.height,
+				width: this.state.width,
+				length: this.state.length,
+			})
 				.then((response) => {
 					console.log("Bay ID: ", response.data)
 					this.props.history.push(`/load/MB${response.data}`)
@@ -136,97 +106,101 @@ class Add extends Component {
 	}
 
 	render() {
-		return ( 
-		<div className = "float-center" >
-			<div className = "container" >
-				<div className = "row col-12" >
-					<h2>Add a {this.state.addedItem}</h2>
-							<div className = "form-check">
-								<label className = "form-check-label">
-									<input type = "radio"
-										className = "form-check-input"
-										name = "Pallet"
-										checked = { this.state.selectedOption === 'Pallet'}
-										onChange = { this.handleOptionChange }
-									/>
-									Pallet 
-								</label > 
-								</div> 
-
-						<div className = "form-check" >
-							<label className = "form-check-label" >
-								<input type = "radio"
-									className = "form-check-input"
-									name = "Master Bay"
-									checked = { this.state.selectedOption === 'Master Bay' }
-									onChange = { this.handleOptionChange }
+		return (
+			<div className="float-center" >
+				<div className="container" >
+					<div className="row col-12" >
+						<h2>Add a {this.state.addedItem}</h2>
+						<div className="form-check">
+							<label className="form-check-label">
+								<input type="radio"
+									className="form-check-input"
+									name="Pallet"
+									checked={this.state.selectedOption === 'Pallet'}
+									onChange={this.handleOptionChange}
 								/>
-								Master Bay 
-								</label > 
-							</div> 
-			</div >
+								Pallet
+								</label >
+						</div>
 
-			<div >
-				<form onSubmit = { this.submitHandler } >
-					<label>
-						Height:
-						<input type = "text" onChange = {this.changeHeight}
-							name = "height" />
-					</label> 
-					<br />
+						<div className="form-check" >
+							<label className="form-check-label" >
+								<input type="radio"
+									className="form-check-input"
+									name="Master Bay"
+									checked={this.state.selectedOption === 'Master Bay'}
+									onChange={this.handleOptionChange}
+								/>
+								Master Bay
+								</label >
+						</div>
+					</div >
 
-					<label>
-						Width:
-						<input type = "text" onChange = {this.changeWidth}
-							name = "width" />
-					</label> 
-					<br />
-
-					<label>
-						Length:
-						<input type = "text" onChange = {this.changeLength}
-							name = "length" />
-					</label> 
-					<br /> 
-		
-						{this.state.selectedOption === 'Pallet' &&
-							<div>
+					<div >
+						<form onSubmit={this.submitHandler} >
 							<label>
-								Department:
-								<select name="department" onChange = {this.changeDepartment}>
-									{this.state.deps.map(x => <option>{x}</option>)}
-								</select>
+								Height:
+						<input type="number" onChange={this.changeHeight}
+									name="height" />
 							</label>
 							<br />
 
 							<label>
-								Class:
-								<select name="class" onChange = {this.changeClass}>
-									{this.state.classes.map(x => <option>{x}</option>)}
-								</select>
+								Width:
+						<input type="number" onChange={this.changeWidth}
+									name="width" />
 							</label>
 							<br />
-		
-							<label>
-								Category:
-								<select name="category" onChange = {this.changeCategory}>
-									{this.state.categories.map(x => <option>{x}</option>)}
-								</select>
-							</label>
-							<br />
-							</div>
-						}
 
-					<button className = "btn btn-primary"
-						type = "submit">
-						Submit 
-					</button> 					
-				</form > 
-			</div> 
-		</div > 
-	</div>
-	)
-}
+							<label>
+								Length:
+						<input type="number" onChange={this.changeLength}
+									name="length" />
+							</label>
+							<br />
+
+							{this.state.selectedOption === 'Pallet' &&
+								<div>
+									<label>
+										Department:
+								<select name="department" onChange={this.changeDepartment}>
+
+											{/* this was the line in question --Q*/}
+											{/*{this.state.deps.map(x => <option>{x}</option>)} */}
+											{this.state.deps.map(x => <option>{x.value}</option>)}
+
+										</select>
+									</label>
+									<br />
+
+									<label>
+										Class:
+								<select name="class" onChange={this.changeClass}>
+											{this.state.classes.map(x => <option>{x.value}</option>)}
+										</select>
+									</label>
+									<br />
+
+									<label>
+										Category:
+								<select name="category" onChange={this.changeCategory}>
+											{this.state.categories.map(x => <option>{x.value}</option>)}
+										</select>
+									</label>
+									<br />
+								</div>
+							}
+
+							<button className="btn btn-primary"
+								type="submit">
+								Submit
+					</button>
+						</form >
+					</div>
+				</div >
+			</div>
+		)
+	}
 }
 
 export default Add

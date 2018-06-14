@@ -110,29 +110,19 @@ li{
 
 
 .subBayDisplay:hover {
+
   background-color: #93DEAB;
   box-shadow: 5px 5px 5px gray;
-  
-}
-input{
-  box-sizing: border-box;
-width: 100%;
-padding: 15px;
-border: 1px solid #d0d0d0;
-outline: none !important;
-background: none;
-font-size: 16px;
-margin-bottom: 5px;
-color: #666a73 !important;
-}
-
-.custom-btn{
-right: 0;
-border-radius: 5px;
-background-color: #00a3fa;
-color: #fff;
+ 
+  background-color: lightgreen;
 
 }
+
+/* For Firefox */
+input[type='number'] {
+  -moz-appearance:textfield;
+}
+
 
 .formStyle {
   text-align: center;
@@ -149,4 +139,11 @@ input {
 label {
   margin: 3px;
   width: 300px;
+
+/* Webkit browsers like Safari and Chrome */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+
 }

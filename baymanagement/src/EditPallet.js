@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 import axios from 'axios';
 
@@ -9,10 +8,7 @@ class EditPallet extends Component {
 		super(props);
 		this.submitHandler = this.submitHandler.bind(this)
 		this.deleteHandler = this.deleteHandler.bind(this)
-		this.changeHeight = this.changeHeight.bind(this)
-		this.changeLength = this.changeLength.bind(this)
-		this.changeWidth = this.changeWidth.bind(this)
-
+		this.changeValue = this.changeValue.bind(this)
 		this.state={
 			id: this.props.location.state.paletteInfo.id,
 			width: this.props.location.state.paletteInfo.width,
@@ -77,17 +73,13 @@ class EditPallet extends Component {
 	}
 
 
-	changeHeight(e) {
-		this.setState({ height: e.target.value })
-		console.log("height here:", e.target.value)
-	}
-
-	changeWidth(e) {
-		this.setState({ width: e.target.value })
-	}
-
-	changeLength(e) {
-		this.setState({ length: e.target.value })
+	changeValue(event,box){
+		// console.log(event.target)
+		var stateChange = {}
+		// console.log(stateChange[box]);
+		stateChange[box] = event.target.value
+		// console.log(stateChange[box]);
+		this.setState(stateChange);
 	}
 
 	componentWillMount() {
@@ -134,11 +126,10 @@ class EditPallet extends Component {
 
 	render() {
 		return (
-			<BrowserRouter>
 				<div>
 					<h4>Palette: P{this.props.location.state.paletteInfo.id}</h4>
 					<form id="editPalette" name="editPalette" >
-					<label>
+						<label>
 							Length:
 							<input type="text" name="length" 
 							value={this.state.length} onChange={(e) => { 
@@ -190,7 +181,6 @@ class EditPallet extends Component {
 					<button className="btn btn-primary" onClick={this.deleteHandler}>Delete</button>
 				</form>
 				</div>
-			</BrowserRouter>
 		)
 	}
 }
