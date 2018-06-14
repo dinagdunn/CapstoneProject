@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 import axios from 'axios';
 
@@ -9,10 +8,7 @@ class EditPallet extends Component {
 		super(props);
 		this.submitHandler = this.submitHandler.bind(this)
 		this.deleteHandler = this.deleteHandler.bind(this)
-		this.changeHeight = this.changeHeight.bind(this)
-		this.changeLength = this.changeLength.bind(this)
-		this.changeWidth = this.changeWidth.bind(this)
-
+		this.changeValue = this.changeValue.bind(this)
 		this.state={
 			id: this.props.location.state.paletteInfo.id,
 			width: this.props.location.state.paletteInfo.width,
@@ -38,7 +34,7 @@ class EditPallet extends Component {
 		palette.paletteClass = this.state.class
 		palette.category = this.state.category;
 		palette.bay = this.state.bay
-		axios.post("http://localhost:8080/editPalette",palette).then((response) =>{
+		axios.post("http://localhost:8081/editPalette",palette).then((response) =>{
 		    console.log(response);
 		    console.log(response.data.dimensionMatch)
 		    if(response.data.dimensionMatch === false){
@@ -73,25 +69,21 @@ class EditPallet extends Component {
 		const pId = this.props.match.params.id;
 		console.log(pId)
 		this.props.history.push('/?msg=deleted')
-		axios.delete(`http://localhost:8080/deletePalette?id=${pId}`)
+		axios.delete(`http://localhost:8081/deletePalette?id=${pId}`)
 	}
 
 
-	changeHeight(e) {
-		this.setState({ height: e.target.value })
-		console.log("height here:", e.target.value)
-	}
-
-	changeWidth(e) {
-		this.setState({ width: e.target.value })
-	}
-
-	changeLength(e) {
-		this.setState({ length: e.target.value })
+	changeValue(event,box){
+		// console.log(event.target)
+		var stateChange = {}
+		// console.log(stateChange[box]);
+		stateChange[box] = event.target.value
+		// console.log(stateChange[box]);
+		this.setState(stateChange);
 	}
 
 	componentWillMount() {
-		let departments = axios.get("http://localhost:8080/getDepartments").then((response) => {
+		let departments = axios.get("http://localhost:8081/getDepartments").then((response) => {
 			const dropDowns = response.data.map((department, index) => {
 				// console.log(department.value)
 				if (department.value === this.state.dep) {
@@ -104,7 +96,7 @@ class EditPallet extends Component {
 			})
 		})
 
-		let classes = axios.get("http://localhost:8080/getClasses").then((response) => {
+		let classes = axios.get("http://localhost:8081/getClasses").then((response) => {
 			const dropDowns = response.data.map((department, index) => {
 				console.log(department.value)
 				if (department.value === this.state.class) {
@@ -117,7 +109,7 @@ class EditPallet extends Component {
 			})
 		})
 
-		let categories = axios.get("http://localhost:8080/getCategories").then((response) => {
+		let categories = axios.get("http://localhost:8081/getCategories").then((response) => {
 			const dropDowns = response.data.map((department, index) => {
 				console.log(department.value)
 				if (department.value === this.state.category) {
@@ -134,11 +126,10 @@ class EditPallet extends Component {
 
 	render() {
 		return (
-			<BrowserRouter>
 				<div>
 					<h4>Palette: P{this.props.location.state.paletteInfo.id}</h4>
 					<form id="editPalette" name="editPalette" >
-					<label>
+						<label>
 							Length:
 							<input type="text" name="length" 
 							value={this.state.length} onChange={(e) => { 
@@ -190,7 +181,6 @@ class EditPallet extends Component {
 					<button className="btn btn-primary" onClick={this.deleteHandler}>Delete</button>
 				</form>
 				</div>
-			</BrowserRouter>
 		)
 	}
 }

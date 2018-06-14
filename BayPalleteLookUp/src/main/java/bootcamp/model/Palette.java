@@ -11,9 +11,7 @@ public class Palette {
 	String category;
 	int bay;	
 	
-	public Palette() {
-		
-	}
+	public Palette() {}
 	
 
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 import axios from 'axios'
 import EditSubBay from './EditSubBay.js'
@@ -38,7 +37,7 @@ class LoadSubBay extends Component {
     componentDidMount() {
         let bId = this.props.passedId
 
-        axios.get(`http://localhost:8080/getMasterbayById?id=${bId}`)
+        axios.get(`http://localhost:8081/getMasterbayById?id=${bId}`)
             .then(res => {
                 console.log(res.data);
                 this.setState({
