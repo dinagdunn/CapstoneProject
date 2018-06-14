@@ -145,7 +145,7 @@ class EditBay extends Component {
 
 						</label>
 						<br />
-						// <br/>
+						<br/>
 	{/* Length:
 							<input type="number" name="length" 
 								value={this.state.masterBayInfo.length} 
