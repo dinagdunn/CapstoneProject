@@ -120,14 +120,6 @@ class EditBay extends Component {
 				<div className="formStyle">
 					<form className="bar" onSubmit={this.submitHandler}>
 						<h2>Editing Master Bay MB{this.state.masterBayInfo.id}</h2>
-						{/* <label>
-							Height:
-							<input type="number" name="height" 
-							value={this.state.masterBayInfo.height} 
-							onChange={this.handleChangeHeight()} />
-							
-							<form className="bar" onSubmit={this.submitHandler} />
-						</label> */}
 						<label>
 							Length:
 							<input type="number" name="length" 
@@ -137,30 +129,38 @@ class EditBay extends Component {
 						</label>
 						<br />
 
-						<label>
+							<label>
 							Width:
 							<input type="number" name="width" 
 								value={this.state.masterBayInfo.width} 
 								onChange={this.handleChangeWidth()} />
 						</label>
 						<br />
-
+					
 						<label>
-
-							{/* Length:
-							<input type="number" name="length" 
-								value={this.state.masterBayInfo.length} 
-								onChange={this.handleChangeLength()} /> */}
-
 							Height:
 						<input type="number" name="height" 
 						value={this.state.masterBayInfo.height} 
 						onChange={this.handleChangeHeight()} />
 
 						</label>
-						<br /><br/>
-
+						<br />
+						// <br/>
+	{/* Length:
+							<input type="number" name="length" 
+								value={this.state.masterBayInfo.length} 
+								onChange={this.handleChangeLength()} /> */}
 					
+
+	{/* <label>
+							Height:
+							<input type="number" name="height" 
+							value={this.state.masterBayInfo.height} 
+							onChange={this.handleChangeHeight()} />
+							
+							<form className="bar" onSubmit={this.submitHandler} />
+						</label> */}
+
 						<div className="row ">
 							<button className="btn btn-primary custom-btn" 
 								type="submit">
