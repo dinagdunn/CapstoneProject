@@ -55,7 +55,12 @@ class Search extends Component {
                 
         } else {
             // console.log("this is where the bad search goes")
-            document.querySelector('[data-error]').style.display = "block";
+            swal({
+                    title: "Invalid Search Query",
+                    icon: "warning",
+                    button: "OK"
+                })
+                // this.props.history.push(`/search`)
             //DISPLAY A SWEET ALERT HERE ABOUT THE BAD SEARCH
         }
     }
@@ -64,7 +69,6 @@ class Search extends Component {
 
     render() {
         return (
-            <React.Fragment>
                 <form onSubmit={this.clickHandler} className="bar">
                     <input type="text" />
 
@@ -76,10 +80,6 @@ class Search extends Component {
                     >Search</button>
 
                 </form>
-                <div style={{ display: "none" }} data-error>
-                    <h3>Incorrect value. Please try again.</h3>
-                </div>
-            </React.Fragment>
         )
     }
 }
