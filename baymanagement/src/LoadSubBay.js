@@ -68,9 +68,9 @@ class LoadSubBay extends Component {
     }
 
 pText(sB) {
-    let pText = `Palette ID${sB.palette} associated with subBay`
+    let pText = `Pallet ID${sB.palette} associated with subBay`
     if(sB.palette === 0) {
-        pText=`No associated Palettes`
+        pText=`No associated Pallets`
     }
     return pText
 }

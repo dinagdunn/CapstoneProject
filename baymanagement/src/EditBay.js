@@ -102,7 +102,7 @@ class EditBay extends Component {
 
 	render() {
 		return (
-				<div>
+				<div className="formStyle">
 					<form className="bar" onSubmit={this.submitHandler}>
 						<h2>Editing Master Bay MB{this.state.masterBayInfo.id}</h2>
 						{/* <label>
@@ -143,7 +143,7 @@ class EditBay extends Component {
 						onChange={this.handleChangeHeight()} />
 
 						</label>
-						<br />
+						<br /><br/>
 
 					
 						<div className="row ">
@@ -153,7 +153,7 @@ class EditBay extends Component {
 							</button>
 						</div>
 					</form>
-
+<br/>
 					<div>
 						<button className="btn btn-primary custom-btn" 
 							type="submit" 
