@@ -82,10 +82,10 @@ class LoadPallet extends Component {
 				<p>Location: SB{this.state.palletInfo.bay}</p>
 
 				<form onSubmit={this.submitHandler} className="bar">
-					<button className="btn btn-primary" type="submit">Edit</button>
+					<button className="btn btn-primary custom-btn" type="submit">Edit</button>
 				</form>
 				<form onSubmit={this.linkHandler} className="bar">
-					<button className="btn btn-primary" type="submit">
+					<button className="btn btn-primary custom-btn" type="submit">
 						{this.state.buttonText}
 					</button>
 				</form>

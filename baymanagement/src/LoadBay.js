@@ -84,7 +84,7 @@ class LoadBay extends Component {
 
 				<div className="col-sm-12">
 					<form onClick={this.addSubBay} className="bar" >
-						<button className="btn btn-primary" type="submit">Add SubBay</button>
+						<button className="btn btn-primary custom-btn" type="submit">Add SubBay</button>
 					</form>
 				</div>
 

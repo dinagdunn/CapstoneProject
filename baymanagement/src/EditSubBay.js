@@ -176,8 +176,8 @@ class EditSubBay extends Component {
                         </select>
                     </label>
                     <br />
-                    <button className="btn btn-primary"  onClick={this.submitHandler}>Submit</button>
-                    <button className="btn btn-primary"  onClick={this.deleteHandler}>Delete</button>
+                    <button className="btn btn-primary custom-btn"  onClick={this.submitHandler}>Submit</button>
+                    <button className="btn btn-primary custom-btn"  onClick={this.deleteHandler}>Delete</button>
                 </div>
             </BrowserRouter>
         )
