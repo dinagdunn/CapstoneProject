@@ -191,7 +191,7 @@ class Add extends Component {
 								</div>
 							}
 
-							<button className="btn btn-primary"
+							<button className="btn btn-primary custom-btn"
 								type="submit">
 								Submit
 					</button>
