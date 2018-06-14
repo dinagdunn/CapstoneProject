@@ -15,19 +15,38 @@ class Search extends Component {
 
         if (query) {
             if (query[0].toUpperCase() === "P") {
-                this.props.history.push(`/load/${query}`)
+                axios.get(`http://localhost:8081/getPaletteById?id=${query.substring(1)}`)
+                    .then(res => {
+                        console.log("axios comes back with: ",res.data.id)
+                        if (res.data.id === 0) {
+                            //sweet alert about data not found
+                            console.log("not here for pallets")
+                        } else {
+                            this.props.history.push(`/load/${query}`)
+                        }
+                    })
             }
 
             else if (query.substring(0,2).toUpperCase() === "MB") {
-                //MB ==> query[0] + query[1]..shortcut for this? 
-                this.props.history.push(`/load/${query}`)
-            }
-
+                console.log("MB string check: ", query.substring(2))
+                axios.get(`http://localhost:8081/getMasterbayById?id=${query.substring(2)}`)
+                    .then(res => {
+                        console.log("axios comes back with: ",res.data.id)
+                        if (res.data.id === 0) {
+                            //sweet alert about data not found
+                            console.log("not here for pallets")
+                        } else {
+                            this.props.history.push(`/load/${query}`)
+                        }
+                    })
+                
         } else {
             // console.log("this is where the bad search goes")
             document.querySelector('[data-error]').style.display = "block";
+            //DISPLAY A SWEET ALERT HERE ABOUT THE BAD SEARCH
         }
     }
+}
 
 
     render() {

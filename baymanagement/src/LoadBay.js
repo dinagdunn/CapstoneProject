@@ -45,7 +45,7 @@ class LoadBay extends Component {
 		
 
 		return (
-			<div class="loadData">
+			<div className="loadData">
 				<h2>MasterBay ID: MB{this.state.masterBayInfo.id}</h2>
 		
 				<p>Master Bay dimensions: </p>
