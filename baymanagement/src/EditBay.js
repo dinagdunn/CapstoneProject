@@ -88,8 +88,26 @@ class EditBay extends Component {
 		let bId = this.props.match.params.id;
 		bId = parseInt(bId)
 		console.log(bId, "delete");
-		axios.delete(`http://localhost:8081/deleteMasterBay?id=${bId}`)
-		this.props.history.push('/?msg=deleted')
+
+		  swal({
+			title: "Are you sure?",
+			text: `MasterBay ${bId} will be deleted`,
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		  })
+		  .then((willDelete) => {
+			if (willDelete) {
+			  swal(`MasterBay ${bId} has been deleted`, {
+				icon: "success",
+			  });
+			  	  // axios.delete(`http://localhost:8081/deleteMasterBay?id=${bId}`)
+		this.props.history.push('/')
+			} else {
+			  swal("Delete cancelled");
+			}
+		  });
+		
 	}
 
 	addSubHandler(event) {
