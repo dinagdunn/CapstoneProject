@@ -96,6 +96,19 @@ class EditPallet extends Component {
 		this.setState(stateChange);
 	}
 
+
+	// changeValue(event,box){
+
+ // 		console.log(event.target)
+ // 		var stateChange = {}
+ // 		console.log(stateChange[box]);
+ // 		stateChange[box] = event.target.value
+ // 		console.log(stateChange[box]);
+ // 		this.setState(stateChange);
+ // 	}
+
+ // https://github.com/newsha400/CapstoneProject/commit/0fe22faf57c8531e24b47af56a711064a78ab75c
+
 	componentWillMount() {
 		let departments = axios.get("http://localhost:8081/getDepartments").then((response) => {
 			const dropDowns = response.data.map((department, index) => {

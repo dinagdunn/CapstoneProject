@@ -10,10 +10,11 @@ import EditBay from './EditBay.js'
 import PBLink from './PBLink.js'
 import Message from './Message';
 import EditSubBay from './EditSubBay'
-
+import AddSubBay from './AddSubBay'
 import img1 from './images/1.jpg'
 import img2 from './images/2.jpg'
 import img3 from './images/3.jpg'
+
 
 
 class App extends Component {
@@ -56,6 +57,8 @@ class App extends Component {
           <Route path="/pblink/P:id" component={ PBLink } />
           <Route exact path="/load/message" component={Message} />  
           <Route exact path="/editSubBay/SB:id" component={EditSubBay} /> 
+          <Route exact path="/addSubBay" component={AddSubBay} /> 
+
         </div> 
         <br/>
 <Route exact path="/" render={()=> 
