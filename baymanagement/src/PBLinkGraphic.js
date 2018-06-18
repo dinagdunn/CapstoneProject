@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 import axios from 'axios'
-import swal from 'sweetalert'
 import LoadSubBayGraphic from './LoadSubBayGraphic';
 
 
@@ -30,80 +28,29 @@ class PBLinkGraphic extends Component {
 	componentWillMount() {
 		let pId = this.props.match.params.id;
 		let bays = axios.get(`http://localhost:8081/getEmptyBays?id=${pId}`).then((response) => {
-			console.log(response.data)
-			const bayList = response.data.map((bay) => {
-				return (
-					<div className="col-sm-4 order-1 offset-md-2 subBayGraphic" onClick={() => this.bayClick(bay)}>
-						<p>SubBay ID: {bay.id}</p>
-						<p>SubBay Width: {bay.width}</p>
-						<p>SubBay Height: {bay.height}</p>
-						<p>SubBay Length: {bay.length}</p>
-						<p>SubBay Dept: {bay.dep}</p>
-						<p>SubBay BayClass: {bay.bayClass}</p>
-						<p>SubBay Category: {bay.category}</p>
-					</div>
-				)
+			console.log("number 1 bay: ", bays)
 			})
-			console.log(bayList)
-			this.setState({
-				bayList: bayList
-			})
-		})
-	}
-
-	click() {
-		console.log("from the td")
-	}
-
-	bayClick(bay) {
-		console.log("click test from parent")
-		let palette = {}
-		palette.id = this.state.id;
-		palette.width = this.state.width;
-		palette.length = this.state.length;
-		palette.height = this.state.height;
-		palette.dep = this.state.dep
-		palette.paletteClass = this.state.class
-		palette.category = this.state.category;
-		palette.bay = bay.id
-		axios.post(`http://localhost:8081/editPalette`, palette).then(() => {
-			swal({
-				title: "Pallet Linked Sucessfully",
-				text: `Pallet P${palette.id} linked successfully to Bay SB${palette.bay}.`,
-				icon: "success",
-				button: "OK"
-			})
-			this.props.history.push(`/load/P${palette.id}`)
-		})
 	}
 
 	render() {
 		return (
-			<div>
-				<h1>Select a bay location</h1>
-				{/* <div class="container-fluid">
-					<div class="row">
-						<div className="col-sm-4 order-2 aisle">Aisle</div>
-						{this.state.bayList}
-					</div>
-				</div> */}
-				<table className="table">
-					<thead>
-						<tr>
-							<th scope="col" className="col-sm">MB{this.state.leftBay}</th>
-							<th scope="col" className="col-2"></th>
-							<th scope="col" className="col-sm">MB{this.state.rightBay}</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><LoadSubBayGraphic /></td>
-							<td className="aisle"></td>
-							<td><LoadSubBayGraphic /></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+			<table className="table">
+				<thead>
+					<tr class="text-center"><h1>Select a Sub Bay Below</h1></tr>
+					<tr>
+						<th scope="col" className="col-md">MB{this.state.leftBay}</th>
+						<th scope="col" className="col-2"></th>
+						<th scope="col" className="col-md">MB{this.state.rightBay}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><LoadSubBayGraphic data={this.state} count="1" /></td>
+						<td className="aisle"></td>
+						<td><LoadSubBayGraphic data={this.state} count="2" /></td>
+					</tr>
+				</tbody>
+			</table>
 		)
 	}
 }

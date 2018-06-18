@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, BrowserRouter, Route } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
 import './App.css';
 import Search from './Search.js'
 import Add from './Add.js'
@@ -89,11 +89,8 @@ class App extends Component {
               <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
             </Carousel.Caption> */} 
           </Carousel.Item>
-
-      
         </Carousel>;
  </div>
- 
  } 
  />
         </div>
