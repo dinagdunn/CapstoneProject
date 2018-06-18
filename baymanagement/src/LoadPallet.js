@@ -49,7 +49,7 @@ class LoadPallet extends Component {
 		if (this.state.buttonText === `Link`) {
 			console.log(this.state.palletInfo)
 			this.props.history.push({
-				pathname: `/pblinkgraphic/P${this.state.id}`,
+				pathname: `/pblink/P${this.state.id}`,
 				state: {paletteInfo: this.state.palletInfo}
 			})
 		} else if (this.state.buttonText === `Unlink`) {
