@@ -29,8 +29,6 @@ class LoadSubBay extends Component {
                 category: ""
             }
         }
-
-
     }
 
 
@@ -55,9 +53,7 @@ class LoadSubBay extends Component {
     }
 
     editBay(sB, e) {
-
         console.log({ sB });
-
         this.props.history.push({
             pathname: `/editSubBay/SB${sB.id}`,
             state: { subBayInfo: sB }
@@ -80,9 +76,6 @@ pText(sB) {
         }
 
         if (this.state.masterBayInfo.bayList) {
-
-
-
             return (
                 <div>
                     <h3>Associated SubBays</h3>

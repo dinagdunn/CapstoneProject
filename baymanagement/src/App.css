@@ -106,6 +106,24 @@ p{
   padding-top: 7px;
 }
 
+.subBayGraphic{
+  border: 1px solid gray;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+  width: 40%;
+  box-sizing: border-box;
+  float: none;
+  display: inline-block; 
+  background-color: white;
+  padding-top: 7px;
+}
+
+.aisle{
+  background-color: grey;
+  width: 20%;
+}
+
 @media only screen and (max-width: 600px) {
   .subBayDisplay {
       width: 100%;
@@ -119,12 +137,9 @@ li{
 
 
 .subBayDisplay:hover {
-
   background-color: #93DEAB;
   box-shadow: 5px 5px 5px gray;
- 
   background-color: lightgreen;
-
 }
 
 /* For Firefox */

@@ -23,7 +23,7 @@ class LoadPallet extends Component {
 		axios.get(`http://localhost:8081/getPaletteById?id=${this.state.id}`).then(res => {
 				let buttonText = "Link"
 				if (res.data.bay>0) {
-					console.log("I AM THE DANG BAYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY", res.data.bay)
+					// console.log("I AM THE DANG BAYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY", res.data.bay)
 					buttonText = `Unlink`
 				}
 				this.setState({
@@ -49,7 +49,7 @@ class LoadPallet extends Component {
 		if (this.state.buttonText === `Link`) {
 			console.log(this.state.palletInfo)
 			this.props.history.push({
-				pathname: `/pblink/P${this.state.id}`,
+				pathname: `/pblinkgraphic/P${this.state.id}`,
 				state: {paletteInfo: this.state.palletInfo}
 			})
 		} else if (this.state.buttonText === `Unlink`) {
@@ -82,7 +82,9 @@ class LoadPallet extends Component {
 				<p>Location: SB{this.state.palletInfo.bay}</p>
 
 				<form onSubmit={this.submitHandler} className="bar">
-					<button className="btn btn-primary custom-btn" type="submit">Edit</button>
+					<button className="btn btn-primary custom-btn" type="submit">
+						Edit
+					</button>
 				</form>
 				<form onSubmit={this.linkHandler} className="bar">
 					<button className="btn btn-primary custom-btn" type="submit">

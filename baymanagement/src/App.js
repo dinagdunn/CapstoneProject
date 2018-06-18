@@ -16,6 +16,7 @@ import img2 from './images/2.jpg'
 import img3 from './images/3.jpg'
 import img5 from './images/5.jpg'
 import {Carousel} from 'react-bootstrap'
+import PBLinkGraphic from './PBLinkGraphic';
 
 
 
@@ -57,6 +58,7 @@ class App extends Component {
           <Route path="/edit/P:id" component={ EditPallet } />
           <Route path="/edit/MB:id" component={ EditBay } />
           <Route path="/pblink/P:id" component={ PBLink } />
+          <Route path="/pblinkgraphic/P:id" component={ PBLinkGraphic } />
           <Route exact path="/load/message" component={Message} />  
           <Route exact path="/editSubBay/SB:id" component={EditSubBay} /> 
           <Route exact path="/addSubBay" component={AddSubBay} /> 
