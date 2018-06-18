@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 import axios from 'axios'
 import swal from 'sweetalert'
+import LoadSubBayGraphic from './LoadSubBayGraphic';
 
 
 
@@ -50,7 +51,12 @@ class PBLinkGraphic extends Component {
 		})
 	}
 
+	click() {
+		console.log("from the td")
+	}
+
 	bayClick(bay) {
+		console.log("click test from parent")
 		let palette = {}
 		palette.id = this.state.id;
 		palette.width = this.state.width;
@@ -85,15 +91,15 @@ class PBLinkGraphic extends Component {
 					<thead>
 						<tr>
 							<th scope="col" className="col-sm">MB{this.state.leftBay}</th>
-							<th scope="col" className="aisle">Aisle</th>
+							<th scope="col" className="col-2"></th>
 							<th scope="col" className="col-sm">MB{this.state.rightBay}</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>SubBay ID</td>
-							<td>Aisle</td>
-							<td>SubBay ID</td>
+							<td><LoadSubBayGraphic /></td>
+							<td className="aisle"></td>
+							<td><LoadSubBayGraphic /></td>
 						</tr>
 					</tbody>
 				</table>
