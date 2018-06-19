@@ -36,7 +36,7 @@ class PBLinkGraphic extends Component {
 		return (
 			<table className="table">
 				<thead>
-					<tr class="text-center"><h1>Select a Sub Bay Below</h1></tr>
+					<tr><h1 className="text-center">Select a Sub Bay Below</h1></tr>
 					<tr>
 						<th scope="col" className="col-md">MB{this.state.leftBay}</th>
 						<th scope="col" className="col-2"></th>
@@ -45,9 +45,9 @@ class PBLinkGraphic extends Component {
 				</thead>
 				<tbody>
 					<tr>
-						<td><LoadSubBayGraphic data={this.state} count="1" /></td>
+						<td><LoadSubBayGraphic data={this.state} count="1" history={this.props.history} /></td>
 						<td className="aisle"></td>
-						<td><LoadSubBayGraphic data={this.state} count="2" /></td>
+						<td><LoadSubBayGraphic data={this.state} count="2" history={this.props.history} /></td>
 					</tr>
 				</tbody>
 			</table>
