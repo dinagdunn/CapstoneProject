@@ -21,6 +21,7 @@ public class MasterBayDao {
 
 	private final String GET_MASTERBAY_LIST = "SELECT * FROM masterbay;";
 	private final String GET_BAY_LIST = "SELECT * FROM Bay WHERE masterbay =?;";
+	private final String GET_BAY_LIST_BY_DEP = "SELECT * FROM Bay WHERE masterbay =?;";
 	private final String GET_MASTERBAY_BY_ID = "SELECT * FROM masterbay WHERE id = ?;";
 	private final String ADD_MASTERBAY = "INSERT INTO masterbay (width, height, length) VALUES (?, ?, ?);";
 	private final String DELETE_MASTERBAY = "DELETE FROM masterbay WHERE id = ?";
@@ -68,5 +69,20 @@ public class MasterBayDao {
 		Object[] args = {masterBay.getWidth(),masterBay.getHeight(),masterBay.getLength(),masterBay.getId()};
 		jdbctemplate.update(EDIT_MASTERBAY, args);
 	}
+
+	public MasterBay getMasterbayByDep(String dep) {
+			Object[] args = {dep};
+			List<Bay> bayList = jdbctemplate.query(GET_BAY_LIST_BY_DEP, args, new BeanPropertyRowMapper<>(Bay.class));
+			List<MasterBay> masterBayList = jdbctemplate.query(GET_MASTERBAY_BY_ID, args, new BeanPropertyRowMapper<>(MasterBay.class));
+			MasterBay masterBay = new MasterBay();
+			if(!masterBayList.isEmpty()) {
+				masterBay = masterBayList.get(0);
+				masterBay.setBayList(bayList);
+				masterBay = new MasterBay(masterBay.getId(), masterBay.getWidth(), 
+						masterBay.getHeight(), masterBay.getLength(), masterBay.getDep(), bayList);
+			}
+			System.out.println(masterBay.getId());
+			return masterBay;
+		}
 	
 }
