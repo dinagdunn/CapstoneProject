@@ -24,17 +24,17 @@ public class BayService {
 	@Autowired
 	PaletteDao paletteDao;
 	
-	private final Message tooWide = new Message("Bay too wide");
+	private final Message tooWide = new Message("Bay exceeds length of Master");
     
     public Message addBay(Bay bay) {
     	MasterBay masterBay = masterBayDao.getMasterbayById(bay.getMasterbay());
     	List<Bay> bayList = masterBay.getBayList();
     	int bayWidthSum=0;
     	for(Bay b: bayList) {
-    		bayWidthSum += b.getWidth();
+    		bayWidthSum += b.getLength();
     	}
-    	bayWidthSum += bay.getWidth();
-    	if(bayWidthSum>masterBay.getWidth()) {
+    	bayWidthSum += bay.getLength();
+    	if(bayWidthSum>masterBay.getLength()) {
     		return tooWide;
     	}
     	bayDao.addBay(bay);

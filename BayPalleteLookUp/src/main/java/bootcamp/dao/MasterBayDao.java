@@ -21,9 +21,9 @@ public class MasterBayDao {
 
 	private final String GET_MASTERBAY_LIST = "SELECT * FROM masterbay;";
 	private final String GET_BAY_LIST = "SELECT * FROM Bay WHERE masterbay =?;";
-	private final String GET_BAY_LIST_BY_DEP = "SELECT * FROM Bay WHERE masterbay =?;";
 	private final String GET_MASTERBAY_BY_ID = "SELECT * FROM masterbay WHERE id = ?;";
-	private final String ADD_MASTERBAY = "INSERT INTO masterbay (width, height, length) VALUES (?, ?, ?);";
+	private final String GET_MASTERBAY_BY_DEP = "SELECT * FROM masterbay WHERE dep = ? ORDER BY id ASC;";
+	private final String ADD_MASTERBAY = "INSERT INTO masterbay (width, height, length, dep) VALUES (?, ?, ?, ?);";
 	private final String DELETE_MASTERBAY = "DELETE FROM masterbay WHERE id = ?";
 	private final String EDIT_MASTERBAY = "UPDATE masterbay SET width =?, height=?, length=? WHERE id = ?; ";
 	
@@ -46,6 +46,7 @@ public class MasterBayDao {
 	}
 	
 	public int addMasterBay(MasterBay masterBay) {
+		System.out.println("dep from dao: "+masterBay.getDep());
 	      KeyHolder keyHolder = new GeneratedKeyHolder();
 	      jdbctemplate.update(
 	              connection -> {
@@ -53,6 +54,7 @@ public class MasterBayDao {
 	                  ps.setLong(1, masterBay.getWidth());
 	                  ps.setLong(2, masterBay.getHeight());
 	                  ps.setLong(3, masterBay.getLength());
+	                  ps.setString(4, masterBay.getDep());
 	                  return ps;
 	              }, keyHolder);
 
@@ -70,19 +72,22 @@ public class MasterBayDao {
 		jdbctemplate.update(EDIT_MASTERBAY, args);
 	}
 
-	public MasterBay getMasterbayByDep(String dep) {
+	public List<MasterBay> getMasterbayByDep(String dep) {
 			Object[] args = {dep};
-			List<Bay> bayList = jdbctemplate.query(GET_BAY_LIST_BY_DEP, args, new BeanPropertyRowMapper<>(Bay.class));
-			List<MasterBay> masterBayList = jdbctemplate.query(GET_MASTERBAY_BY_ID, args, new BeanPropertyRowMapper<>(MasterBay.class));
-			MasterBay masterBay = new MasterBay();
+			List<MasterBay> masterBayList = jdbctemplate.query(GET_MASTERBAY_BY_DEP, args, 
+					new BeanPropertyRowMapper<>(MasterBay.class));
 			if(!masterBayList.isEmpty()) {
-				masterBay = masterBayList.get(0);
-				masterBay.setBayList(bayList);
-				masterBay = new MasterBay(masterBay.getId(), masterBay.getWidth(), 
-						masterBay.getHeight(), masterBay.getLength(), masterBay.getDep(), bayList);
+				//call other department search here
+			} else {
+				for (MasterBay mb : masterBayList) {
+					Object[] bayArgs = {mb.getId()};
+					List<Bay> bayList = jdbctemplate.query(GET_BAY_LIST, 
+							bayArgs, new BeanPropertyRowMapper<>(Bay.class));
+					mb.setBayList(bayList);
+				}
 			}
-			System.out.println(masterBay.getId());
-			return masterBay;
+//			System.out.println(masterBay.getId());
+			return masterBayList;
 		}
 	
 }

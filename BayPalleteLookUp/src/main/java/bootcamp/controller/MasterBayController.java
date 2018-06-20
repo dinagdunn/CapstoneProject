@@ -27,12 +27,19 @@ public class MasterBayController {
   }
   
   @CrossOrigin
-  /* given masterbay ID return a masterbay object with it's dimentions and all the subbays listed. */
-  @RequestMapping(value = "/getMasterbayById", method = RequestMethod.GET   )
+  /* given masterbay ID return a masterbay object with it's dimensions and all the subbays listed. */
+  @RequestMapping(value = "/getMasterbayById", method = RequestMethod.GET)
   public MasterBay getMasterbayById(@RequestParam("id") int id) {
 	  return masterBayService.getMasterbayById(id);
-	  
   }
+  
+  @CrossOrigin
+  /* given masterbay ID return a masterbay object with it's dimensions and all the subbays listed. */
+  @RequestMapping(value = "/getMasterbayByDep", method = RequestMethod.GET)
+  public MasterBay getMasterbayById(@RequestParam("dep") String dep) {
+	  return masterBayService.getMasterbayByDep(dep);
+  }
+  
   @CrossOrigin
   @RequestMapping(value = "/addMasterBay", method=RequestMethod.POST)
   public int addMasterBay(@RequestBody MasterBay masterBay) {

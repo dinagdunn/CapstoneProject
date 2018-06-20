@@ -11,20 +11,23 @@ class EditBay extends Component {
 		this.handleChangeWidth = this.handleChangeWidth.bind(this)
 		this.handleChangeLength = this.handleChangeLength.bind(this)
 		this.handleChangeHeight = this.handleChangeHeight.bind(this)
+		this.changeDepartment = this.changeDepartment.bind(this)
 
 		this.state = {
 			masterBayInfo: {
 				id: 0,
 				width: 0,
 				height: 0,
-				length: 0
-			}
+				length: 0,
+				dep: "D1"
+			},
+			deps: []
 		}
 	}
 
 	componentDidMount() {
 		let bId = this.props.match.params.id;
-		this.setState({id: parseInt(bId)})
+		this.setState({ id: parseInt(bId) })
 
 		axios.get(`http://localhost:8081/getMasterbayById?id=${bId}`)
 			.then(res => {
@@ -32,6 +35,14 @@ class EditBay extends Component {
 				this.setState({
 					masterBayInfo: res.data,
 				});
+			})
+		axios.get("http://localhost:8081/getDepartments")
+			.then((response) => {
+				console.log("departments on load: ", response.data)
+				this.setState({
+					deps: response.data,
+					// dep: response.data[0].value
+				})
 			})
 	}
 
@@ -55,6 +66,13 @@ class EditBay extends Component {
 		this.setState({ masterBayInfo: newMasterBayInfo })
 	}
 
+	changeDepartment(event) {
+		console.log("got to the change method:", event)
+		let newMasterBayInfo = Object.assign({}, this.state.masterBayInfo)
+		newMasterBayInfo.dep = event.target.value
+		this.setState({ masterBayInfo: newMasterBayInfo })
+	}
+
 	submitHandler(event) {
 		//push new data to db !!!
 		event.preventDefault();
@@ -67,17 +85,13 @@ class EditBay extends Component {
 		})
 			.then(res => {
 				swal({
-                    title: "Edit Successful",
-                    icon: "success",
-                    button: "OK"
-                })
-                this.props.history.push(`/load/MB${this.state.masterBayInfo.id}`)
+					title: "Edit Successful",
+					icon: "success",
+					button: "OK"
+				})
+				this.props.history.push(`/load/MB${this.state.masterBayInfo.id}`)
 			})
 		console.log("finished hitting post");
-
-		
-		
-
 	}
 
 	deleteHandler(event) {
@@ -86,25 +100,25 @@ class EditBay extends Component {
 		bId = parseInt(bId)
 		console.log(bId, "delete");
 
-		  swal({
+		swal({
 			title: "Are you sure?",
 			text: `MasterBay ${bId} will be deleted`,
 			icon: "warning",
 			buttons: true,
 			dangerMode: true,
-		  })
-		  .then((willDelete) => {
-			if (willDelete) {
-			  swal(`MasterBay ${bId} has been deleted`, {
-				icon: "success",
-			  });
-			  	  axios.delete(`http://localhost:8081/deleteMasterBay?id=${bId}`)
-		this.props.history.push('/')
-			} else {
-			  swal("Delete cancelled");
-			}
-		  });
-		
+		})
+			.then((willDelete) => {
+				if (willDelete) {
+					swal(`MasterBay ${bId} has been deleted`, {
+						icon: "success",
+					});
+					axios.delete(`http://localhost:8081/deleteMasterBay?id=${bId}`)
+					this.props.history.push('/')
+				} else {
+					swal("Delete cancelled");
+				}
+			});
+
 	}
 
 	addSubHandler(event) {
@@ -117,42 +131,55 @@ class EditBay extends Component {
 
 	render() {
 		return (
-				<div className="formStyle">
-					<form className="bar" onSubmit={this.submitHandler}>
-						<h2>Editing Master Bay MB{this.state.masterBayInfo.id}</h2>
-						<label>
-							Length:
-							<input type="number" name="length" 
-								value={this.state.masterBayInfo.length} 
-								onChange={this.handleChangeLength()} />
+			<div className="formStyle">
+				<form className="bar" onSubmit={this.submitHandler}>
+					<h2>Editing Master Bay MB{this.state.masterBayInfo.id}</h2>
+					<label>
+						Length:
+							<input type="number" name="length"
+							value={this.state.masterBayInfo.length}
+							onChange={this.handleChangeLength()} />
 
-						</label>
-						<br />
+					</label>
+					<br />
 
-							<label>
-							Width:
-							<input type="number" name="width" 
-								value={this.state.masterBayInfo.width} 
-								onChange={this.handleChangeWidth()} />
-						</label>
-						<br />
-					
-						<label>
-							Height:
-						<input type="number" name="height" 
-						value={this.state.masterBayInfo.height} 
-						onChange={this.handleChangeHeight()} />
+					<label>
+						Width:
+							<input type="number" name="width"
+							value={this.state.masterBayInfo.width}
+							onChange={this.handleChangeWidth()} />
+					</label>
+					<br />
 
-						</label>
-						<br />
-						<br/>
-	{/* Length:
+					<label>
+						Height:
+						<input type="number" name="height"
+							value={this.state.masterBayInfo.height}
+							onChange={this.handleChangeHeight()} />
+
+					</label>
+					<br />
+
+					<label>
+						Department:
+						<select name="department" onChange={this.changeDepartment}>
+
+							{/* this was the line in question --Q*/}
+							{/*{this.state.deps.map(x => <option>{x}</option>)} */}
+							{console.log("deps: ", this.state.deps)}
+							{this.state.deps.map(x => <option>{x.value}</option>)}
+						</select>
+					</label>
+					<br />
+
+					<br />
+					{/* Length:
 							<input type="number" name="length" 
 								value={this.state.masterBayInfo.length} 
 								onChange={this.handleChangeLength()} /> */}
-					
 
-	{/* <label>
+
+					{/* <label>
 							Height:
 							<input type="number" name="height" 
 							value={this.state.masterBayInfo.height} 
@@ -161,24 +188,24 @@ class EditBay extends Component {
 							<form className="bar" onSubmit={this.submitHandler} />
 						</label> */}
 
-						<div className="row ">
-							<button className="btn btn-primary custom-btn" 
-								type="submit">
-								Submit
+					<div className="row ">
+						<button className="btn btn-primary custom-btn"
+							type="submit">
+							Submit
 							</button>
-						</div>
-					</form>
-<br/>
-					<div>
-						<button className="btn btn-primary custom-btn" 
-							type="submit" 
-							onClick={this.deleteHandler}>
-							Delete
+					</div>
+				</form>
+				<br />
+				<div>
+					<button className="btn btn-primary custom-btn"
+						type="submit"
+						onClick={this.deleteHandler}>
+						Delete
 						</button>
-					</div>
-					<div className="row">
-					</div>
 				</div>
+				<div className="row">
+				</div>
+			</div>
 		)
 	}
 }

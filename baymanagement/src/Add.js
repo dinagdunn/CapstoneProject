@@ -10,7 +10,7 @@ class Add extends Component {
 			height: '',
 			width: '',
 			length: '',
-			dep:'',
+			dep: '',
 			deps: [],
 			classes: [],
 			categories: [],
@@ -29,27 +29,31 @@ class Add extends Component {
 	componentWillMount() {
 		axios.get("http://localhost:8081/getDepartments")
 			.then((response) => {
-				console.log("departments on load: ", response.data)
-				this.setState({ deps: response.data,
-				dep:response.data[0].value })
+				// console.log("departments on load: ", response.data)
+				this.setState({
+					deps: response.data,
+					dep: response.data[0].value
+				})
 			})
-
 		axios.get("http://localhost:8081/getClasses").then((response) => {
-			console.log("classes: ", response.data)
-			this.setState({ classes: response.data,
-			paletteClass:response.data[0].value })
+			// console.log("classes: ", response.data)
+			this.setState({
+				classes: response.data,
+				paletteClass: response.data[0].value
+			})
 		})
-
 		axios.get("http://localhost:8081/getCategories").then((response) => {
-			console.log("categories on load: ", response.data)
-			this.setState({ categories: response.data,
-			category:response.data[0].value })
+			// console.log("categories on load: ", response.data)
+			this.setState({
+				categories: response.data,
+				category: response.data[0].value
+			})
 		})
 	}
 
 	changeHeight(e) {
 		this.setState({ height: e.target.value })
-		console.log("height here:", e.target.value)
+		// console.log("height here:", e.target.value)
 	}
 	changeWidth(e) {
 		this.setState({ width: e.target.value })
@@ -59,6 +63,7 @@ class Add extends Component {
 	}
 	changeDepartment(e) {
 		this.setState({ dep: e.target.value })
+		console.log("dep change check: ", this.state.dep)
 	}
 	changeClass(e) {
 		this.setState({ class: e.target.value })
@@ -75,7 +80,6 @@ class Add extends Component {
 	submitHandler(event) {
 		event.preventDefault();
 		if (this.state.selectedOption === 'Pallet') {
-			console.log("dept: ", this.state.dep)
 			axios.post(`http://localhost:8081/addPalette`, {
 				height: this.state.height,
 				width: this.state.width,
@@ -94,10 +98,12 @@ class Add extends Component {
 				});
 		}
 		else if (this.state.selectedOption === 'Master Bay') {
+		console.log("from submit: ", this.state.dep)
 			axios.post(`http://localhost:8081/addMasterBay`, {
 				height: this.state.height,
 				width: this.state.width,
 				length: this.state.length,
+				dep: this.state.dep
 			})
 				.then((response) => {
 					console.log("Bay ID: ", response.data)
@@ -163,20 +169,18 @@ class Add extends Component {
 							</label>
 							<br />
 
+
+							<label>
+								Department:
+								<select name="department" onChange={this.changeDepartment}>
+									{/* this was the line in question --Q*/}
+									{/*{this.state.deps.map(x => <option>{x}</option>)} */}
+									{this.state.deps.map(x => <option>{x.value}</option>)}
+								</select>
+							</label>
+							<br />
 							{this.state.selectedOption === 'Pallet' &&
 								<div>
-									<label>
-										Department:
-								<select name="department" onChange={this.changeDepartment}>
-
-											{/* this was the line in question --Q*/}
-											{/*{this.state.deps.map(x => <option>{x}</option>)} */}
-											{this.state.deps.map(x => <option>{x.value}</option>)}
-
-										</select>
-									</label>
-									<br />
-
 									<label>
 										Class:
 								<select name="class" onChange={this.changeClass}>

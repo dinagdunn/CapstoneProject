@@ -61,11 +61,11 @@ class LoadBay extends Component {
 
 			<div className="loadData">
 				<h2>MasterBay ID: MB{this.state.masterBayInfo.id}</h2>
-		
 				<p>Master Bay dimensions: </p>
+				<p>Length:  {this.state.masterBayInfo.length}</p>
 				<p>Width: {this.state.masterBayInfo.width}</p>
 				<p>Height: {this.state.masterBayInfo.height}</p>
-				<p>Length:  {this.state.masterBayInfo.length}</p>
+				<p>Department:  {this.state.masterBayInfo.dep}</p>
 				<div className="col-sm-12">
 
 					<form onSubmit={this.clickHandler} className="bar">

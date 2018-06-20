@@ -43,7 +43,6 @@ public class MasterBayService {
 			  return new Message("Master bay is associated with palette P" + b.getPalette());
 		  }
 	  }
-	  
 	  masterBayDao.deleteMasterBay(id);
 	  return new Message("Delete successful");
   }
@@ -80,5 +79,9 @@ public class MasterBayService {
 	  }
 	  return new Message("edit successful");
   }
+
+public MasterBay getMasterbayByDep(String dep) {
+	  return masterBayDao.getMasterbayByDep(dep);
+}
 	
 }

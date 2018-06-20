@@ -13,10 +13,8 @@ class LoadSubBay extends Component {
 
         this.state = {
             masterBayInfo: {
-
                 bayList: [{}]
             },
-
             subBayInfo: {
                 id: 0,
                 width: 0,
@@ -83,9 +81,9 @@ pText(sB) {
                             <div key={i} className="col-sm-3 subBayDisplay">
                                 <div onClick={(e) => { this.editBay(sB, e) }}>
                                     <p>SubBay ID: {sB.id}</p>
+                                    <p>SubBay Length: {sB.length}</p>
                                     <p>SubBay Width: {sB.width}</p>
                                     <p>SubBay Height: {sB.height}</p>
-                                    <p>SubBay Length: {sB.length}</p>
                                     <p>SubBay Dept: {sB.dep}</p>
                                     <p>SubBay BayClass: {sB.bayClass}</p>
                                     <p>SubBay Category: {sB.category}</p>

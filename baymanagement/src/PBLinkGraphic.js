@@ -11,7 +11,7 @@ class PBLinkGraphic extends Component {
 		super(props)
 		this.componentWillMount = this.componentWillMount.bind(this)
 		this.render = this.render.bind(this)
-		console.log(this.props)
+		// console.log(this.props)
 		this.state = {
 			id: this.props.location.state.paletteInfo.id,
 			width: this.props.location.state.paletteInfo.width,
@@ -20,15 +20,15 @@ class PBLinkGraphic extends Component {
 			dep: this.props.location.state.paletteInfo.dep,
 			class: this.props.location.state.paletteInfo.paletteClass,
 			category: this.props.location.state.paletteInfo.category,
-			leftBay: 1,
-			rightBay: 2
+			leftBay: 99,
+			rightBay: 100
 		}
 	}
 
 	componentWillMount() {
 		let pId = this.props.match.params.id;
-		let bays = axios.get(`http://localhost:8081/getEmptyBays?id=${pId}`).then((response) => {
-			console.log("number 1 bay: ", bays)
+		let bays = axios.get(`http://localhost:8081/getEmptyBaysGraphic?id=${pId}`).then((response) => {
+			console.log("number 1 bay: ", response.data)
 			})
 	}
 
@@ -36,7 +36,7 @@ class PBLinkGraphic extends Component {
 		return (
 			<table className="table">
 				<thead>
-					<tr><h1 className="text-center">Select a Sub Bay Below</h1></tr>
+					<tr className="text-center">Select a Sub Bay Below</tr>
 					<tr>
 						<th scope="col" className="col-md">MB{this.state.leftBay}</th>
 						<th scope="col" className="col-2"></th>
@@ -45,9 +45,9 @@ class PBLinkGraphic extends Component {
 				</thead>
 				<tbody>
 					<tr>
-						<td><LoadSubBayGraphic data={this.state} count="1" history={this.props.history} /></td>
+						<td><LoadSubBayGraphic data={this.state} count={this.state.leftBay} history={this.props.history} /></td>
 						<td className="aisle"></td>
-						<td><LoadSubBayGraphic data={this.state} count="2" history={this.props.history} /></td>
+						<td><LoadSubBayGraphic data={this.state} count={this.state.rightBay} history={this.props.history} /></td>
 					</tr>
 				</tbody>
 			</table>
