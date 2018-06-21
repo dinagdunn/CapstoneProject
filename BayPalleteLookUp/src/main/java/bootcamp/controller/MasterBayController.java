@@ -34,13 +34,6 @@ public class MasterBayController {
   }
   
   @CrossOrigin
-  /* given masterbay ID return a masterbay object with it's dimensions and all the subbays listed. */
-  @RequestMapping(value = "/getMasterbayByDep", method = RequestMethod.GET)
-  public MasterBay getMasterbayById(@RequestParam("dep") String dep) {
-	  return masterBayService.getMasterbayByDep(dep);
-  }
-  
-  @CrossOrigin
   @RequestMapping(value = "/addMasterBay", method=RequestMethod.POST)
   public int addMasterBay(@RequestBody MasterBay masterBay) {
 	 return masterBayService.addMasterBay(masterBay);
@@ -57,7 +50,6 @@ public class MasterBayController {
   public Message editMasterBay(@RequestBody MasterBay masterBay) {
 	  return masterBayService.editMasterBay(masterBay);
   }
-  
 }
   
 //  { "id": 1, "width": 12, "height": 12, "length": 34, "bayList":null}

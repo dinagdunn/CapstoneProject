@@ -26,7 +26,7 @@ class LoadSubBayGraphic extends Component {
 
     componentDidMount() {
         let bId = this.props.count
-        // console.log("bId: ", bId)
+        console.log("bId: ", bId)
         axios.get(`http://localhost:8081/getMasterbayById?id=${bId}`)
             .then(res => {
                 // console.log(res.data);
@@ -43,6 +43,13 @@ class LoadSubBayGraphic extends Component {
             pText = `No associated Pallets`
         }
         return pText
+    }
+    topOrNot(sB) {
+        let mode = "subBayGraphic"
+        if (sB.id === this.props.best) {
+            mode = "subBayGraphicBest"
+        }
+        return mode
     }
 
     bayClick(sB) {
@@ -80,7 +87,7 @@ class LoadSubBayGraphic extends Component {
                     // console.log("sB return: ", this.state.masterBayInfo.bayList)
                     if (sB.palette === 0) {
                         return (
-                            <td onClick={() => { this.bayClick(sB) }} className="subBayGraphic">
+                            <td onClick={() => { this.bayClick(sB) }} className={this.topOrNot(sB)}>
                                 <p>SubBay ID: {sB.id}</p>
                                 <p>SubBay Dept: {sB.dep}</p>
                                 <p>SubBay BayClass: {sB.bayClass}</p>

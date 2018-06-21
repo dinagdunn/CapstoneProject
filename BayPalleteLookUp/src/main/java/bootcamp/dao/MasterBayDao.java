@@ -2,6 +2,7 @@ package bootcamp.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,23 +72,4 @@ public class MasterBayDao {
 		Object[] args = {masterBay.getWidth(),masterBay.getHeight(),masterBay.getLength(),masterBay.getId()};
 		jdbctemplate.update(EDIT_MASTERBAY, args);
 	}
-
-	public List<MasterBay> getMasterbayByDep(String dep) {
-			Object[] args = {dep};
-			List<MasterBay> masterBayList = jdbctemplate.query(GET_MASTERBAY_BY_DEP, args, 
-					new BeanPropertyRowMapper<>(MasterBay.class));
-			if(!masterBayList.isEmpty()) {
-				//call other department search here
-			} else {
-				for (MasterBay mb : masterBayList) {
-					Object[] bayArgs = {mb.getId()};
-					List<Bay> bayList = jdbctemplate.query(GET_BAY_LIST, 
-							bayArgs, new BeanPropertyRowMapper<>(Bay.class));
-					mb.setBayList(bayList);
-				}
-			}
-//			System.out.println(masterBay.getId());
-			return masterBayList;
-		}
-	
 }

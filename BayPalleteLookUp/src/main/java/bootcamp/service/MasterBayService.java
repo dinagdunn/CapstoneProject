@@ -71,7 +71,7 @@ public class MasterBayService {
 		  return new Message("Width too small");
 	  }
 	  masterBayDao.editMasterBay(masterBay);
-	  //everytime the masterbay is updated the length and height of the bays should update too
+	  //every time the masterbay is updated the length and height of the bays should update too
 	  for(Bay b: bayList) {
 		  b.setHeight(masterBay.getHeight());
 		  b.setLength(masterBay.getLength());
@@ -79,9 +79,4 @@ public class MasterBayService {
 	  }
 	  return new Message("edit successful");
   }
-
-public MasterBay getMasterbayByDep(String dep) {
-	  return masterBayDao.getMasterbayByDep(dep);
-}
-	
 }
