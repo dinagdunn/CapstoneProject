@@ -48,7 +48,7 @@ class PBLinkGraphic extends Component {
 			} else {
 				this.setState({
 					leftBay: topBay.masterbay,
-					rightBay: (topBay.masterbay - 1)
+					rightBay: (topBay.masterbay + 1)
 				})
 			}
 		} else {
@@ -57,8 +57,14 @@ class PBLinkGraphic extends Component {
 			})
 		}
 
-			console.log("left then right",this.state.leftBay,this.state.rightBay)
+			// console.log("left then right",this.state.leftBay,this.state.rightBay)
 		})
+	}
+
+	setHeight(h) {
+		// console.log("height from sub ", h)
+		let sty = `height: ${h}%`
+		return sty
 	}
 
 	render() {
@@ -66,9 +72,9 @@ class PBLinkGraphic extends Component {
 			return <div />
 		} else if (this.state.noReturnsWarning) {
 			swal({
-                title: "No available bays matched this pallet.",
+                title: "No Available Bays",
                 text: `No bays match the dimensions of Pallet P${this.state.id}.`,
-                icon: "fail",
+                icon: "error",
                 button: "OK"
             })
 			{this.props.history.push(`/load/P${this.state.id}`)}
@@ -80,9 +86,9 @@ class PBLinkGraphic extends Component {
 				<table className="table">
 					<thead>
 						<tr>
-							<th scope="col" className="col-md">MB{this.state.leftBay}</th>
+							<th scope="col" className="col-md-5">MB{this.state.leftBay}</th>
 							<th scope="col" className="col-2"></th>
-							<th scope="col" className="col-md">MB{this.state.rightBay}</th>
+							<th scope="col" className="col-md-5">MB{this.state.rightBay}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -92,13 +98,16 @@ class PBLinkGraphic extends Component {
 								count={this.state.leftBay}
 								history={this.props.history}
 								best={this.state.bestChoiceBay}
+								style={this.setHeight}
 							/></td>
-							<td className="aisle"></td>
+							<td className="aisle"><p>The green bay is the best fit. 
+								Please use it if possible.</p></td>
 							<td><LoadSubBayGraphic
 								data={this.state}
 								count={this.state.rightBay}
 								history={this.props.history}
 								best={this.state.bestChoiceBay}
+								style={this.setHeight}
 							/></td>
 						</tr>
 					</tbody>

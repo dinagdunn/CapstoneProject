@@ -115,10 +115,9 @@ p{
   padding-top: 7px;
 }
 
-.subBayGraphic:hover {
-  background-color: #93DEAB;
+.subBayGraphic:hover {  
   box-shadow: 5px 5px 5px gray;
-  background-color: lightgreen;
+  background-color: yellow;
 }
 
 .subBayGraphicBest{
@@ -133,6 +132,11 @@ p{
   display: inline-block; 
   background-color: green;
   padding-top: 7px;
+}
+
+.subBayGraphicBest:hover{  
+  box-shadow: 5px 5px 5px gray;
+  background-color: lightgreen;
 }
 
 .subBayGraphicUnavail{
@@ -151,6 +155,7 @@ p{
 .aisle{
   background-color: grey;
   width: 20%;
+  color: white;
 }
 
 @media only screen and (max-width: 600px) {

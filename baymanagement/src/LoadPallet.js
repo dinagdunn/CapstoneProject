@@ -68,6 +68,14 @@ class LoadPallet extends Component {
 		}
 	}
 
+	locationCheck(bay) {
+		let text = `Location: SB${bay}`
+		if (bay === 0 ) {
+			text = "Pallet not yet placed"
+		}
+		return text
+	}
+
 	render() {
 		return (
 			<div>
@@ -79,7 +87,7 @@ class LoadPallet extends Component {
 				<p>Department: {this.state.palletInfo.dep}</p>
 				<p>Class: {this.state.palletInfo.paletteClass}</p>
 				<p>Category: {this.state.palletInfo.category}</p>
-				<p>Location: SB{this.state.palletInfo.bay}</p>
+				<p>{this.locationCheck(this.state.palletInfo.bay)}</p>
 
 				<form onSubmit={this.submitHandler} className="bar">
 					<button className="btn btn-primary custom-btn" type="submit">

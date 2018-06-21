@@ -117,10 +117,7 @@ class AddSubBay extends Component {
 							<br />
 
 							<label>
-								Department:
-						<select name="department" form="editPalette">
-									{this.state.dep}
-								</select>
+								Department: {this.state.dep}
 							</label>
 							<br />
 

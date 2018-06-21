@@ -10,6 +10,7 @@ class LoadSubBayGraphic extends Component {
         this.bayClick = this.bayClick.bind(this)
         this.state = {
             masterBayInfo: {
+                height: '',
                 bayList: [{}]
             },
             subBayInfo: {
@@ -52,6 +53,11 @@ class LoadSubBayGraphic extends Component {
         return mode
     }
 
+    setHeight() {
+        console.log((this.state.subBayInfo.length/this.state.masterBayInfo.length)*100)
+        return ("height sub check ",(this.state.subBayInfo.length/this.state.masterBayInfo.length)*100)
+    }
+
     bayClick(sB) {
         console.log("click test from child")
         let palette = {}
@@ -84,6 +90,7 @@ class LoadSubBayGraphic extends Component {
         if (this.state.masterBayInfo.bayList) {
             return (
                 this.state.masterBayInfo.bayList.map((sB) => {
+                    this.props.setHeight
                     // console.log("sB return: ", this.state.masterBayInfo.bayList)
                     if (sB.palette === 0) {
                         return (
