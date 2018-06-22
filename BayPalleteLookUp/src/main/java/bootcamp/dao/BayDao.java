@@ -40,7 +40,15 @@ public class BayDao {
 	}
 	
 	public void addBay(Bay bay) {
-		java.lang.Object[] args = {bay.getWidth(), bay.getLength(), bay.getHeight(), bay.getDep(), bay.getBayClass(), bay.getCategory(), bay.getMasterbay()};
+		java.lang.Object[] args = {
+				bay.getWidth(), 
+				bay.getLength(), 
+				bay.getHeight(), 
+				bay.getDep(), 
+				bay.getBayClass(), 
+				bay.getCategory(), 
+				bay.getMasterbay()
+				};
 		jdbctemplate.update(ADD_BAY, args);
 	}
 	

@@ -1,7 +1,6 @@
 package bootcamp.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import bootcamp.model.Bay;
 import bootcamp.model.Message;
 import bootcamp.service.BayService;
-
 
 @RestController
 public class BayController {

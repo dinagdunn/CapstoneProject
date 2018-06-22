@@ -25,7 +25,7 @@ class EditSubBay extends Component {
 
     submitHandler(event) {
         event.preventDefault();
-        console.log(this.props.location.state.subBayInfo)
+        // console.log(this.props.location.state.subBayInfo)
         let subBay = {}
         subBay.id = this.state.id;
         subBay.width = this.state.width;
@@ -36,7 +36,7 @@ class EditSubBay extends Component {
         subBay.category = this.state.category;
         subBay.masterbay = this.state.masterbay;
         axios.post("http://localhost:8081/editBay", subBay).then((response) => {
-            console.log(response);
+            // console.log(response);
             console.log(response.data.message)
             if (response.data.message === "Bay too wide") {
                 swal({
@@ -65,8 +65,15 @@ class EditSubBay extends Component {
         event.preventDefault();
         const pId = this.props.match.params.id;
         console.log(pId)
-        this.props.history.push('/?msg=deleted')
-        axios.delete(`http://localhost:8081/deleteBay?id=${pId}`)
+        
+        axios.delete(`http://localhost:8081/deleteBay?id=${pId}`).then(
+            swal({
+                title: "Bay Deleted Successfully",
+                icon: "success",
+                button: "OK"
+            }),
+            this.props.history.push(`/loadMB${this.state.masterbay}`)
+        )
     }
 
     changeValue(event, box) {
@@ -83,7 +90,7 @@ class EditSubBay extends Component {
 
         let departments = axios.get("http://localhost:8081/getDepartments").then((response) => {
             const dropDowns = response.data.map((department, index) => {
-                console.log(department.value)
+                // console.log(department.value)
                 if (department.value === this.state.dep) {
                     return (<option value={department.value} selected>{department.value}</option>)
                 } else
@@ -96,7 +103,7 @@ class EditSubBay extends Component {
 
         let classes = axios.get("http://localhost:8081/getClasses").then((response) => {
             const dropDowns = response.data.map((department, index) => {
-                console.log(department.value)
+                // console.log(department.value)
                 if (department.value === this.state.class) {
                     return (<option value={department.value} selected>{department.value}</option>)
                 } else
@@ -109,7 +116,7 @@ class EditSubBay extends Component {
 
         let categories = axios.get("http://localhost:8081/getCategories").then((response) => {
             const dropDowns = response.data.map((department, index) => {
-                console.log(department.value)
+                // console.log(department.value)
                 if (department.value === this.state.category) {
                     return (<option value={department.value} selected>{department.value}</option>)
                 } else
