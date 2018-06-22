@@ -87,6 +87,9 @@ class Add extends Component {
 				dep: this.state.dep,
 				paletteClass: this.state.paletteClass,
 				category: this.state.category,
+				// dep: 'Tools',
+				// paletteClass: 'Hand Tools',
+				// category: 'Hammers',
 				bay: 0
 			})
 				.then((response) => {

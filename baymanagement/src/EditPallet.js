@@ -9,7 +9,7 @@ class EditPallet extends Component {
 		super(props);
 		this.submitHandler = this.submitHandler.bind(this)
 		this.deleteHandler = this.deleteHandler.bind(this)
-		this.changeValue = this.changeValue.bind(this)
+		// this.changeValue = this.changeValue.bind(this)
 		this.state={
 			id: this.props.location.state.paletteInfo.id,
 			width: this.props.location.state.paletteInfo.width,
@@ -82,14 +82,29 @@ class EditPallet extends Component {
 		console.log("new length: ", this.state.length)
 	}
 
-	changeValue(event,box){
-		// console.log(event.target)
-		var stateChange = {}
-		// console.log(stateChange[box]);
-		stateChange[box] = event.target.value
-		// console.log(stateChange[box]);
-		this.setState(stateChange);
+	changeDep(event) {
+		this.setState({ dep: event.target.value })
+		console.log("new dep: ", this.state.dep)
 	}
+
+	changeCat(event) {
+		this.setState({ category: event.target.value })
+		console.log("new cat: ", this.state.category)
+	}
+
+	changeClass(event) {
+		this.setState({ class: event.target.value })
+		console.log("new class: ", this.state.class)
+	}
+
+	// changeValue(event,box){
+	// 	// console.log(event.target)
+	// 	var stateChange = {}
+	// 	// console.log(stateChange[box]);
+	// 	stateChange[box] = event.target.value
+	// 	// console.log(stateChange[box]);
+	// 	this.setState(stateChange);
+	// }
 
 
 	// changeValue(event,box){
@@ -177,7 +192,8 @@ class EditPallet extends Component {
 
 					<label>
 						Department:
-						<select name="department" form="editPalette" >
+						<select name="department" form="editPalette" onChange={(e) => { 
+								this.changeDep(e) }} >
 							{this.state.deps}
 						</select>
 					</label>
@@ -185,7 +201,8 @@ class EditPallet extends Component {
 
 					<label>
 						Class:
-						<select name="class" form="editPalette">
+						<select name="class" form="editPalette" onChange={(e) => { 
+								this.changeClass(e) }} >
 							{this.state.classes}
 						</select>
 					</label>
@@ -193,7 +210,8 @@ class EditPallet extends Component {
 
 					<label>
 						Category:
-						<select name="category" form="editPalette">
+						<select name="category" form="editPalette" onChange={(e) => { 
+								this.changeCat(e) }} >
 							{this.state.categories}
 						</select>
 					</label>

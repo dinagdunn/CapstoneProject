@@ -13,9 +13,9 @@ import bootcamp.model.Department;
 @Component
 public class DepartmentDao {
 
-	private final String DEPARTMENTS = "SELECT dep as value from Bay UNION SELECT dep from palette;";
-	private final String CLASSES = "select bayClass as value from Bay UNION select paletteClass from palette;";
-	private final String CATEGOIES = "select category as value from Bay UNION select category from palette;";
+	private final String DEPARTMENTS = "SELECT dep as value from Bay UNION SELECT dep from palette order by value;";
+	private final String CLASSES = "select bayClass as value from Bay UNION select paletteClass from palette order by value;";
+	private final String CATEGOIES = "select category as value from Bay UNION select category from palette order by value;";
 	
 	
 	@Autowired

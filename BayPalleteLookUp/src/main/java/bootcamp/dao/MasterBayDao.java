@@ -23,10 +23,9 @@ public class MasterBayDao {
 	private final String GET_MASTERBAY_LIST = "SELECT * FROM masterbay;";
 	private final String GET_BAY_LIST = "SELECT * FROM Bay WHERE masterbay =?;";
 	private final String GET_MASTERBAY_BY_ID = "SELECT * FROM masterbay WHERE id = ?;";
-	private final String GET_MASTERBAY_BY_DEP = "SELECT * FROM masterbay WHERE dep = ? ORDER BY id ASC;";
 	private final String ADD_MASTERBAY = "INSERT INTO masterbay (width, height, length, dep) VALUES (?, ?, ?, ?);";
 	private final String DELETE_MASTERBAY = "DELETE FROM masterbay WHERE id = ?";
-	private final String EDIT_MASTERBAY = "UPDATE masterbay SET width =?, height=?, length=? WHERE id = ?; ";
+	private final String EDIT_MASTERBAY = "UPDATE masterbay SET width =?, height=?, length=?, dep=? WHERE id = ?; ";
 	
 	public List<MasterBay> getMasterBayList() {
 		return jdbctemplate.query(GET_MASTERBAY_LIST, new BeanPropertyRowMapper<>(MasterBay.class));
@@ -34,13 +33,16 @@ public class MasterBayDao {
 	
 	public MasterBay getMasterbayById(int id) {
 		Object[] args = {id};
+		System.out.println("id in get method " + id);
 		List<Bay> bayList = jdbctemplate.query(GET_BAY_LIST, args, new BeanPropertyRowMapper<>(Bay.class));
+		for (Bay b : bayList) {
+			System.out.println("bay list pallet: " + b.getPalette());
+		}
 		List<MasterBay> masterBayList = jdbctemplate.query(GET_MASTERBAY_BY_ID, args, new BeanPropertyRowMapper<>(MasterBay.class));
 		MasterBay masterBay = new MasterBay();
 		if(!masterBayList.isEmpty()) {
 			masterBay = masterBayList.get(0);
 			masterBay.setBayList(bayList);
-//			 masterBay = new MasterBay(masterBay.getId(), masterBay.getWidth(), masterBay.getHeight(), masterBay.getLength(), bayList);
 		}
 		System.out.println(masterBay.getId());
 		return masterBay;
@@ -69,7 +71,7 @@ public class MasterBayDao {
 	}
 	
 	public void editMasterBay(MasterBay masterBay) {
-		Object[] args = {masterBay.getWidth(),masterBay.getHeight(),masterBay.getLength(),masterBay.getId()};
+		Object[] args = {masterBay.getWidth(),masterBay.getHeight(),masterBay.getLength(),masterBay.getDep(),masterBay.getId()};
 		jdbctemplate.update(EDIT_MASTERBAY, args);
 	}
 }

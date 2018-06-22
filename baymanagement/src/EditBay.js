@@ -19,7 +19,7 @@ class EditBay extends Component {
 				width: 0,
 				height: 0,
 				length: 0,
-				dep: "D1"
+				dep: ''
 			},
 			deps: []
 		}
@@ -67,21 +67,23 @@ class EditBay extends Component {
 	}
 
 	changeDepartment(event) {
-		console.log("got to the change method:", event)
+		console.log("got to the change method:", event.target.value)
 		let newMasterBayInfo = Object.assign({}, this.state.masterBayInfo)
 		newMasterBayInfo.dep = event.target.value
+		console.log("check the value: ", newMasterBayInfo.dep)
 		this.setState({ masterBayInfo: newMasterBayInfo })
 	}
 
 	submitHandler(event) {
 		//push new data to db !!!
 		event.preventDefault();
-		console.log(this.state.masterBayInfo)
+		console.log("from submit: ",this.state.masterBayInfo)
 		axios.post(`http://localhost:8081/editMasterBay`, {
 			id: this.state.masterBayInfo.id,
 			width: this.state.masterBayInfo.width,
 			height: this.state.masterBayInfo.height,
 			length: this.state.masterBayInfo.length,
+			dep: this.state.masterBayInfo.dep
 		})
 			.then(res => {
 				swal({
@@ -139,7 +141,6 @@ class EditBay extends Component {
 							<input type="number" name="length"
 							value={this.state.masterBayInfo.length}
 							onChange={this.handleChangeLength()} />
-
 					</label>
 					<br />
 
@@ -163,7 +164,6 @@ class EditBay extends Component {
 					<label>
 						Department:
 						<select name="department" onChange={this.changeDepartment}>
-
 							{/* this was the line in question --Q*/}
 							{/*{this.state.deps.map(x => <option>{x}</option>)} */}
 							{console.log("deps: ", this.state.deps)}

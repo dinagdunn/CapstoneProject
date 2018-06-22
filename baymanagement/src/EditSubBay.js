@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom'
 import './App.css';
 import axios from 'axios';
+import swal from 'sweetalert'
 
 class EditSubBay extends Component {
     constructor(props) {
@@ -33,6 +34,7 @@ class EditSubBay extends Component {
         subBay.dep = this.state.dep
         subBay.bayClass = this.state.class
         subBay.category = this.state.category;
+        subBay.masterbay = this.state.masterbay;
         axios.post("http://localhost:8081/editBay", subBay).then((response) => {
             console.log(response);
             console.log(response.data.message)
@@ -49,19 +51,12 @@ class EditSubBay extends Component {
             } else if (response.data.message === "Bay width too small for palette P...") {
                 //use regex to get the else if work
             } else if (response.data.message === "Edit successful") {
-                //         this.props.history.push({
-                //         pathname: `/load/message`,
-                //         state: {message: "Edit  was successful!"}
-                //         })
-                //         window.setTimeout(()=>
-                //         this.props.history.push({
-                //             pathname: `/load/P${this.state.id}`,
-                //             state: {paletteInfo: this.props.location.state.paletteInfo}
-                //         }), 4000);
-                //     }
-                // }).catch(function (error) {
-                //     console.log(error);
-                // });   
+                swal({
+                    title: "Edit Successful",
+                    icon: "success",
+                    button: "OK"
+                })
+                this.props.history.push(`/load/MB${this.state.masterbay}`)
             }
         })
     }

@@ -44,7 +44,7 @@ class LoadBay extends Component {
 		this.props.history.push(`/edit/mb${bId}`)
 	}
 
-	addSubBay(event){
+	addSubBay(event) {
 		event.preventDefault();
 		this.props.history.push({
 			pathname: `/addSubBay`,
@@ -53,47 +53,47 @@ class LoadBay extends Component {
 	}
 
 	render() {
-			console.log(this.state.masterBayInfo)
-			if(this.state.masterBayInfo.id ===0){
-				return(<h2>Master bay doesn't exist</h2>)
-			}else{
-		return (
+		console.log(this.state.masterBayInfo)
+		if (this.state.masterBayInfo.id === 0) {
+			return (<h2>Master bay doesn't exist</h2>)
+		} else {
+			return (
+				<div className="loadData">
+					<h2>MasterBay ID: MB{this.state.masterBayInfo.id}</h2>
+					<p>Master Bay dimensions: </p>
+					<p>Length:  {this.state.masterBayInfo.length}</p>
+					<p>Width: {this.state.masterBayInfo.width}</p>
+					<p>Height: {this.state.masterBayInfo.height}</p>
+					<p>Department:  {this.state.masterBayInfo.dep}</p>
+					<div className="col-sm-12">
 
-			<div className="loadData">
-				<h2>MasterBay ID: MB{this.state.masterBayInfo.id}</h2>
-				<p>Master Bay dimensions: </p>
-				<p>Length:  {this.state.masterBayInfo.length}</p>
-				<p>Width: {this.state.masterBayInfo.width}</p>
-				<p>Height: {this.state.masterBayInfo.height}</p>
-				<p>Department:  {this.state.masterBayInfo.dep}</p>
-				<div className="col-sm-12">
-
-					<form onSubmit={this.clickHandler} className="bar">
-						<button className="btn btn-primary custom-btn" type="submit">Edit MasterBay</button>
-
-					</form>
-				</div>
-
-				<div className="col-sm-12 ">
-					
-			<div className="col-sm-12 text-center">
-			<br/>
-					<LoadSubBay history={this.props.history} passedId={this.props.match.params.id} />
+						<form onSubmit={this.clickHandler} className="bar">
+							<button className="btn btn-primary custom-btn" type="submit">
+								Edit MasterBay</button>
+						</form>
 					</div>
-				</div>
 
-				<div className="col-sm-12">
-					<form onClick={this.addSubBay} className="bar" ><br/>
-						<button className="btn btn-primary custom-btn" type="submit">Add SubBay</button>
-					</form>
-				</div>
+					<div className="col-sm-12 ">
+						<div className="col-sm-12 text-center">
+							<br />
+							<LoadSubBay history={this.props.history} 
+								passedId={this.props.match.params.id} />
+						</div>
+					</div>
 
-				{/* <div className="col-sm-12" > */}
-			 	{/* <LoadSubBay passedId={this.props.match.params.id} /> */}
-				{/* </div> */}
-			</div>
-		)
-	}
+					<div className="col-sm-12">
+						<form onClick={this.addSubBay} className="bar" ><br />
+							<button className="btn btn-primary custom-btn" type="submit">
+								Add SubBay</button>
+						</form>
+					</div>
+
+					{/* <div className="col-sm-12" > */}
+					{/* <LoadSubBay passedId={this.props.match.params.id} /> */}
+					{/* </div> */}
+				</div>
+			)
+		}
 	}
 }
 export default LoadBay

@@ -9,8 +9,9 @@ class LoadSubBayGraphic extends Component {
         super(props);
         this.bayClick = this.bayClick.bind(this)
         this.state = {
+            exists: true,
             masterBayInfo: {
-                height: '',
+                // height: '',
                 bayList: [{}]
             },
             subBayInfo: {
@@ -20,7 +21,9 @@ class LoadSubBayGraphic extends Component {
                 length: 0,
                 dep: "",
                 bayClass: "",
-                category: ""
+                category: "",
+                masterBay: 0,
+                palette: 0
             },
         }
     }
@@ -30,11 +33,17 @@ class LoadSubBayGraphic extends Component {
         console.log("bId: ", bId)
         axios.get(`http://localhost:8081/getMasterbayById?id=${bId}`)
             .then(res => {
-                // console.log(res.data);
-                this.setState({
-                    masterBayInfo: res.data,
-                });
-                console.log("called MB");
+                console.log(res.data.bayList);
+                if (res.data.bayList !== null) {
+                    this.setState({
+                        masterBayInfo: res.data,
+                    });
+                    // console.log("called MB");
+                } else {
+                    this.setState({
+                        exists: false
+                    })
+                }
             })
     }
 
@@ -53,13 +62,13 @@ class LoadSubBayGraphic extends Component {
         return mode
     }
 
-    setHeight() {
-        console.log((this.state.subBayInfo.length/this.state.masterBayInfo.length)*100)
-        return ("height sub check ",(this.state.subBayInfo.length/this.state.masterBayInfo.length)*100)
-    }
+    // setHeight() {
+    //     console.log((this.state.subBayInfo.length/this.state.masterBayInfo.length)*100)
+    //     return ("height sub check ",(this.state.subBayInfo.length/this.state.masterBayInfo.length)*100)
+    // }
 
     bayClick(sB) {
-        console.log("click test from child")
+        console.log("pallet check from click ", this.props.data.id)
         let palette = {}
         palette.id = this.props.data.id;
         palette.width = this.props.data.width;
@@ -69,29 +78,32 @@ class LoadSubBayGraphic extends Component {
         palette.paletteClass = this.props.data.class
         palette.category = this.props.data.category;
         palette.bay = sB.id
+        sB.palette = palette.id
         axios.post(`http://localhost:8081/editPalette`, palette).then(() => {
-            console.log(palette.bay)
-            swal({
-                title: "Pallet Linked Sucessfully",
-                text: `Pallet P${palette.id} linked successfully to Bay SB${palette.bay}.`,
-                icon: "success",
-                button: "OK"
+            axios.post(`http://localhost:8081/editBay`, sB).then(() => {
+                // console.log(palette.bay)
+                swal({
+                    title: "Pallet Linked Sucessfully",
+                    text: `Pallet P${palette.id} linked successfully to Bay SB${palette.bay}.`,
+                    icon: "success",
+                    button: "OK"
+                })
+                this.props.history.push(`/load/P${palette.id}`)
             })
-            this.props.history.push(`/load/P${palette.id}`)
         })
     }
 
     //add an onClick for each of these divs, and add a Flip feature 
     render() {
-        if (this.state.masterBayInfo.bayList.length === 0) {
-            return (<h3>No linked Sub Bays</h3>)
+        if (this.state.masterBayInfo.bayList.length === 0 || this.state.exists === false) {
+            return (<h3>No Available Sub Bays</h3>)
         }
 
         if (this.state.masterBayInfo.bayList) {
             return (
                 this.state.masterBayInfo.bayList.map((sB) => {
-                    this.props.setHeight
-                    // console.log("sB return: ", this.state.masterBayInfo.bayList)
+                    // this.props.setHeight
+                    console.log(`sB ${sB.id} returns: `, sB.palette)
                     if (sB.palette === 0) {
                         return (
                             <td onClick={() => { this.bayClick(sB) }} className={this.topOrNot(sB)}>
@@ -100,16 +112,17 @@ class LoadSubBayGraphic extends Component {
                                 <p>SubBay BayClass: {sB.bayClass}</p>
                                 <p>SubBay Category: {sB.category}</p>
                                 <p>{this.pText(sB)}</p>
-                            </td>)
+                            </td>
+                        )
                     } else {
                         return (
-                        <td className="subBayGraphicUnavail">
-                            <p>SubBay ID: {sB.id}</p>
-                            <p>SubBay Dept: {sB.dep}</p>
-                            <p>SubBay BayClass: {sB.bayClass}</p>
-                            <p>SubBay Category: {sB.category}</p>
-                            <p>{this.pText(sB)}</p>
-                        </td>
+                            <td className="subBayGraphicUnavail">
+                                <p>SubBay ID: {sB.id}</p>
+                                <p>SubBay Dept: {sB.dep}</p>
+                                <p>SubBay BayClass: {sB.bayClass}</p>
+                                <p>SubBay Category: {sB.category}</p>
+                                <p>{this.pText(sB)}</p>
+                            </td>
                         )
                     }
                 })

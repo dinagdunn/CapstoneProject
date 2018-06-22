@@ -22,6 +22,7 @@ class AddSubBay extends Component {
 	}
 
 	componentWillMount() {
+		console.log("from the mount: ",this.props.location.state.masterBayInfo)
 		let classes = axios.get("http://localhost:8081/getClasses").then((response) => {
 			const dropDowns = response.data.map((department, index) => {
 				console.log(department.value)
@@ -60,7 +61,7 @@ class AddSubBay extends Component {
 
 	submitHandler(event) {
 		event.preventDefault();
-		console.log(this.state.dep)
+		console.log("at the submit: ",this.state.dep)
 		axios.post(`http://localhost:8081/addBay`, {
 			height: this.state.height,
 			width: this.state.width,
@@ -88,8 +89,6 @@ class AddSubBay extends Component {
 
 	render() {
 		return (
-
-
 			<div className="float-center" >
 				<div className="container" >
 					<div className="row col-12" >

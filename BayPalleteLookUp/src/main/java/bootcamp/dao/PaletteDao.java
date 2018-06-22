@@ -55,7 +55,17 @@ public class PaletteDao {
 	}
 	
 	public boolean editPalette(Palette palette) {
-		Object[] args = { palette.getWidth(), palette.getLength(), palette.getHeight(), palette.getDep(), palette.getPaletteClass(), palette.getCategory(), palette.getBay(), palette.getId()};
+		Object[] args = { 
+				palette.getWidth(), 
+				palette.getLength(), 
+				palette.getHeight(), 
+				palette.getDep(), 
+				palette.getPaletteClass(), 
+				palette.getCategory(), 
+				palette.getBay(), 
+				palette.getId()
+				};
+		System.out.println("bay id coming down: " + palette.getBay());
 		int rows = jdbctemplate.update(EDIT_PALETTE,args);
 		if(rows==0) {
 			return false;

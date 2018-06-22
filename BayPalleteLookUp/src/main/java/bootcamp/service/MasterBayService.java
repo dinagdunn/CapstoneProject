@@ -67,7 +67,7 @@ public class MasterBayService {
 		  }
 	  }
 	  //masterbay width should not be smaller than sum of the width of the bays in it
-	  if(bayWidthSum>masterBay.getWidth()) {
+	  if(bayWidthSum > masterBay.getWidth()) {
 		  return new Message("Width too small");
 	  }
 	  masterBayDao.editMasterBay(masterBay);

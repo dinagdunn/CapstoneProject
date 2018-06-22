@@ -37,7 +37,6 @@ public class BayDao {
 			return new Bay();
 		}
 		return bayList.get(0);
-		
 	}
 	
 	public void addBay(Bay bay) {
@@ -46,7 +45,17 @@ public class BayDao {
 	}
 	
 	public void editBay(Bay bay) {
-		java.lang.Object[] args = {bay.getWidth(), bay.getLength(), bay.getHeight(), bay.getDep(), bay.getBayClass(), bay.getCategory(), bay.getMasterbay(), bay.getPalette(), bay.getId()};
+		java.lang.Object[] args = {
+				bay.getWidth(), 
+				bay.getLength(), 
+				bay.getHeight(), 
+				bay.getDep(), 
+				bay.getBayClass(), 
+				bay.getCategory(), 
+				bay.getMasterbay(), 
+				bay.getPalette(), 
+				bay.getId()
+				};
 		jdbctemplate.update(EDIT_BAY, args);		
 	}
 	
@@ -69,6 +78,4 @@ public class BayDao {
 		Object[] args = {palette.getWidth(), palette.getLength(), palette.getHeight()};
 			return jdbctemplate.query(EMPTY_BAYS_OTHER_DEPARTMENTS,args, new BeanPropertyRowMapper<>(Bay.class));
 	}
-	
-
 }

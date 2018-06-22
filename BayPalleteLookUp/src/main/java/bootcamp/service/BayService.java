@@ -46,18 +46,19 @@ public class BayService {
     }
     
     public Message editBay(Bay bay) {
-    	int bayCurrentWidth =   bayDao.getBayById(bay.getId()).getWidth();
-    	System.out.println(bay.getMasterbay());
+    	int bayCurrentLength =   bayDao.getBayById(bay.getId()).getLength();
+//    	System.out.println("bay id: " + bay.getId());
     	MasterBay masterBay = masterBayDao.getMasterbayById(bay.getMasterbay());
     	List<Bay> bayList = masterBay.getBayList();
-    	int bayWidthSum=0;
+    	System.out.println("Bay list: " + bayList);
+    	int bayLengthSum = 0;
     	for(Bay b: bayList) {
-    		bayWidthSum += b.getWidth();
+    		bayLengthSum += b.getLength();
     	}
-    	bayWidthSum -= bayCurrentWidth; 
-    	bayWidthSum += bay.getWidth();
+    	bayLengthSum -= bayCurrentLength; 
+    	bayLengthSum += bay.getLength();
     	//sum of the width of bays should not be greater than the masterbay
-    	if(bayWidthSum>masterBay.getWidth()) {
+    	if(bayLengthSum>masterBay.getLength()) {
     		return tooWide;
     	} 
     	//if bay is associated with a palette should not be smaller than the palette
