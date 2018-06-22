@@ -39,17 +39,17 @@ class EditSubBay extends Component {
             console.log(response);
             console.log(response.data.message)
             if (response.data.message === "Bay too wide") {
-                // this.props.history.push({
-                //     pathname: `/load/message`,
-                //     state: {message: "Edit unsuccessful, the bay that is associated with this palette is smaller!"}
-                // })
-                // window.setTimeout(()=>
-                //     this.props.history.push({
-                //         pathname: `/edit/p${this.state.id}`,
-                //         state: {paletteInfo: this.props.location.state.paletteInfo}
-                //     }), 4000);
+                swal({
+                    title: response.data.message,
+                    icon: "error",
+                    button: "OK"
+                })
             } else if (response.data.message === "Bay width too small for palette P...") {
-                //use regex to get the else if work
+                swal({
+                    title: response.data.message,
+                    icon: "error",
+                    button: "OK"
+                })
             } else if (response.data.message === "Edit successful") {
                 swal({
                     title: "Edit Successful",
@@ -132,8 +132,9 @@ class EditSubBay extends Component {
                         <label>
                             Length:
                             <input type="number" name="depth"
-                                value={this.state.length} onChange={(e) => { 
-                                    this.changeValue(e, 'length') }} 
+                                value={this.state.length} onChange={(e) => {
+                                    this.changeValue(e, 'length')
+                                }}
                             />
                         </label>
                         <br />
@@ -147,26 +148,26 @@ class EditSubBay extends Component {
                             Height: {this.state.height}
                         </label>
                         <br />
-                    <label>
-                        Department: {this.state.dep}
-                    </label>
-                    <br />
+                        <label>
+                            Department: {this.state.dep}
+                        </label>
+                        <br />
 
-                    <label>
-                        Class:
+                        <label>
+                            Class:
             <select name="class" form="editSubBay">
-                            {this.state.classes}
-                        </select>
-                    </label>
-                    <br />
+                                {this.state.classes}
+                            </select>
+                        </label>
+                        <br />
 
-                    <label>
-                        Category:
+                        <label>
+                            Category:
             <select name="category" form="editSubBay">
-                            {this.state.categories}
-                        </select>
-                    </label>
-                    <br />
+                                {this.state.categories}
+                            </select>
+                        </label>
+                        <br />
                     </form>
                     <button className="btn btn-primary custom-btn" onClick={this.submitHandler}>Submit</button>
                     <button className="btn btn-primary custom-btn" onClick={this.deleteHandler}>Delete</button>

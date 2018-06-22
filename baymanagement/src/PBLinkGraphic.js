@@ -98,7 +98,7 @@ class PBLinkGraphic extends Component {
 								count={this.state.leftBay}
 								history={this.props.history}
 								best={this.state.bestChoiceBay}
-								style={this.setHeight}
+								// style={this.setHeight}
 							/></td>
 							<td className="aisle"><p>The green bay is the best fit. 
 								Please use it if possible.</p></td>
@@ -107,7 +107,7 @@ class PBLinkGraphic extends Component {
 								count={this.state.rightBay}
 								history={this.props.history}
 								best={this.state.bestChoiceBay}
-								style={this.setHeight}
+								// style={this.setHeight}
 							/></td>
 						</tr>
 					</tbody>
