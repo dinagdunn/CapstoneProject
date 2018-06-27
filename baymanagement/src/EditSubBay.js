@@ -88,7 +88,7 @@ class EditSubBay extends Component {
 
     componentWillMount() {
 
-        let departments = axios.get("http://localhost:8081/getDepartments").then((response) => {
+        axios.get("http://localhost:8081/getDepartments").then((response) => {
             const dropDowns = response.data.map((department, index) => {
                 // console.log(department.value)
                 if (department.value === this.state.dep) {
@@ -101,7 +101,7 @@ class EditSubBay extends Component {
             })
         })
 
-        let classes = axios.get("http://localhost:8081/getClasses").then((response) => {
+        axios.get("http://localhost:8081/getClasses").then((response) => {
             const dropDowns = response.data.map((department, index) => {
                 // console.log(department.value)
                 if (department.value === this.state.class) {
@@ -114,7 +114,7 @@ class EditSubBay extends Component {
             })
         })
 
-        let categories = axios.get("http://localhost:8081/getCategories").then((response) => {
+        axios.get("http://localhost:8081/getCategories").then((response) => {
             const dropDowns = response.data.map((department, index) => {
                 // console.log(department.value)
                 if (department.value === this.state.category) {

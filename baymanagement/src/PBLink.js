@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom'
 import './App.css';
 import axios from 'axios'
 import swal from 'sweetalert'
@@ -27,7 +26,7 @@ class PBLink extends Component {
 
 	  componentWillMount() {
 	  	let pId = this.props.match.params.id;
-	  	let bays = axios.get(`http://localhost:8081/getEmptyBays?id=${pId}`).then((response)=>{
+	  	axios.get(`http://localhost:8081/getEmptyBays?id=${pId}`).then((response)=>{
 	  		console.log(response.data)
 	  		const bayList = response.data.map((bay)=>{
 	  			return (<div className="subBayDisplay" onClick={()=>this.bayClick(bay)}>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios'
 import LoadSubBayGraphic from './LoadSubBayGraphic';
-import swal from 'sweetalert' 
+import swal from 'sweetalert'
 
 
 
@@ -30,32 +30,32 @@ class PBLinkGraphic extends Component {
 
 	componentWillMount() {
 		let pId = this.props.match.params.id;
-		let bays = axios.get(`http://localhost:8081/getEmptyBays?id=${pId}`).then((response) => {
+		axios.get(`http://localhost:8081/getEmptyBays?id=${pId}`).then((response) => {
 			//   console.log(response.data[0])
 			if (response.data[0]) {
-			let topBay = response.data[0]
-			this.setState({
-				bestChoiceBay: response.data[0].id
-			})
-			console.log("master for top", topBay.masterbay)
-			console.log("top id ", topBay.id)
-			console.log("top full data: ", topBay)
-			if (topBay.masterbay % 2 === 0) {
+				let topBay = response.data[0]
 				this.setState({
-					leftBay: (topBay.masterbay - 1),
-					rightBay: topBay.masterbay
+					bestChoiceBay: response.data[0].id
 				})
+				console.log("master for top", topBay.masterbay)
+				console.log("top id ", topBay.id)
+				console.log("top full data: ", topBay)
+				if (topBay.masterbay % 2 === 0) {
+					this.setState({
+						leftBay: (topBay.masterbay - 1),
+						rightBay: topBay.masterbay
+					})
+				} else {
+					this.setState({
+						leftBay: topBay.masterbay,
+						rightBay: (topBay.masterbay + 1)
+					})
+				}
 			} else {
 				this.setState({
-					leftBay: topBay.masterbay,
-					rightBay: (topBay.masterbay + 1)
+					noReturnsWarning: "No available bays matched this pallet."
 				})
 			}
-		} else {
-			this.setState({
-				noReturnsWarning: "No available bays matched this pallet."
-			})
-		}
 
 			// console.log("left then right",this.state.leftBay,this.state.rightBay)
 		})
@@ -72,13 +72,13 @@ class PBLinkGraphic extends Component {
 			return <div />
 		} else if (this.state.noReturnsWarning) {
 			swal({
-                title: "No Available Bays",
-                text: `No bays match the dimensions of Pallet P${this.state.id}.`,
-                icon: "error",
-                button: "OK"
-            })
-			{this.props.history.push(`/load/P${this.state.id}`)}
-			}
+				title: "No Available Bays",
+				text: `No bays match the dimensions of Pallet P${this.state.id}.`,
+				icon: "error",
+				button: "OK"
+			})
+			this.props.history.push(`/load/P${this.state.id}`)
+		}
 
 		return (
 			<div>
@@ -98,16 +98,16 @@ class PBLinkGraphic extends Component {
 								count={this.state.leftBay}
 								history={this.props.history}
 								best={this.state.bestChoiceBay}
-								// style={this.setHeight}
+							// style={this.setHeight}
 							/></td>
-							<td className="aisle"><p>The green bay is the best fit. 
+							<td className="aisle"><p>The green bay is the best fit.
 								Please use it if possible.</p></td>
 							<td><LoadSubBayGraphic
 								data={this.state}
 								count={this.state.rightBay}
 								history={this.props.history}
 								best={this.state.bestChoiceBay}
-								// style={this.setHeight}
+							// style={this.setHeight}
 							/></td>
 						</tr>
 					</tbody>

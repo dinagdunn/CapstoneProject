@@ -44,7 +44,7 @@ class LoadSubBay extends Component {
         event.preventDefault();
 
         let bId = this.props.match.params.id;
-        bId = parseInt(bId)
+        bId = parseInt(bId,10)
         this.props.history.push(`/edit/mb${bId}`)
     }
 

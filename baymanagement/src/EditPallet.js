@@ -120,7 +120,7 @@ class EditPallet extends Component {
  // https://github.com/newsha400/CapstoneProject/commit/0fe22faf57c8531e24b47af56a711064a78ab75c
 
 	componentWillMount() {
-		let departments = axios.get("http://localhost:8081/getDepartments").then((response) => {
+		axios.get("http://localhost:8081/getDepartments").then((response) => {
 			const dropDowns = response.data.map((department, index) => {
 				// console.log(department.value)
 				if (department.value === this.state.dep) {
@@ -133,7 +133,7 @@ class EditPallet extends Component {
 			})
 		})
 
-		let classes = axios.get("http://localhost:8081/getClasses").then((response) => {
+		axios.get("http://localhost:8081/getClasses").then((response) => {
 			const dropDowns = response.data.map((department, index) => {
 				console.log(department.value)
 				if (department.value === this.state.class) {
@@ -146,7 +146,7 @@ class EditPallet extends Component {
 			})
 		})
 
-		let categories = axios.get("http://localhost:8081/getCategories").then((response) => {
+		axios.get("http://localhost:8081/getCategories").then((response) => {
 			const dropDowns = response.data.map((department, index) => {
 				console.log(department.value)
 				if (department.value === this.state.category) {

@@ -23,7 +23,7 @@ class LoadBay extends Component {
 	componentWillMount() {
 		let bId = this.props.match.params.id;
 		console.log(bId)
-		bId = parseInt(bId)
+		bId = parseInt(bId,10)
 		axios.get(`http://localhost:8081/getMasterbayById?id=${bId}`)
 			.then(res => {
 				console.log(res.data)
@@ -40,7 +40,7 @@ class LoadBay extends Component {
 		event.preventDefault();
 		// const query = event.target[0].value
 		let bId = this.props.match.params.id;
-		bId = parseInt(bId)
+		bId = parseInt(bId,10)
 		this.props.history.push(`/edit/mb${bId}`)
 	}
 

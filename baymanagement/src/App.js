@@ -12,7 +12,6 @@ import Message from './Message';
 import EditSubBay from './EditSubBay'
 import AddSubBay from './AddSubBay'
 import img1 from './images/1.jpg'
-import img2 from './images/2.jpg'
 import img3 from './images/3.jpg'
 import img5 from './images/5.jpg'
 import { Carousel } from 'react-bootstrap'

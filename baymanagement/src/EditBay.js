@@ -27,7 +27,7 @@ class EditBay extends Component {
 
 	componentDidMount() {
 		let bId = this.props.match.params.id;
-		this.setState({ id: parseInt(bId) })
+		this.setState({ id: parseInt(bId,10) })
 
 		axios.get(`http://localhost:8081/getMasterbayById?id=${bId}`)
 			.then(res => {
@@ -99,7 +99,7 @@ class EditBay extends Component {
 	deleteHandler(event) {
 		//delete from the db
 		let bId = this.props.match.params.id;
-		bId = parseInt(bId)
+		bId = parseInt(bId,10)
 		console.log(bId, "delete");
 
 		swal({
@@ -126,7 +126,7 @@ class EditBay extends Component {
 	addSubHandler(event) {
 		// add to db
 		let bId = this.props.match.params.id;
-		bId = parseInt(bId)
+		bId = parseInt(bId,10)
 		event.preventDefault();
 		this.props.history.push(`/managesubs/mb${bId}`)
 	}

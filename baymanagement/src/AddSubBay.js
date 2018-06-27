@@ -23,7 +23,7 @@ class AddSubBay extends Component {
 
 	componentWillMount() {
 		console.log("from the mount: ",this.props.location.state.masterBayInfo)
-		let classes = axios.get("http://localhost:8081/getClasses").then((response) => {
+		axios.get("http://localhost:8081/getClasses").then((response) => {
 			const dropDowns = response.data.map((department, index) => {
 				console.log(department.value)
 				return (<option value={department.value}>{department.value}</option>)
@@ -34,7 +34,7 @@ class AddSubBay extends Component {
 			})
 		})
 
-		let categories = axios.get("http://localhost:8081/getCategories").then((response) => {
+		axios.get("http://localhost:8081/getCategories").then((response) => {
 			const dropDowns = response.data.map((department, index) => {
 				console.log(department.value)
 				return (<option value={department.value}>{department.value}</option>)
